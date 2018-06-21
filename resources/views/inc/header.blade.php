@@ -107,20 +107,20 @@
             <div class="c-sub-nav_wrap">
                 <div class="sub-nav_content">
                     <ul class="sub-nav_list list-inline second-menu">
-                        <li id="menu-item-54" class="menu-item menu-item-type-taxonomy menu-item-object-wp-manga-genre menu-item-54"><a href="http://demo.mangabooth.com/manga-genre/romance/">Romance</a></li>
-                        <li id="menu-item-32" class="menu-item menu-item-type-taxonomy menu-item-object-wp-manga-genre menu-item-32"><a href="http://demo.mangabooth.com/manga-genre/comedy/">Comédia</a></li>
-                        <li id="menu-item-58" class="menu-item menu-item-type-taxonomy menu-item-object-wp-manga-genre menu-item-58"><a href="http://demo.mangabooth.com/manga-genre/shoujo/">Shoujo</a></li>
-                        <li id="menu-item-36" class="menu-item menu-item-type-taxonomy menu-item-object-wp-manga-genre menu-item-36"><a href="http://demo.mangabooth.com/manga-genre/drama/">Drama</a></li>
-                        <li id="menu-item-55" class="menu-item menu-item-type-taxonomy menu-item-object-wp-manga-genre menu-item-55"><a href="http://demo.mangabooth.com/manga-genre/school-life/">Vida Escolar</a></li>
-                        <li id="menu-item-60" class="menu-item menu-item-type-taxonomy menu-item-object-wp-manga-genre menu-item-60"><a href="http://demo.mangabooth.com/manga-genre/shounen/">Shounen</a></li>
-                        <li id="menu-item-28" class="menu-item menu-item-type-taxonomy menu-item-object-wp-manga-genre menu-item-28"><a href="http://demo.mangabooth.com/manga-genre/action/">Ação</a></li>
+                        <li id="menu-item-54" class="menu-item"><a href="http://demo.mangabooth.com/manga-genre/romance/">Romance</a></li>
+                        <li id="menu-item-54" class="menu-item"><a href="http://demo.mangabooth.com/manga-genre/comedy/">Comédia</a></li>
+                        <li id="menu-item-54" class="menu-item"><a href="http://demo.mangabooth.com/manga-genre/shoujo/">Shoujo</a></li>
+                        <li id="menu-item-54" class="menu-item"><a href="http://demo.mangabooth.com/manga-genre/drama/">Drama</a></li>
+                        <li id="menu-item-54" class="menu-item"><a href="http://demo.mangabooth.com/manga-genre/school-life/">Vida Escolar</a></li>
+                        <li id="menu-item-54" class="menu-item"><a href="http://demo.mangabooth.com/manga-genre/shounen/">Shounen</a></li>
+                        <li id="menu-item-54" class="menu-item"><a href="http://demo.mangabooth.com/manga-genre/action/">Ação</a></li>
 
                     </ul>
                 </div>
                 <div class="c-modal_item">
                     @guest
-                    <a href="{{ route('login') }}" class="btn-active-modal">Entrar</a>
-                    <a href="{{ route('register') }}" class="btn-active-modal">Cadastro</a>
+                        <a href="{{ route('login') }}" class="btn-active-modal">Entrar</a>
+                        <a href="{{ route('register') }}" class="btn-active-modal">Cadastro</a>
                     @endguest
                     @auth
                         <div class="c-user_item">
@@ -128,11 +128,19 @@
                             <div class="c-user_avatar">
                                 <img alt="" src="http://1.gravatar.com/avatar/1f2281df65a4de28c1547e09710b68c0?s=50&amp;d=mm&amp;r=g" srcset="http://1.gravatar.com/avatar/1f2281df65a4de28c1547e09710b68c0?s=100&amp;d=mm&amp;r=g 2x" class="avatar avatar-50 photo" height="50" width="50">
                                 <ul class="c-user_menu">
+                                    @if(Auth::user()->editor)
+                                        <li>
+                                            <a href="{{ route('panel') }}">@lang('pages.panel')</a>
+                                        </li>
+                                    @endif
                                     <li>
-                                        <a href="http://demo.mangabooth.com/user-settings/">User Settings</a>
+                                        <a href="">@lang('pages.my-list')</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('logout') }}">Logout</a>
+                                        <a href="">@lang('pages.settings')</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('logout') }}">@lang('pages.logout')</a>
                                     </li>
                                 </ul>
                             </div>

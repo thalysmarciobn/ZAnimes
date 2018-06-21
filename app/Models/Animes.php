@@ -9,6 +9,8 @@ class Animes extends Model
 {
     protected $table = 'animo_animes';
 
+    protected $fillable = ['id', 'name', 'slug_name', 'sinopse', 'image', 'author', 'status', 'year', 'genres', 'userid'];
+
     public function scopeAnimesInRelease($query)
     {
         return $query->where('status', 0);
@@ -24,13 +26,12 @@ class Animes extends Model
         return $this->hasMany('App\Models\AnimesSeasonsEpisodes', 'anime')->orderBy('season', 'desc')->orderBy('episode', 'desc');
     }
 
+    public function creator() {
+        return $this->hasOne('App\User', 'id', 'userid');
+    }
+
     public function scopeLatestCreated($query)
     {
         return $query->orderBy('created_at', 'desc');
-    }
-
-    public function scopeKey($query, $name)
-    {
-        return $query->where('slug_name', $name);
     }
 }

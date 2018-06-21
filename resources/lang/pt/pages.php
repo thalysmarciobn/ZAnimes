@@ -1,6 +1,10 @@
 <?php
 
 return [
+    'panel' => 'Painel',
+    'my-list' => 'Minha Lista',
+    'settings' => 'Configurações',
+    'logout' => 'Sair',
     'info' => 'Informação',
     'info-logged' => 'Você entrou como \':name\', todos os acessos serão registrados como seus últimos animes e episódios recém assistidos para lhe trazer uma melhor experiência em nosso site.',
 
