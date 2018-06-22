@@ -3,14 +3,14 @@
 @section('title', __('pages.home-title'))
 
 @section('container')
-    <div class="c-sidebar c-top-second-sidebar" style="background: #efefef;">
+    <div class="c-sidebar c-top-second-sidebar" style="background: #eaeaea;">
         <div class="container c-container">
             <div class="row c-row">
                 <div class="widget col-xs-12 col-md-12 default heading-style-2">
                     <div class="c-widget-wrap">
                         <div class="popular-slider style-1" data-style="style-1" data-count="4">
                             <div class="c-blog__heading style-2 font-heading">
-                                <h4><i class="ion-ios-bolt"></i>@lang('pages.home-releases')</h4>
+                                <h4>@lang('pages.home-releases')</h4>
                             </div>
                             <div class="slider__container" role="toolbar">
                                 @foreach ($releases as $release)
@@ -64,7 +64,7 @@
         <div class="c-page-content style-1">
             <div class="content-area">
                 <div class="container">
-                    <div class="row ">
+                    <div class="row">
 
                         @if (session('info'))
                             <div class="alert alert-info" role="info">
@@ -78,14 +78,22 @@
                             <div class="c-widget-wrap">
                                 <div class="popular-slider style-1" data-style="style-1" data-count="4">
                                     <div class="c-blog__heading style-2 font-heading">
-                                        <h4><i class="ion-ios-bolt"></i>@lang('pages.home-latest-releases')</h4>
+                                        <h4>@lang('pages.home-latest-releases')</h4>
                                     </div>
                                     <div class="slider__container" role="toolbar">
                                         @foreach ($episodes as $latest)
                                             <div class="slider__item">
-                                                <div class="anime c-image-hover">
+                                                <div class="anime">
                                                     <div class="episode">
-                                                        <img  data-src="{{ asset('uploads/animes/' . $latest->slug_name . '/' . $latest->image) }}" data-srcset="{{ asset('uploads/animes/' . $latest->slug_name . '/' . $latest->image) }}"  class="img-responsive lazyload effect-fade" src="http://demo.mangabooth.com/wp-content/themes/madara/images/dflazy.jpg"  alt="{{ $latest->name }}"/>
+                                                        <div class="thumb c-image-hover">
+                                                            <img  data-src="{{ asset('uploads/animes/' . $latest->slug_name . '/' . $latest->image) }}" data-srcset="{{ asset('uploads/animes/' . $latest->slug_name . '/' . $latest->image) }}"  class="img-responsive lazyload effect-fade" src="http://demo.mangabooth.com/wp-content/themes/madara/images/dflazy.jpg"  alt="{{ $latest->name }}"/>
+                                                        </div>
+                                                        <div class="data">
+                                                            <h3>
+                                                                <a href="http://zanimes.com/anime/death-note">{{ $latest->title }}</a>
+                                                            </h3>
+                                                            <div class="season">{{ $latest->getAnime->name }}</div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -96,7 +104,7 @@
                             <div class="c-widget-wrap">
                                 <div class="popular-slider style-1" data-style="style-1" data-count="4">
                                     <div class="c-blog__heading style-2 font-heading">
-                                        <h4><i class="ion-ios-bolt"></i>@lang('pages.home-latest-animes')</h4>
+                                        <h4>@lang('pages.home-latest-animes')</h4>
                                     </div>
                                     <div class="slider__container" role="toolbar">
                                         @foreach ($latests as $latest)
@@ -120,10 +128,10 @@
 
 
                         <div class="sidebar-col col-md-4 col-sm-4">
-                            <div class="c-widget-wrap">
+                            <div class="c-widget-wrap row">
                                 <div class="popular-slider style-1" data-style="style-1" data-count="4">
                                     <div class="c-blog__heading style-2 font-heading">
-                                        <h4><i class="ion-ios-bolt"></i>ÚLTIMOS ANIMES</h4>
+                                        <h4>MAIS ACESSADOS</h4>
                                     </div>
                                     <div class="slider__container" role="toolbar">
                                         @foreach ($latests as $latest)

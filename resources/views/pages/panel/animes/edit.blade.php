@@ -73,6 +73,12 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <div class="checkbox">
+                                        <input id="delete" name="delete" value="delete" type="checkbox">
+                                        <label for="delete"> Delete </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <button type="submit" class="btn btn-default">Edit</button>
                                 </div>
                             </form>

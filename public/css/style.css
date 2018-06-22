@@ -1348,12 +1348,11 @@ html {
 body {
   font-family: 'Poppins', sans-serif;
   font-size: 14px;
-  /*change content font size*/
   line-height: 1.5;
   color: #888888;
-  /*#666666*/
   -webkit-font-smoothing: antialiased !important;
   -moz-osx-font-smoothing: grayscale !important;
+  background: #fdfdfd;
 }
 .sub-lineheight {
   line-height: 1.45;
@@ -1581,8 +1580,8 @@ h5,
 .h3,
 .h4,
 .h5 {
-  font-weight: 600;
-  line-height: 1.2;
+  font-weight: 400;
+  line-height: 1.7;
   color: #333333;
 }
 h1,
@@ -1689,6 +1688,9 @@ h6,
 }
 .c-blog__heading.style-2 h4 {
   margin: 0;
+  padding-left: 10px;
+  border-left: solid 3px #6e42c1;
+  height: 30px;
 }
 .c-blog__heading.style-2 > *:not(i):not(h4) {
   margin: 0;
@@ -6584,8 +6586,8 @@ body.single .paging-navigation:last-child {
   margin: 0 -15px;
 }
 .popular-slider .slider__container .slider__item {
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 .popular-slider .slider__container .slider__item .item__wrap {
   background-color: #FFFFFF;
@@ -6661,7 +6663,7 @@ body.single .paging-navigation:last-child {
 .popular-slider .slider__container .slick-arrow {
   width: 30px;
   height: 30px;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.33);
   z-index: 1;
   -webkit-transition: background-color 200ms ease;
   -moz-transition: background-color 200ms ease;
@@ -6714,7 +6716,7 @@ body.single .paging-navigation:last-child {
   border-bottom: none !important;
 }
 .popular-slider.style-1 .slider__container .slick-list {
-  padding: 50px 0 10px;
+  padding: 50px 10px 10px;
 }
 .popular-slider.style-1 .slider__container .slick-arrow {
   top: 0;
@@ -6781,7 +6783,35 @@ body.single .paging-navigation:last-child {
   z-index: 3;
   position: relative;
 }
-.anime .episode img {
+.anime .episode {
+  background: #fff;
+  padding: 3px;
+  border: 1px solid #efefef;
+}
+.anime .episode .data {
+  margin: 3px;
+}
+.anime .episode .data h3 {
+  font-size: 13px;
+  line-height: 20px;
+  margin: 0;
+  width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  font-weight: 400;
+}
+.anime .episode .data .season {
+  font-size: 12px;
+  line-height: 20px;
+  margin: 0;
+  width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  font-weight: 400;
+}
+.anime .episode .thumb img {
   width: 100%;
 }
 .anime .info {

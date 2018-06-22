@@ -17,6 +17,7 @@ Route::group(['middleware' => ['editor:1']], function () {
             Route::prefix('edit')->group(function () {
                 Route::match(['get', 'post'], '/{slug}', 'PanelController@editAnime')->name('panel-anime-edit');
                 Route::match(['get', 'post'], '/{slug}/season/{season}', 'PanelController@editSeason')->name('panel-anime-edit-season');
+                Route::match(['get', 'post'], '/{slug}/season/{season}/episode/{episode}', 'PanelController@editEpisode')->name('panel-anime-edit-season-episode');
             });
         });
     });

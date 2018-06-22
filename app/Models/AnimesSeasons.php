@@ -13,16 +13,6 @@ class AnimesSeasons extends Model
 
     public function episodes()
     {
-        return $this->hasMany('App\Models\AnimesSeasonsEpisodes', 'anime');
-    }
-
-    public function scopeGetSeasonByAnime($query, $anime)
-    {
-        return $query->where('anime', $anime);
-    }
-
-    public function scopeGetSeason($query, $anime, $season)
-    {
-        return $query->where('anime', $anime)->where('season', $season);
+        return $this->hasMany('App\Models\AnimesSeasonsEpisodes', 'season');
     }
 }
