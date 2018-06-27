@@ -1,16 +1,3 @@
-/*
-Theme Name: Madara
-Theme URI: http://demo.mangabooth.com/
-Author: Madara
-Author URI: https://themeforest.net/user/wpstylish
-Description:  A theme for building Manga sites. Work with Madara-Core plugin
-Version: 1.3
-Text Domain: madara
-Domain Path: /languages/
-Tags: one-column, two-columns, right-sidebar, custom-header, custom-menu, editor-style, featured-images, microformats, post-formats, rtl-language-support, sticky-post, translation-ready
-License: ThemeForest License
-License URI: license.txt
-*/
 /*--------------------------------------------------------------
 >>> TABLE OF CONTENTS:
 ----------------------------------------------------------------
@@ -1581,8 +1568,8 @@ h5,
 .h4,
 .h5 {
   font-weight: 400;
-  line-height: 1.7;
-  color: #333333;
+  line-height: 1.8;
+  color: #666;
 }
 h1,
 .h1 {
@@ -1598,11 +1585,11 @@ h3,
 }
 h4,
 .h4 {
-  font-size: 18px;
+  font-size: 16px;
 }
 h5,
 .h5 {
-  font-size: 16px;
+  font-size: 14px;
 }
 h6,
 .h6 {
@@ -2582,7 +2569,7 @@ img.lazyloaded {
   padding: 7px 20px;
 }
 .site-header .c-sub-header-nav .c-sub-nav_wrap .sub-nav_content .sub-nav_list li a {
-  font-weight: 600;
+  font-weight: 400;
   color: #666;
   text-transform: uppercase;
   padding: 13px;
@@ -2666,6 +2653,9 @@ img.lazyloaded {
 .site-header .c-sub-header-nav .c-sub-nav_wrap .c-modal_item {
   text-align: right;
   width: 30%;
+  bottom: 0;
+  padding-bottom: 12px;
+  position: absolute;
 }
 .site-header .c-sub-header-nav .c-sub-nav_wrap .c-modal_item .btn-active-modal {
   color: #666;
@@ -2922,15 +2912,6 @@ body.panel-open .panel-form .panel-content .modal-body .login #resetform:after {
 }
 .off-canvas {
   background: #684dc9;
-  /* For browsers that do not support gradients */
-  background: -webkit-linear-gradient(left, #684dc9 40%, #f45c43);
-  /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(right, #684dc9 40%, #f45c43);
-  /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(right, #684dc9 40%, #f45c43);
-  /* For Firefox 3.6 to 15 */
-  background: linear-gradient(to right, #684dc9 40%, #f45c43);
-  /* Standard syntax */
   position: fixed;
   width: 300px;
   top: 0;
@@ -6716,7 +6697,7 @@ body.single .paging-navigation:last-child {
   border-bottom: none !important;
 }
 .popular-slider.style-1 .slider__container .slick-list {
-  padding: 50px 10px 10px;
+  padding: 40px 10px 15px;
 }
 .popular-slider.style-1 .slider__container .slick-arrow {
   top: 0;
@@ -6779,17 +6760,20 @@ body.single .paging-navigation:last-child {
 .popular-slider.style-3 .slider__container .slick-prev {
   left: 0px;
 }
+.most-acc {
+    padding-top: 50px;
+}
 .anime {
   z-index: 3;
   position: relative;
 }
 .anime .episode {
   background: #fff;
-  padding: 3px;
+  padding: 10px;
   border: 1px solid #efefef;
 }
 .anime .episode .data {
-  margin: 3px;
+  margin-top: 5px;
 }
 .anime .episode .data h3 {
   font-size: 13px;
@@ -6802,7 +6786,7 @@ body.single .paging-navigation:last-child {
   font-weight: 400;
 }
 .anime .episode .data .season {
-  font-size: 12px;
+  font-size: 11px;
   line-height: 20px;
   margin: 0;
   width: 100%;
@@ -6830,7 +6814,7 @@ body.single .paging-navigation:last-child {
   text-overflow: ellipsis;
   overflow: hidden;
 }
-.anime .info .episodes {
+.anime .info .year {
   color: #eee;
   font-size: 12px;
 }

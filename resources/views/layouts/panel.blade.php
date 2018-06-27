@@ -26,6 +26,10 @@
         <script type='text/javascript' src='http://demo.mangabooth.com/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
         <script type='text/javascript' src='http://demo.mangabooth.com/wp-content/plugins/revslider/public/assets/js/jquery.themepunch.tools.min.js?ver=5.4.6.2'></script>
         <script type='text/javascript' src='http://demo.mangabooth.com/wp-content/plugins/revslider/public/assets/js/jquery.themepunch.revolution.min.js?ver=5.4.6.2'></script>
+
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+        <script src="https://code.highcharts.com/modules/export-data.js"></script>
     </head>
     <body class="page-template page-template-page-templates page vc_responsive panel-open">
     <div class="wrap">

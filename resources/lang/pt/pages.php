@@ -1,6 +1,15 @@
 <?php
 
 return [
+    'menu-home' => 'Início',
+    'menu-animes' => 'Animes',
+    'menu-dmca' => 'DMCA',
+
+    'episode' => 'Episódio',
+
+    'login' => 'Entrar',
+    'register' => 'Cadastro',
+
     'panel' => 'Painel',
     'my-list' => 'Minha Lista',
     'settings' => 'Configurações',

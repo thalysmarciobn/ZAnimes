@@ -1,8 +1,10 @@
 <?php
 namespace App\Http\Controllers;
 
+use DB;
 use Auth;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
@@ -10,12 +12,55 @@ use App\Models\Genres;
 use App\Models\Animes;
 use App\Models\AnimesSeasons;
 use App\Models\AnimesSeasonsEpisodes;
+use App\Models\AnimesSeasonsEpisodesViews;
 
 class PanelController extends Controller
 {
 
     public function panel() {
+
+        $analystic_animes = collect();
+        $analystic_seasons = collect();
+        $analystic_episodes = collect();
+        foreach(range(-14, 0) as $i) {
+            $date = Carbon::now()->addDays($i)->format('Y-m-d');
+            $analystic_animes->put($date, 0);
+            $analystic_seasons->put($date, 0);
+            $analystic_episodes->put($date, 0);
+        }
         return view('pages.panel.panel', [
+            'analystic_animes' => $analystic_animes->merge(Animes::where('created_at', '>=', $analystic_animes->keys()->first())
+                ->groupBy('date')
+                ->orderBy('date')
+                ->get([
+                    DB::raw('DATE(created_at) as date'),
+                    DB::raw('COUNT(*) as "count"')
+                ])
+                ->pluck('count', 'date')),
+            'analystic_seasons' => $analystic_seasons->merge(AnimesSeasons::where('created_at', '>=', $analystic_seasons->keys()->first())
+                ->groupBy('date')
+                ->orderBy('date')
+                ->get([
+                    DB::raw('DATE(created_at) as date'),
+                    DB::raw('COUNT(*) as "count"')
+                ])
+                ->pluck('count', 'date')),
+            'analystic_episodes' => $analystic_episodes->merge(AnimesSeasonsEpisodes::where('created_at', '>=', $analystic_episodes->keys()->first())
+                ->groupBy('date')
+                ->orderBy('date')
+                ->get([
+                    DB::raw('DATE(created_at) as date'),
+                    DB::raw('COUNT(*) as "count"')
+                ])
+                ->pluck('count', 'date')),
+            'analystic_views' => $analystic_episodes->merge(AnimesSeasonsEpisodesViews::where('created_at', '>=', $analystic_episodes->keys()->first())
+                ->groupBy('date')
+                ->orderBy('date')
+                ->get([
+                    DB::raw('DATE(created_at) as date'),
+                    DB::raw('COUNT(*) as "count"')
+                ])
+                ->pluck('count', 'date')),
             'genres' => Genres::get(),
             'animes' => Animes::get(),
             'seasons' => AnimesSeasons::get(),

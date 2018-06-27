@@ -28,9 +28,9 @@
 
                             <div class="main-menu">
                                 <ul class="nav navbar-nav main-navbar">
-                                    <li class="menu-item"><a href="{{ route('home') }}">HOME</a></li>
-                                    <li class="menu-item"><a href="{{ route('home') }}">ANIMES</a></li>
-                                    <li class="menu-item"><a href="{{ route('home') }}">DMCA</a></li>
+                                    <li class="menu-item"><a href="{{ route('home') }}">@lang('pages.menu-home')</a></li>
+                                    <li class="menu-item"><a href="{{ route('home') }}">@lang('pages.menu-animes')</a></li>
+                                    <li class="menu-item"><a href="{{ route('home') }}">@lang('pages.menu-dmca')</a></li>
 
                                 </ul>
                             </div>
@@ -90,14 +90,9 @@
             </button>
         </div>
         <nav class="off-menu">
-            <ul id="menu-main-menu-1" class="nav navbar-nav main-navbar"><li id="nav-menu-item-27" class="main-menu-item menu-item-depth-0 menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children parent dropdown"><a href="/" class="menu-link dropdown-toggle disabled main-menu-link" data-toggle="dropdown">HOME </a>
-                    <ul class="dropdown-menu menu-depth-1">
-                        <li id="nav-menu-item-25" class="sub-menu-item menu-item-depth-1 menu-item menu-item-type-post_type menu-item-object-page"><a href="http://demo.mangabooth.com/home-2/" class="menu-link  sub-menu-link">HOME 2 </a></li>
-                        <li id="nav-menu-item-24" class="sub-menu-item menu-item-depth-1 menu-item menu-item-type-post_type menu-item-object-page"><a href="http://demo.mangabooth.com/home-3/" class="menu-link  sub-menu-link">HOME 3 </a></li>
-                        <li id="nav-menu-item-341" class="sub-menu-item menu-item-depth-1 menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-337 current_page_item"><a href="http://demo.mangabooth.com/home-4/" class="menu-link  sub-menu-link">HOME 4 &#8211; REV SLIDER </a></li>
-                        <li id="nav-menu-item-402" class="sub-menu-item menu-item-depth-1 menu-item menu-item-type-post_type menu-item-object-page"><a href="http://demo.mangabooth.com/home-dark/" class="menu-link  sub-menu-link">HOME DARK </a></li>
-                        <li id="nav-menu-item-500" class="sub-menu-item menu-item-depth-1 menu-item menu-item-type-post_type menu-item-object-page"><a href="http://demo.mangabooth.com/home-single-manga/" class="menu-link  sub-menu-link">SINGLE MANGA </a></li>
-                    </ul>
+            <ul id="menu-main-menu-1" class="nav navbar-nav main-navbar">
+                <li id="nav-menu-item-27" class="main-menu-item menu-item-depth-0 menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children parent dropdown">
+                    <a href="{{ route('home') }}">@lang('pages.menu-home')</a>
                 </li>
             </ul>
         </nav>
@@ -119,8 +114,8 @@
                 </div>
                 <div class="c-modal_item">
                     @guest
-                        <a href="{{ route('login') }}" class="btn-active-modal">Entrar</a>
-                        <a href="{{ route('register') }}" class="btn-active-modal">Cadastro</a>
+                        <a href="{{ route('login') }}" class="btn-active-modal">@lang('pages.login')</a>
+                        <a href="{{ route('register') }}" class="btn-active-modal">@lang('pages.register')</a>
                     @endguest
                     @auth
                         <div class="c-user_item">

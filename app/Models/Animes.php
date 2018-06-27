@@ -13,7 +13,7 @@ class Animes extends Model
 
     public function scopeAnimesInRelease($query)
     {
-        return $query->where('status', 0);
+        return $query->where('status', 0)->orderBy('latest_episode', 'desc');
     }
 
     public function seasons()
