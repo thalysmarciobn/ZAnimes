@@ -11,20 +11,12 @@
                         <h1>
                             @lang('pages.register-title')
                         </h1>
-                        @if (session('danger'))
-                            <div class="alert alert-danger" role="danger">
-                                {{ session('danger') }}
-                            </div>
-                        @endif
-                        @if (session('alert'))
-                            <div class="alert alert-alert" role="alert">
-                                {{ session('danger') }}
-                            </div>
-                        @endif
-                        @if (session('info'))
-                            <div class="alert alert-info" role="alert">
-                                {{ session('info') }}
-                            </div>
+                        @if ($errors->any())
+                            @foreach($errors->all() as $message)
+                                <div class="alert alert-danger" role="danger">
+                                    {{ $message }}
+                                </div>
+                            @endforeach
                         @endif
                         <form name="register" method="post">
                             @csrf
@@ -45,7 +37,7 @@
                             </p>
                             <p>
                                 <label>@lang('pages.register-r-password')<br>
-                                    <input type="password" name="r-password" class="input user_login" value="" size="20">
+                                    <input type="password" name="r_password" class="input user_login" value="" size="20">
                                 </label>
                             </p>
                             <p class="submit">

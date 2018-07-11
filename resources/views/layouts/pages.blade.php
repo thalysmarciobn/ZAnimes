@@ -17,35 +17,90 @@
         <link rel='stylesheet' id='fontawesome-css' href='{{ asset('css/font-awesome/fontawesome-all.min.css?ver=5.0.6') }}' type='text/css' media='all' />
         <link rel='stylesheet' id='ionicons-css' href='{{ asset('css/ionicons.min.css?ver=4.9.6') }}' type='text/css' media='all' />
         <link rel='stylesheet' id='bootstrap-css' href='{{ asset('css/bootstrap.min.css?ver=4.9.6') }}' type='text/css' media='all' />
+        <link rel='stylesheet' id='bootstrap-css' href='{{ asset('css/morris.css?ver=4.9.6') }}' type='text/css' media='all' />
         <link rel='stylesheet' id='slick-css' href='{{ asset('css/slick/slick.css?ver=4.9.6') }}' type='text/css' media='all' />
         <link rel='stylesheet' id='slick-theme-css' href='{{ asset('css/slick/slick-theme.css?ver=4.9.6') }}' type='text/css' media='all' />
         <link rel='stylesheet' id='loaders-css' href='{{ asset('css/loaders.min.css?ver=4.9.6') }}' type='text/css' media='all' />
 
         <link rel='stylesheet' id='madara-css-css' href='{{ asset('css/style.css?ver=4.9.6') }}' type='text/css' media='all' />
 
-        <script type='text/javascript' src='http://demo.mangabooth.com/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
-        <script type='text/javascript' src='http://demo.mangabooth.com/wp-content/plugins/revslider/public/assets/js/jquery.themepunch.tools.min.js?ver=5.4.6.2'></script>
-        <script type='text/javascript' src='http://demo.mangabooth.com/wp-content/plugins/revslider/public/assets/js/jquery.themepunch.revolution.min.js?ver=5.4.6.2'></script>
+        <script type='text/javascript' src='{{ asset('js/jquery.js?ver=1.12.4') }}'></script>
+        <script type='text/javascript' src='{{ asset('js/jquery.themepunch.tools.min.js?ver=5.4.6.2') }}'></script>
+        <script type='text/javascript' src='{{ asset('js/jquery.themepunch.revolution.min.js?ver=5.4.6.2') }}'></script>
     </head>
-    <body class="page-template page-template-page-templates page vc_responsive">
+    <body class="@yield('body') page-template page-template-page-templates page vc_responsive">
         <div class="wrap">
             <div class="body-wrap">
                 @include('inc.header')
-                @yield("container")
+                <div class="site-content">
+                    <div class="c-page-content style-1">
+                        @yield("header")
+                        <div class="content-area">
+                            <div class="container">
+                                <div class="row">
+                                    @if (session('info'))
+                                        <div class="alert alert-info" role="info">
+                                            <h4 class="alert-heading">@lang('pages.info')</h4>
+                                            <p>{{ session('info') }}</p>
+                                        </div>
+                                    @endif
+                                    <div class="col-md-12">
+                                        <div class="col-md-8">
+                                            <div class="row">
+                                                @yield("container")
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            @yield("sidebar")
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+        <footer id="main-footer">
+
+            <div id="info">
+                <div class="container wrap">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="logo">
+                                <p>Copyright <i class="fa fa-copyright"></i> <strong>{{ config('app.name', 'Laravel') }}</strong> - 2018</p>
+                            </div>
+                            <div id="contact">
+                                <ul class="inline-list">
+                                    <li><a dhref="">Termos de Uso</a></li>
+                                    <li><a href="{{ route('dmca') }}">DMCA</a></li>
+                                    <li><a dhref="">Facebook</a></li>
+                                    <li><a dhref="">Contato</a></li>
+                                </ul>
+                                <p>
+                                    Desenvolvido por Thalys Márcio
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </footer>
+
         <div class="go-to-top active">
             <i class="ion-android-arrow-up"></i>
         </div>
-        <script type='text/javascript' src='http://demo.mangabooth.com/wp-content/themes/madara/js/lazysizes/lazysizes.min.js?ver=2.0.7'></script>
-        <script type='text/javascript' src='http://demo.mangabooth.com/wp-content/themes/madara/js/bootstrap.min.js?ver=3.3.7'></script>
-        <script type='text/javascript' src='http://demo.mangabooth.com/wp-includes/js/imagesloaded.min.js?ver=3.2.0'></script>
+        <script type='text/javascript' src='{{ asset('js/lazysizes.min.js?ver=2.0.7') }}'></script>
+        <script type='text/javascript' src='{{ asset('js/bootstrap.min.js?ver=3.3.7') }}'></script>
+        <script type='text/javascript' src='{{ asset('js/imagesloaded.min.js?ver=3.2.0') }}'></script>
 
-        <script type='text/javascript' src='http://demo.mangabooth.com/wp-content/themes/madara/js/template.js?ver=4.9.6'></script>
-        <script type='text/javascript' src='http://demo.mangabooth.com/wp-content/plugins/madara-core/assets/js/script.js?ver=4.9.6'></script>
+        <script type='text/javascript' src='{{ asset('js/template.js?ver=4.9.6') }}'></script>
+        <script type='text/javascript' src='{{ asset('js/script.js?ver=4.9.6') }}'></script>
 
-        <script type='text/javascript' src='http://demo.mangabooth.com/wp-content/themes/madara/js/slick/slick.min.js?ver=1.7.1'></script>
-
+        <script type='text/javascript' src='{{ asset('js/slick.min.js?ver=1.7.1') }}'></script>
 
     </body>
+
 </html>

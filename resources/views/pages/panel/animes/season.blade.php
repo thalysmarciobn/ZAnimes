@@ -1,6 +1,6 @@
 @extends('layouts.panel')
 
-@section('title', "Edit Anime")
+@section('title', "Edit Season")
 
 @section('container')
     <div class="row">

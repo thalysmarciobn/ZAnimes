@@ -1,12 +1,27 @@
 <?php
 
 Route::get('/', 'PagesController@home')->name('home');
+Route::get('/animes', 'PagesController@animes')->name('animes');
+Route::get('/dmca', 'PagesController@dmca')->name('dmca');
+Route::prefix('api')->group(function () {
+    Route::get('/animes', 'APIController@animes');
+});
+Route::prefix('anime')->group(function () {
+    Route::get('/{anime_slug}', 'PagesController@anime')->name('anime');
+    Route::get('/{anime_slug}/episodio-{episode}-{episode_slug}-{season}', 'HomeController@episode')->name('episode');
+});
 Route::group(['middleware' => ['guest']], function () {
-    Route::match(['get', 'post'], '/logar', 'PagesController@login')->name('login');
-    Route::match(['get', 'post'], '/cadastro', 'PagesController@register')->name('register');
+    Route::get('/logar', 'PagesController@login')->name('login');
+    Route::post('/logar', 'AuthController@login');
+    Route::get('/cadastro', 'PagesController@register')->name('register');
+    Route::post('/cadastro', 'AuthController@register');
 });
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/sair', 'PagesController@logout')->name('logout');
+    Route::get('/sair', function () {
+        Auth::logout();
+        Session::flush();
+        return redirect('/');
+    })->name('logout');
 });
 Route::group(['middleware' => ['editor:1']], function () {
     Route::prefix('panel')->group(function () {

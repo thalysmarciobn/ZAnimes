@@ -1,6 +1,6 @@
 @extends('layouts.panel')
 
-@section('title', "Edit Anime")
+@section('title', "Edit Episode")
 
 @section('container')
     <div class="row">
@@ -8,6 +8,11 @@
             @if (session('success'))
                 <div class="alert alert-success" role="success">
                     {{ session('success') }}
+                </div>
+            @endif
+            @if (session('warning'))
+                <div class="alert alert-warning" role="warning">
+                    {{ session('warning') }}
                 </div>
             @endif
         </div>

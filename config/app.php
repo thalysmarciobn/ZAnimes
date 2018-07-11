@@ -53,6 +53,7 @@ return [
     */
 
     'url' => env('APP_URL', 'http://localhost'),
+    'cdn' => env('APP_CDN', 'http://cdn.localhost'),
 
     /*
     |--------------------------------------------------------------------------
@@ -208,6 +209,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'ZAnimesControl' => App\ZAnimesControl::class,
 
     ],
 

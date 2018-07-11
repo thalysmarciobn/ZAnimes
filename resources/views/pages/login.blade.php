@@ -9,22 +9,24 @@
                 <div class="modal-body">
                     <div id="login" class="login">
                         <h1>
-                            @lang('pages.login-title')
+                            @lang('login.title')
                         </h1>
-                        @if (session('danger'))
-                            <div class="alert alert-danger" role="danger">
-                                {{ session('danger') }}
-                            </div>
+                        @if ($errors->any())
+                            @foreach($errors->all() as $message)
+                                <div class="alert alert-danger" role="danger">
+                                    {{ $message }}
+                                </div>
+                            @endforeach
                         @endif
                         <form name="login" method="post">
                             @csrf
                             <p>
-                                <label>@lang('pages.login-email')<br>
+                                <label>@lang('login.email')<br>
                                     <input type="email" name="email" class="input user_login" value="" size="20">
                                 </label>
                             </p>
                             <p>
-                                <label>@lang('pages.login-password')<br>
+                                <label>@lang('login.password')<br>
                                     <input type="password" name="password" class="input user_login" value="" size="20">
                                 </label>
                             </p>
@@ -34,7 +36,7 @@
                                 </label>
                             </p>
                             <p class="submit">
-                                <input type="submit" name="wp-submit" class="button button-primary button-large wp-submit" value="@lang('pages.login-submit')">
+                                <input type="submit" name="wp-submit" class="button button-primary button-large wp-submit" value="@lang('login.submit')">
                             </p>
                         </form>
                     </div>

@@ -98,7 +98,7 @@
                     text: 'Stats'
                 },
                 xAxis: {
-                    categories: [@foreach ( $analystic_animes as $date => $count )'{{ $date }}',@endforeach]
+                    categories: [@foreach ( $analystic_users as $date => $count )'{{ $date }}',@endforeach]
                 },
                 yAxis: {
                     title: {
@@ -114,17 +114,9 @@
                     }
                 },
                 series: [{
-                    name: 'Animes',
-                    data: [@foreach ( $analystic_animes as $date => $count ){{ $count }},@endforeach]
-                },
-                    {
-                        name: 'Seasons',
-                        data: [@foreach ( $analystic_seasons as $date => $count ){{ $count }},@endforeach]
-                    },
-                    {
-                        name: 'Episodes',
-                        data: [@foreach ( $analystic_episodes as $date => $count ){{ $count }},@endforeach]
-                    }
+                    name: 'Users',
+                    data: [@foreach ( $analystic_users as $date => $count ){{ $count }},@endforeach]
+                }
                 ]
             });
 

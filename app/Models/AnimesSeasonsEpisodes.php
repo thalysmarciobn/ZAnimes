@@ -8,14 +8,28 @@ class AnimesSeasonsEpisodes extends Model
 {
     protected $table = 'animo_animes_seasons_episodes';
 
-    protected $fillable = ['title', 'anime', 'episode', 'season', 'video', 'image', 'hidden', 'duration', 'prev', 'poster'];
+    protected $fillable = ['id', 'title', 'episode', 'season_id', 'video', 'image', 'duration', 'prev', 'poster'];
 
-    public function scopeLatestEpisodes($query)
+    public function scopeLatestEpisode($query)
     {
-        return $query->where('hidden', 0)->orderBy('created_at', 'desc');
+        return $query->orderBy('season_id', 'desc')->orderBy('episode', 'desc')->limit(1);
     }
 
-    public function getAnime() {
-        return $this->hasOne('App\Models\Animes', 'id', 'anime');
+    public function scopeLatestEpisodesAccess($query)
+    {
+        return $query->orderBy('access_at', 'desc');
+    }
+
+    public function season() {
+        return $this->hasOne('App\Models\AnimesSeasons','id', 'season_id');
+    }
+
+    public function anime() {
+        return $this->hasOne('App\Models\Animes','id', 'anime_id');
+    }
+
+    public function views()
+    {
+        return $this->hasMany('App\Models\AnimesSeasonsEpisodesViews', 'episode_id');
     }
 }

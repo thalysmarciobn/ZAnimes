@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use DB;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,19 +12,23 @@ class Animes extends Model
 
     protected $fillable = ['id', 'name', 'slug_name', 'sinopse', 'image', 'author', 'status', 'year', 'genres', 'userid'];
 
-    public function scopeAnimesInRelease($query)
-    {
-        return $query->where('status', 0)->orderBy('latest_episode', 'desc');
+    public function seasons() {
+        return $this->hasMany('App\Models\AnimesSeasons', 'anime_id', 'id')->orderBy('id', 'desc');
     }
 
-    public function seasons()
+    public function latestEpisodes($limit = 1)
     {
-        return $this->hasMany('App\Models\AnimesSeasons', 'anime');
+        return $this->hasMany('App\Models\AnimesSeasonsEpisodes', 'anime_id')->orderBy('season_id', 'desc')->orderBy('episode', 'desc')->limit($limit)->get();
     }
 
     public function episodes()
     {
-        return $this->hasMany('App\Models\AnimesSeasonsEpisodes', 'anime')->orderBy('season', 'desc')->orderBy('episode', 'desc');
+        return $this->hasMany('App\Models\AnimesSeasonsEpisodes', 'anime_id');
+    }
+
+    public function monthly_views()
+    {
+        return $this->hasMany('App\Models\AnimesSeasonsEpisodesViews', 'anime_id')->where('created_at', '>=', Carbon::now()->addDays(-29)->format('Y-m-d H:i:s'));
     }
 
     public function creator() {

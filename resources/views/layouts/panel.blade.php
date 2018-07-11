@@ -23,9 +23,9 @@
 
         <link rel='stylesheet' id='madara-css-css' href='{{ asset('css/style.css?ver=4.9.6') }}' type='text/css' media='all' />
 
-        <script type='text/javascript' src='http://demo.mangabooth.com/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
-        <script type='text/javascript' src='http://demo.mangabooth.com/wp-content/plugins/revslider/public/assets/js/jquery.themepunch.tools.min.js?ver=5.4.6.2'></script>
-        <script type='text/javascript' src='http://demo.mangabooth.com/wp-content/plugins/revslider/public/assets/js/jquery.themepunch.revolution.min.js?ver=5.4.6.2'></script>
+        <script type='text/javascript' src='{{ asset('js/jquery.js?ver=1.12.4') }}'></script>
+        <script type='text/javascript' src='{{ asset('js/jquery.themepunch.tools.min.js?ver=5.4.6.2') }}'></script>
+        <script type='text/javascript' src='{{ asset('js/jquery.themepunch.revolution.min.js?ver=5.4.6.2') }}'></script>
 
         <script src="https://code.highcharts.com/highcharts.js"></script>
         <script src="https://code.highcharts.com/modules/exporting.js"></script>

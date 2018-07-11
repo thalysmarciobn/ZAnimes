@@ -42,10 +42,26 @@ return [
     */
 
     'disks' => [
-
+        //149.56.234.162
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),
+        ],
+
+        'cdn' => [
+            'driver' => 'ftp',
+            'host' => env('CDN_FTP_HOST'),
+            'username' => env('CDN_FTP_USERNAME'),
+            'password' => env('CDN_FTP_PASSWORD'),
+
+            // Settings for SSH key based authentication...
+            // 'privateKey' => '/path/to/privateKey',
+            // 'password' => 'encryption-password',
+
+            // Optional SFTP Settings...
+            'port' => env('CDN_FTP_PORT'),
+            // 'root' => '',
+            'timeout' => 30,
         ],
 
         'public' => [
@@ -55,14 +71,16 @@ return [
             'visibility' => 'public',
         ],
 
-        's3' => [
-            'driver' => 's3',
-            'key' => env('AWS_ACCESS_KEY_ID'),
-            'secret' => env('AWS_SECRET_ACCESS_KEY'),
-            'region' => env('AWS_DEFAULT_REGION'),
-            'bucket' => env('AWS_BUCKET'),
-            'url' => env('AWS_URL'),
-        ],
+        /*
+         *'s3' => [
+         *    'driver' => 's3',
+         *    'key' => env('AWS_ACCESS_KEY_ID'),
+         *    'secret' => env('AWS_SECRET_ACCESS_KEY'),
+         *    'region' => env('AWS_DEFAULT_REGION'),
+         *    'bucket' => env('AWS_BUCKET'),
+         *    'url' => env('AWS_URL'),
+         *],
+        */
 
     ],
 

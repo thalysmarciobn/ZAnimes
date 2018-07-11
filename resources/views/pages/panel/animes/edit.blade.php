@@ -52,7 +52,7 @@
                                     <label>
                                         <div class="anime">
                                             <div class="poster">
-                                                <img data-src="{{ asset('uploads/animes/' . $anime->slug_name . '/' . $anime->image) }}" data-srcset="{{ asset('uploads/animes/' . $anime->slug_name . '/' . $anime->image) }}" data-sizes="(max-width: 125px) 100vw, 125px" class="img-responsive effect-fade lazyloaded" src="{{ asset('uploads/animes/' . $anime->slug_name . '/' . $anime->image) }}" style="padding-top:180px; " alt="as54sa6 dfg df" sizes="(max-width: 125px) 100vw, 125px" srcset="{{ asset('uploads/animes/' . $anime->slug_name . '/' . $anime->image) }}">
+                                                <img data-src="{{ ZAnimesControl::url('animes/' . $anime->slug_name . '/' . $anime->image) }}" data-srcset="{{ ZAnimesControl::url('animes/' . $anime->slug_name . '/' . $anime->image) }}" data-sizes="(max-width: 125px) 100vw, 125px" class="img-responsive effect-fade lazyloaded" src="{{ ZAnimesControl::url('animes/' . $anime->slug_name . '/' . $anime->image) }}" style="padding-top:180px; " alt="as54sa6 dfg df" sizes="(max-width: 125px) 100vw, 125px" srcset="{{ ZAnimesControl::url('animes/' . $anime->slug_name . '/' . $anime->image) }}">
                                             </div>
                                         </div>
 

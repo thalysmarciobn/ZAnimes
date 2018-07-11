@@ -2,60 +2,65 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
-use App\User;
-use Illuminate\Http\Request;
 use App\Models\Animes;
 use App\Models\AnimesSeasonsEpisodes;
+use App\ZAnimesControl;
+use Illuminate\Http\Request;
+use App\Services\Contracts\ZAnimesInterface;
+use Illuminate\Support\Facades\Validator;
 
-class PagesController extends Controller
-{
+class PagesController extends Controller {
+    private $Zanimes;
+
+    public function __construct(ZAnimesInterface $ZAnimes) {
+        $this->Zanimes = $ZAnimes;
+    }
+
     public function home() {
         return view('pages.home', [
-            'releases' => Animes::animesInRelease()->orderBy("name", "asc")->get(),
-            'episodes' => AnimesSeasonsEpisodes::latestEpisodes()->take(12)->get(),
-            'latests' => Animes::latestCreated()->take(12)->get()
+            'releases_episodes' => $this->Zanimes->cache('releases_episodes'),
+            'monthly' => $this->Zanimes->cache('animes')->sortByDesc('monthly_views_count')->take(5),
+            'episodes_views' => AnimesSeasonsEpisodes::latestEpisodesAccess()->limit(12)->get(),
+            'latests' => $this->Zanimes->cache('animes')->sortByDesc('created_at')->take(12)
         ]);
     }
 
-    public function login(Request $request) {
-        if ($request->has('email') && $request->has('password')) {
-            if (Auth::attempt($request->only('email', 'password'), $request->has('rememberme'))) {
-                return redirect('')->with('info', __('pages.info-logged', ['name' => Auth::user()->name]));
-            }
-            return redirect('logar')->with('danger', __('pages.login-failed'));
-        }
+    public function login() {
         return view('pages.login');
     }
 
-    public function register(Request $request) {
-        if ($request->has('username') && $request->has('email') && $request->has('password') && $request->has('r-password')) {
-            if (User::where('name', '=', $request->input('username'))->exists()) {
-                return redirect('cadastro')->with('alert', __('pages.register-name-exist', ['name' => $request->input('username')]));
-            } else if (User::where('email', '=', $request->input('email'))->exists()) {
-                return redirect('cadastro')->with('alert', __('pages.register-email-exist', ['email' => $request->input('email')]));
-            } else if ($request->input('password') != $request->input('r-password')) {
-                return redirect('cadastro')->with('danger', __('pages.register-password-not-match'));
-            }
-            $user = new User([
-                'name' => $request->input('username'),
-                'email' => $request->input('email'),
-                'password' => bcrypt($request->input('password')),
-                'remember_token' => "",
-                'editor' => 0
-            ]);
-            if ($user->save()) {
-                Auth::login($user);
-                return redirect('')->with('info', __('pages.info-logged', ['name' => $user->name]));
-            }
-        }
+    public function register() {
         return view('pages.register');
     }
 
-    public function logout() {
-        if (!Auth::guest()) {
-            Auth::logout();
+    public function animes(Request $request) {
+        return view('pages.animes', [
+            'monthly' => $this->Zanimes->cache('animes')->sortByDesc('monthly_views_count')->take(5),
+            'genres' => ZAnimesControl::genres(),
+            'animes' => ZAnimesControl::paginateAnimes($request, 10)
+        ]);
+    }
+
+    public function anime(Request $request, $anime_slug) {
+        $cache = $this->Zanimes->cache('animes')->sortByDesc('views_count');
+        if ($cache->contains('slug_name', $anime_slug )) {
+            $subset = $cache->where('slug_name', $anime_slug);
+            print_r($subset);
+            return view('pages.anime',
+                [
+                    'anime' => $subset->first(),
+                    'rank' => $this->Zanimes->cache('animes'),
+                    'monthly' => $this->Zanimes->cache('animes')
+                ]
+            );
         }
-        return redirect('');
+    }
+
+    public function episode($anime_slug, $episode, $episode_slug, $season) {
+
+    }
+
+    public function dmca() {
+        return view('pages.dmca');
     }
 }
