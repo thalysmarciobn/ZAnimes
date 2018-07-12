@@ -2,26 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Animes;
-use App\Models\AnimesSeasonsEpisodes;
 use App\ZAnimesControl;
+use HTMLMin\HTMLMin\Facades\HTMLMin;
 use Illuminate\Http\Request;
 use App\Services\Contracts\ZAnimesInterface;
-use Illuminate\Support\Facades\Validator;
 
 class PagesController extends Controller {
-    private $Zanimes;
 
-    public function __construct(ZAnimesInterface $ZAnimes) {
-        $this->Zanimes = $ZAnimes;
-    }
-
-    public function home() {
+    public function home(ZAnimesInterface $z_animes) {
         return view('pages.home', [
-            'releases_episodes' => $this->Zanimes->cache('releases_episodes'),
-            'monthly' => $this->Zanimes->cache('animes')->sortByDesc('monthly_views_count')->take(5),
-            'episodes_views' => AnimesSeasonsEpisodes::latestEpisodesAccess()->limit(12)->get(),
-            'latests' => $this->Zanimes->cache('animes')->sortByDesc('created_at')->take(12)
+            'releases' => $z_animes->animesInRelease(),
+            'releases_episodes' => $z_animes->episodesInRelease(12),
+            'monthly' => $z_animes->monthly()->take(5),
+            'episodes_views' => $z_animes->recentEpisodesViews(12),
+            'latests' => $z_animes->latestAnimes(12)
         ]);
     }
 
@@ -35,25 +29,17 @@ class PagesController extends Controller {
 
     public function animes(Request $request) {
         return view('pages.animes', [
-            'monthly' => $this->Zanimes->cache('animes')->sortByDesc('monthly_views_count')->take(5),
             'genres' => ZAnimesControl::genres(),
             'animes' => ZAnimesControl::paginateAnimes($request, 10)
         ]);
     }
 
-    public function anime(Request $request, $anime_slug) {
-        $cache = $this->Zanimes->cache('animes')->sortByDesc('views_count');
-        if ($cache->contains('slug_name', $anime_slug )) {
-            $subset = $cache->where('slug_name', $anime_slug);
-            print_r($subset);
-            return view('pages.anime',
-                [
-                    'anime' => $subset->first(),
-                    'rank' => $this->Zanimes->cache('animes'),
-                    'monthly' => $this->Zanimes->cache('animes')
-                ]
-            );
-        }
+    public function anime(ZAnimesInterface $z_animes, $anime_slug) {
+        $anime = $z_animes->getAnimeOrFail('slug_name', $anime_slug);
+        return view('pages.anime', [
+            'similar' => $z_animes->getSimilarAnimes($anime, 5),
+            'anime' => $anime,
+        ]);
     }
 
     public function episode($anime_slug, $episode, $episode_slug, $season) {

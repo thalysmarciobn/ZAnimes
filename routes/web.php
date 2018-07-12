@@ -8,7 +8,7 @@ Route::prefix('api')->group(function () {
 });
 Route::prefix('anime')->group(function () {
     Route::get('/{anime_slug}', 'PagesController@anime')->name('anime');
-    Route::get('/{anime_slug}/episodio-{episode}-{episode_slug}-{season}', 'HomeController@episode')->name('episode');
+    Route::get('/{anime_slug}/episodio-{episode}-{episode_slug}-{season}', 'PagesController@episode')->name('episode');
 });
 Route::group(['middleware' => ['guest']], function () {
     Route::get('/logar', 'PagesController@login')->name('login');

@@ -7,7 +7,7 @@ return [
     'recents' => 'Mais Recentes',
     '_news' => 'novos',
     'news' => 'Novos',
-    'animes_filtered' => 'Foram filtrado :count Animes',
+    'animes_filtered' => 'Foram filtrado(s) :count Animes',
     'advanced' => 'Avançado',
     'search' => 'Procurar',
     'search_for' => 'Procurar por:',

@@ -13,17 +13,12 @@ class Animes extends Model
     protected $fillable = ['id', 'name', 'slug_name', 'sinopse', 'image', 'author', 'status', 'year', 'genres', 'userid'];
 
     public function seasons() {
-        return $this->hasMany('App\Models\AnimesSeasons', 'anime_id', 'id')->orderBy('id', 'desc');
-    }
-
-    public function latestEpisodes($limit = 1)
-    {
-        return $this->hasMany('App\Models\AnimesSeasonsEpisodes', 'anime_id')->orderBy('season_id', 'desc')->orderBy('episode', 'desc')->limit($limit)->get();
+        return $this->hasMany('App\Models\AnimesSeasons', 'anime_id', 'id')->orderByDesc('id');
     }
 
     public function episodes()
     {
-        return $this->hasMany('App\Models\AnimesSeasonsEpisodes', 'anime_id');
+        return $this->hasMany('App\Models\AnimesSeasonsEpisodes', 'anime_id')->orderByDesc('id');
     }
 
     public function monthly_views()
@@ -33,10 +28,5 @@ class Animes extends Model
 
     public function creator() {
         return $this->hasOne('App\User', 'id', 'userid');
-    }
-
-    public function scopeLatestCreated($query)
-    {
-        return $query->orderBy('created_at', 'desc');
     }
 }

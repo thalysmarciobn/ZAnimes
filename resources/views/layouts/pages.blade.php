@@ -61,6 +61,8 @@
                 </div>
             </div>
         </div>
+        @yield('footer')
+        <div class="clear"></div>
         <footer id="main-footer">
 
             <div id="info">

@@ -75,7 +75,7 @@ class ZAnimesControl
         if ($request->has("genre")) {
             if (is_array($request->genre)) {
                 foreach ($request->genre as $genre) {
-                    $anime->where("genres", 'LIKE', '%' . $genre . '%');
+                    $anime->orWhere("genres", 'LIKE', '%' . $genre . '%');
                 }
             }
         }

@@ -260,7 +260,7 @@
             var check_rtl = (jQuery("body").css('direction') === "rtl");
             var manga_style_1 = {
                 dots: true,
-                infinite: true,
+                infinite: false,
                 speed: 500,
                 centerMode: (((manga_slidesToShow % 2 !== 0) && (!check_style)) ? true : false),
                 slidesToShow: manga_slidesToShow,
@@ -272,7 +272,7 @@
                     settings: {
                         slidesToShow: (manga_slidesToShow == 1) ? 1 : 2,
                         slidesToScroll: (manga_slidesToShow == 1) ? 1 : 2,
-                        infinite: true,
+                        infinite: false,
                         centerMode: false,
                         dots: true
                     }
@@ -281,7 +281,7 @@
                     settings: {
                         slidesToShow: 1,
                         slidesToScroll: 1,
-                        infinite: true,
+                        infinite: false,
                         variableWidth: false,
                         dots: true
                     }
@@ -295,10 +295,11 @@
             }
             var manga_style_2 = {
                 dots: true,
-                infinite: true,
+                infinite: false,
                 speed: 500,
+                centerMode: (((manga_slidesToShow % 2 !== 0) && (!check_style)) ? true : false),
                 slidesToShow: manga_slidesToShow,
-                slidesToScroll: manga_slidesToShow,
+                slidesToScroll: check_style ? 3 : 1,
                 arrows: false,
                 rtl: check_rtl,
                 responsive: [{
@@ -306,7 +307,7 @@
                     settings: {
                         slidesToShow: (manga_slidesToShow == 1) ? 1 : 2,
                         slidesToScroll: (manga_slidesToShow == 1) ? 1 : 2,
-                        infinite: true,
+                        infinite: false,
                         dots: true
                     }
                 }, {
@@ -314,14 +315,14 @@
                     settings: {
                         slidesToShow: 1,
                         slidesToScroll: 1,
-                        infinite: true,
+                        infinite: false,
                         dots: true
                     }
                 }]
             }
             var manga_style_3 = {
                 dots: true,
-                infinite: true,
+                infinite: false,
                 speed: 500,
                 slidesToShow: manga_slidesToShow,
                 slidesToScroll: manga_slidesToShow,
@@ -332,7 +333,7 @@
                     settings: {
                         slidesToShow: (manga_slidesToShow == 1) ? 1 : 2,
                         slidesToScroll: (manga_slidesToShow == 1) ? 1 : 2,
-                        infinite: true,
+                        infinite: false,
                         dots: true
                     }
                 }, {
@@ -340,7 +341,7 @@
                     settings: {
                         slidesToShow: 1,
                         slidesToScroll: 1,
-                        infinite: true,
+                        infinite: false,
                         dots: true
                     }
                 }]
@@ -366,7 +367,7 @@
             var check_rtl = (jQuery("body").css('direction') === "rtl");
             var popular_style_2 = {
                 dots: false,
-                infinite: true,
+                infinite: false,
                 speed: 500,
                 slidesToShow: manga_slidesToShow,
                 arrows: true,
@@ -405,7 +406,7 @@
             }
             var popular_style_1 = {
                 dots: false,
-                infinite: true,
+                infinite: false,
                 speed: 500,
                 slidesToShow: manga_slidesToShow,
                 arrows: true,
@@ -415,22 +416,22 @@
                     {
                         breakpoint: 1700,
                         settings: {
-                            slidesToShow: 4,
-                            slidesToScroll: 4,
+                            slidesToShow: 6,
+                            slidesToScroll: 6,
                         }
                     },
                     {
                         breakpoint: 1200,
                         settings: {
-                            slidesToShow: 3,
-                            slidesToScroll: 3,
+                            slidesToShow: 5,
+                            slidesToScroll: 5,
                         }
                     },
                     {
                         breakpoint: 992,
                         settings: {
-                            slidesToShow: 2,
-                            slidesToScroll: 2,
+                            slidesToShow: 3,
+                            slidesToScroll: 3,
                         }
                     },
                     {

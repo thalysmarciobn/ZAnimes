@@ -10,16 +10,6 @@ class AnimesSeasonsEpisodes extends Model
 
     protected $fillable = ['id', 'title', 'episode', 'season_id', 'video', 'image', 'duration', 'prev', 'poster'];
 
-    public function scopeLatestEpisode($query)
-    {
-        return $query->orderBy('season_id', 'desc')->orderBy('episode', 'desc')->limit(1);
-    }
-
-    public function scopeLatestEpisodesAccess($query)
-    {
-        return $query->orderBy('access_at', 'desc');
-    }
-
     public function season() {
         return $this->hasOne('App\Models\AnimesSeasons','id', 'season_id');
     }

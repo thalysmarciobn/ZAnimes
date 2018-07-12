@@ -2,42 +2,43 @@
 
 namespace App\Services;
 
-use App\Models\AnimesSeasons;
-use Carbon\Carbon;
-use DB;
 use App\Services\Contracts\ZAnimesInterface;
-use App\Models\Genres;
 use App\Models\Animes;
 use App\Models\AnimesSeasonsEpisodes;
 use Illuminate\Support\Facades\Cache;
 
 class ZAnimes implements ZAnimesInterface
 {
-    public $minutes = 1;
 
-    public function cache($cache) {
-        return Cache::store('file')->get('zanimes')[$cache];
+    public function monthly() {
+        return Cache::store('file')->remember('animes', 5, function () {
+            return Animes::withCount(['monthly_views'])->get()->sortByDesc('monthly_views_count');
+        });
     }
 
-    public function __construct()
-    {
-        if (!Cache::store('file')->has('zanimes')) {
-            Cache::store('file')->put('zanimes',
-                [
-                    'releases_episodes' => AnimesSeasonsEpisodes::whereHas('anime',
-                        function ($query)
-                        {
-                            return $query->where('status', 0);
-                        }
-                    )->orderBy('created_at', 'desc')->get()->unique('anime_id')->take(12),
+    public function animesInRelease() {
+        return Animes::where('status', 0)->get();
+    }
 
-                    'animes' => Animes::withCount(['monthly_views'])->get(),
-                    'seasons' => AnimesSeasons::get(),
-                    'episodes' => AnimesSeasonsEpisodes::withCount(['views'])->get(),
-                    'latest_access' => AnimesSeasonsEpisodes::latestEpisodesAccess()->limit(12)->get()
+    public function episodesInRelease($take) {
+        return AnimesSeasonsEpisodes::whereHas('anime', function ($query) {
+            return $query->where('status', 0);
+        })->orderByDesc('created_at')->get()->unique('anime_id')->take($take);
+    }
 
-                ]
-            , $this->minutes);
-        }
+    public function recentEpisodesViews($limit) {
+        return AnimesSeasonsEpisodes::orderByDesc('access_at')->limit($limit)->get();
+    }
+
+    public function latestAnimes($limit) {
+        return Animes::orderByDesc('created_at')->limit($limit)->get();
+    }
+
+    public function getAnimeOrFail($key, $value) {
+        return Animes::where($key, $value)->firstOrFail();
+    }
+
+    public function getSimilarAnimes($anime, $limit) {
+        return Animes::withCount(['monthly_views'])->whereIn('genres', explode(',', $anime->genres))->orWhere('id', '!=', $anime->id)->orderByDesc('monthly_views_count')->limit($limit)->get();
     }
 }
