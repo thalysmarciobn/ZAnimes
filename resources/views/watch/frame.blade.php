@@ -37,7 +37,7 @@ function time_updated(time_update_event){
         xhttp.open("POST", "{{ route('api_episode') }}", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.setRequestHeader('x-csrf-token', "{{ csrf_token() }}");
-        xhttp.send("episode_id={{ $episode->id }}&current_time=" + current_time + "&duration=" + duration);
+        xhttp.send("anime_id={{ $episode->anime->id }}&season_id={{ $episode->season->id }}&episode_id={{ $episode->id }}&current_time=" + current_time + "&duration=" + duration);
         console.info('Source changed to % s', current_time);
         last = 0;
     }

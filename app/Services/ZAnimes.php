@@ -94,13 +94,15 @@ class ZAnimes implements ZAnimesInterface {
         $view->save();
     }
 
-    public function checkEpisodeUser($user, $episode_id, $current_time, $duration) {
-        return $users_episodes = UsersEpisodes::where('user_id', $user->id)->where('episode_id', $episode_id)->doesntExist();
+    public function checkEpisodeUser($user, $anime_id, $season_id, $episode_id, $current_time, $duration) {
+        return $users_episodes = UsersEpisodes::where('user_id', $user->id)->where('anime_id', $anime_id)->where('season_id', $season_id)->where('episode_id', $episode_id)->doesntExist();
     }
 
-    public function addEpisodeUser($user, $episode_id, $current_time, $duration) {
+    public function addEpisodeUser($user, $anime_id, $season_id, $episode_id, $current_time, $duration) {
         $episode = new UsersEpisodes([
             'user_id' => $user->id,
+            'anime_id' => $anime_id,
+            'season_id' => $season_id,
             'episode_id' => $episode_id,
             'current_time' => $current_time,
             'duration' => $duration

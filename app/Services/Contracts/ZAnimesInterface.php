@@ -30,9 +30,9 @@ interface ZAnimesInterface {
 
     public function addWatchAccess($address, $anime_id, $season_id, $episode_id);
 
-    public function checkEpisodeUser($user, $episode_id, $current_time, $duration);
+    public function checkEpisodeUser($user, $anime_id, $season_id, $episode_id, $current_time, $duration);
 
-    public function addEpisodeUser($user, $episode_id, $current_time, $duration);
+    public function addEpisodeUser($user, $anime_id, $season_id, $episode_id, $current_time, $duration);
 
     public function updateEpisodeUser($user, $episode_id, $current_time, $duration);
 

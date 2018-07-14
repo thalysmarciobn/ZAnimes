@@ -2496,6 +2496,11 @@ body.search.search-results .search-wrap .tab-content-wrap .c-tabs-item .c-tabs-i
 .loc {
   padding: 10px;
 }
+.discord {
+  margin-top: 20px;
+  border-bottom: 2px solid #c5cbd3;
+  min-height: 380px;
+}
 .anime {
   z-index: 3;
   position: relative;
