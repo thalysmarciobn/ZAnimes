@@ -11,9 +11,13 @@ class AnimesSeasonsEpisodes extends Model
     protected $fillable = ['id', 'title', 'episode', 'season_id', 'video', 'image', 'duration', 'prev', 'poster'];
 
     public function current($user_id, $episode_id) {
-        $user_episode = UsersEpisodes::where('user_id', $user_id)->where('episode_id', $episode_id)->first();
-        if ($user_episode != null) {
-            return ($user_episode["current_time"] * 100) / $user_episode["duration"];
+        try {
+            $user_episode = UsersEpisodes::where('user_id', $user_id)->where('episode_id', $episode_id)->first();
+            if ($user_episode != null) {
+                return ($user_episode["current_time"] * 100) / $user_episode["duration"];
+            }
+        } catch (\Exception $e) {
+            return 0;
         }
         return 0;
     }
