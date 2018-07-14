@@ -35,10 +35,12 @@ class Controller extends BaseController {
         if ($validator->fails()) {
             return abort(403);
         }
-        if ($z_animes->checkEpisodeUser(Auth::user(), $request->anime_id, $request->season_id, $request->episode_id)) {
-            $z_animes->addEpisodeUser(Auth::user(), $request->anime_id, $request->season_id, $request->episode_id, $request->current_time, $request->duration);
-        } else {
-            $z_animes->updateEpisodeUser(Auth::user(), $request->anime_id, $request->season_id, $request->episode_id, $request->current_time, $request->duration);
+        if ($request->current_time != (0 || "0") || $request->duration != (0 || "0")) {
+            if ($z_animes->checkEpisodeUser(Auth::user(), $request->anime_id, $request->season_id, $request->episode_id)) {
+                $z_animes->addEpisodeUser(Auth::user(), $request->anime_id, $request->season_id, $request->episode_id, $request->current_time, $request->duration);
+            } else {
+                $z_animes->updateEpisodeUser(Auth::user(), $request->anime_id, $request->season_id, $request->episode_id, $request->current_time, $request->duration);
+            }
         }
     }
 
