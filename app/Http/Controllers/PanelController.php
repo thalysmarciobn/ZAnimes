@@ -79,7 +79,7 @@ class PanelController extends Controller {
                     'status' => $request->input('status'),
                     'year' => $request->input('year'),
                     'genres' => implode(",", $request->input('genre')),
-                    'userid' => Auth::user()->id
+                    'user_id' => Auth::user()->id
                 ]);
                 if ($anime->save()) {
                     ZAnimesControl::put("animes/" . $anime->slug_name . "/cover.jpg", Image::make($request->file('image')->getRealPath())->resize(340, 510)->encode('jpg', 80));
@@ -186,8 +186,8 @@ class PanelController extends Controller {
                     'prev' => $request->input('prev'),
                     'episode' => $request->input('episode'),
                     'video' => $request->input('video'),
-                    'image' => $anime->slug_name . "/episodes/" . $season->season_id . "_" . $request->input('episode') . ".jpg?" . str_random(20),
-                    'poster' => $anime->slug_name . "/episodes/" . $season->season_id . "_" . $request->input('episode') . "_poster.jpg?" . str_random(20),
+                    'image' => $anime->slug_name . "/episodes/" . $season->season . "_" . $request->input('episode') . ".jpg?" . str_random(20),
+                    'poster' => $anime->slug_name . "/episodes/" . $season->season . "_" . $request->input('episode') . "_poster.jpg?" . str_random(20),
                     'anime_id' => $anime->id,
                     'season_id' => $season->id,
                     'duration' => $ZAnimes->getDuration($request->input('video'))
