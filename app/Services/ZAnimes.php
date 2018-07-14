@@ -69,7 +69,9 @@ class ZAnimes implements ZAnimesInterface {
     public function getWatchOrFail($session, $key, $id, $slug) {
         if ($session->has('KEY')) {
             if ($session->pull("KEY") == $key) {
-                $episode = AnimesSeasonsEpisodes::where('id', $id)->where('slug', $slug)->firstOrFail();
+                $query = AnimesSeasonsEpisodes::where('id', $id)->where('slug', $slug);
+                $query->update(['access_at' => Carbon::now()]);
+                $episode = $query->firstOrFail();
                 if (ZAnimesControl::hashing($episode->season_id, $episode->episode) == $key) {
                     return $episode;
                 }
