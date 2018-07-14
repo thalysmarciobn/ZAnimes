@@ -54,8 +54,8 @@
                                     </div>
                                     <div class="summary-content">
                                         <div class="genres-content">
-                                            @foreach(explode(',', $anime->genres) as $genre)
-                                                {{ ZAnimesControl::genre($genre) }}@if (!$loop->last), @endif
+                                            @foreach($anime->genres() as $genre)
+                                                {{ $genre->name }}@if (!$loop->last), @endif
                                             @endforeach
                                         </div>
                                     </div>
@@ -96,6 +96,16 @@
                                 </div>
                                 <div class="post-content_item">
                                     <div class="summary-heading">
+                                        <h5>
+                                            @lang('anime.poster')
+                                        </h5>
+                                    </div>
+                                    <div class="summary-content">
+                                        {{ $anime->creator->name }}
+                                    </div>
+                                </div>
+                                <div class="post-content_item">
+                                    <div class="summary-heading">
                                         <h4>
                                             @lang('anime.sinopse')
                                         </h4>
@@ -132,15 +142,24 @@
                                 <ul class="episodes">
                                     @foreach($season->episodes as $episode)
                                     <li>
-                                        <div class="thumb c-image-hover">
-                                            <a href="{{ route('episode', ['anime_slug' => $anime->slug_name, 'episode' => $episode->episode, 'episode_slug' => $episode->slug, 'season' => $episode->id]) }}">
-                                                <img  data-src="{{ ZAnimesControl::url('animes/' . $episode->slug_name . '/' . $episode->image) }}" data-srcset="{{ ZAnimesControl::url('animes/' . $episode->slug_name . '/' . $episode->image) }}"  class="img-responsive lazyload effect-fade" src="{{ asset('images/video_empty.png') }}"  alt="{{ $episode->name }}"/>
-                                            </a>
+                                        <div class="thumb">
+                                            <div class="c-image-hover">
+                                                <a href="{{ route('episode', ['anime_slug' => $anime->slug_name, 'episode' => $episode->episode, 'episode_slug' => $episode->slug, 'season' => $episode->season_id]) }}">
+                                                    <img width="100px" height="60px" data-src="{{ ZAnimesControl::url('animes/' . $episode->image) }}" data-srcset="{{ ZAnimesControl::url('animes/' . $episode->image) }}"  class="img-responsive lazyload effect-fade" src="{{ asset('images/video_empty.png') }}"  alt="{{ $episode->name }}"/>
+                                                </a>
+                                            </div>
+                                            @auth
+                                            <div class="episode_progress">
+                                                <div class="ep_progress" style="width:{{ $episode->current(Auth::user()->id, $episode->id) }}%;"></div>
+                                            </div>
+                                            @endauth
                                         </div>
-                                        <div class="duration">{{ str_replace('00:', '', $episode->duration) }}</div>
-                                        <div class="episode">
-                                            <a href="{{ route('episode', ['anime_slug' => $anime->slug_name, 'episode' => $episode->episode, 'episode_slug' => $episode->slug, 'season' => $episode->id]) }}">@lang('anime.episode', ['episode' => $episode->episode])</a>
-                                            <span class="title">{{ $episode->title }}</span>
+                                        <div>
+                                            <div class="duration">{{ str_replace('00:', '', $episode->duration) }}</div>
+                                            <div class="episode">
+                                                <a href="{{ route('episode', ['anime_slug' => $anime->slug_name, 'episode' => $episode->episode, 'episode_slug' => $episode->slug, 'season' => $episode->season_id]) }}">@lang('anime.episode', ['episode' => $episode->episode])</a>
+                                                <span class="title">{{ $episode->title }}</span>
+                                            </div>
                                         </div>
                                     </li>
                                     @endforeach

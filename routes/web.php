@@ -3,12 +3,17 @@
 Route::get('/', 'PagesController@home')->name('home');
 Route::get('/animes', 'PagesController@animes')->name('animes');
 Route::get('/dmca', 'PagesController@dmca')->name('dmca');
+Route::get('/watch/{key}/{id}/{slug}', 'Controller@watch')->name('watch');
 Route::prefix('api')->group(function () {
-    Route::get('/animes', 'APIController@animes');
+    Route::get('/animes', 'Controller@api_animes')->name('api_animes');
+    Route::get('/genres', 'Controller@api_genres')->name('api_genres');
+    Route::group(['middleware' => ['auth']], function () {
+        Route::post('/episode', 'Controller@api_episode')->name('api_episode');
+    });
 });
 Route::prefix('anime')->group(function () {
     Route::get('/{anime_slug}', 'PagesController@anime')->name('anime');
-    Route::get('/{anime_slug}/episodio-{episode}-{episode_slug}-{season}', 'PagesController@episode')->name('episode');
+    Route::get('/{anime_slug}/{season}/episodio-{episode}/{episode_slug}', 'PagesController@episode')->name('episode');
 });
 Route::group(['middleware' => ['guest']], function () {
     Route::get('/logar', 'PagesController@login')->name('login');

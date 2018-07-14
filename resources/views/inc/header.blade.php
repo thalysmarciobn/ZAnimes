@@ -10,9 +10,10 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="{{ route('home') }}">@lang('pages.menu-home')</a></li>
-                    <li><a href="{{ route('animes') }}">@lang('pages.menu-animes')</a></li>
-                    <li><a href="{{ route('dmca') }}">@lang('pages.menu-dmca')</a></li>
+                    <li class="{{ Request::is('/') ? 'active' : 'non' }}"><a href="{{ route('home') }}">@lang('pages.menu-home')</a></li>
+                    <li class="{{ Request::is('animes') ? 'active' : 'non' }}"><a href="{{ route('animes') }}">@lang('pages.menu-animes')</a></li>
+                    <li class="{{ Request::is('noticias') ? 'active' : 'non' }}"><a href="{{ route('home') }}">@lang('pages.menu-articles')</a></li>
+                    <li class="{{ Request::is('forum') ? 'active' : 'non' }}"><a href="{{ route('home') }}">@lang('pages.menu-forum')</a></li>
                 </ul>
                 <ul class="pull-right nav navbar-nav">
                     @auth

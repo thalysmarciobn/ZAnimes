@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'poster' => 'Postador',
     'genres' => 'Gêneros',
     'author' => 'Autor',
     'status' => 'Status',

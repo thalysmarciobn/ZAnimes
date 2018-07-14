@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\ZAnimesControl;
-use HTMLMin\HTMLMin\Facades\HTMLMin;
 use Illuminate\Http\Request;
 use App\Services\Contracts\ZAnimesInterface;
 
@@ -13,7 +11,8 @@ class PagesController extends Controller {
         return view('pages.home', [
             'releases' => $z_animes->animesInRelease(),
             'releases_episodes' => $z_animes->episodesInRelease(12),
-            'monthly' => $z_animes->monthly()->take(5),
+            'monthly' => $z_animes->monthly(5),
+            'weekly_recommendation' => $z_animes->weeklyRecommendation(12),
             'episodes_views' => $z_animes->recentEpisodesViews(12),
             'latests' => $z_animes->latestAnimes(12)
         ]);
@@ -27,10 +26,10 @@ class PagesController extends Controller {
         return view('pages.register');
     }
 
-    public function animes(Request $request) {
+    public function animes(ZAnimesInterface $z_animes, Request $request) {
         return view('pages.animes', [
-            'genres' => ZAnimesControl::genres(),
-            'animes' => ZAnimesControl::paginateAnimes($request, 10)
+            'genres' => $z_animes->genres(),
+            'animes' => $z_animes->paginateAnimes($request, 10)
         ]);
     }
 
@@ -42,8 +41,11 @@ class PagesController extends Controller {
         ]);
     }
 
-    public function episode($anime_slug, $episode, $episode_slug, $season) {
-
+    public function episode(ZAnimesInterface $z_animes, $anime_slug, $season, $episode, $episode_slug) {
+        $z_animes->flashEpisodeKey(session(), $season, $episode);
+        return view('pages.episode', [
+            'episode' => $z_animes->getEpisodeOrFail($anime_slug, $season, $episode, $episode_slug)
+        ]);
     }
 
     public function dmca() {

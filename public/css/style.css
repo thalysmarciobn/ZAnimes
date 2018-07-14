@@ -431,6 +431,13 @@ h6,
   margin: 0;
   height: 30px;
 }
+.c-blog__heading.style-2 span {
+  display: block;
+  font-size: 12px;
+}
+.c-blog__heading.style-2 .pull-right {
+  text-align: right;
+}
 .c-blog__heading.style-2 > *:not(i):not(h4) {
   margin-top: -5px;
 }
@@ -2629,7 +2636,7 @@ body.search.search-results .search-wrap .tab-content-wrap .c-tabs-item .c-tabs-i
 }
 #seasons .se-c .se-a ul.episodes li .duration {
   float: left;
-  padding: 10px;
+  padding: 15px;
   margin: 10px 0;
   width: 80px;
   text-align: center;
@@ -2638,7 +2645,7 @@ body.search.search-results .search-wrap .tab-content-wrap .c-tabs-item .c-tabs-i
   border-right: 1px solid #c5cbd3;
 }
 #seasons .se-c .se-a ul.episodes li .thumb {
-  width: 90px;
+  width: 105px;
   float: left;
   margin-top: 3px;
   position: relative;
@@ -2649,7 +2656,7 @@ body.search.search-results .search-wrap .tab-content-wrap .c-tabs-item .c-tabs-i
 }
 #seasons .se-c .se-a ul.episodes li .episode {
   float: left;
-  padding: 10px;
+  padding: 15px;
   width: 50%;
   position: relative;
   text-overflow: ellipsis;
@@ -2671,6 +2678,17 @@ body.search.search-results .search-wrap .tab-content-wrap .c-tabs-item .c-tabs-i
   width: 100%;
   font-size: 11px;
   font-weight: 300;
+}
+#seasons .se-c .se-a ul.episodes li .episode_progress {
+  background: #dbdbdb;
+  height: 5px;
+  width: 100%;
+  margin-top: 3px;
+}
+#seasons .se-c .se-a ul.episodes li .episode_progress .ep_progress {
+  height: 100%;
+  display: block;
+  background: #888;
 }
 .top5__row{
   padding-bottom:20px;
@@ -2987,7 +3005,8 @@ body.search.search-results .search-wrap .tab-content-wrap .c-tabs-item .c-tabs-i
 .shortcode-manga-chapter .post-content_item .summary-sinopse {
    word-break: break-word;
    width: 100%;
- }
+   font-size: 12px;
+}
 .shortcode-manga-chapter .post-content_item .summary-heading h4 {
   font-size: 16px;
   font-weight: 400;

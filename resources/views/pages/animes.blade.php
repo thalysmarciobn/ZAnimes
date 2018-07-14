@@ -172,8 +172,8 @@
                                     </div>
                                 </div>
                                 <div class="tab-meta">
-                                    @foreach(explode(',', $anime->genres) as $genre)
-                                        <span class="genre">{{ ZAnimesControl::genre($genre) }}</span>
+                                    @foreach($anime->genres() as $genre)
+                                        <span class="genre">{{ $genre->name }}</span>
                                     @endforeach
                                 </div>
                             </div>

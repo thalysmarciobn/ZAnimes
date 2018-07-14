@@ -74,7 +74,7 @@ class PanelController extends Controller {
                     'name' => $request->input('name'),
                     'slug_name' => $slug,
                     'sinopse' => $request->input('sinopse'),
-                    'image' => "/cover.jpg?" . str_random(20),
+                    'image' => "cover.jpg?t=" . str_random(20) . time(),
                     'author' => $request->input('author'),
                     'status' => $request->input('status'),
                     'year' => $request->input('year'),

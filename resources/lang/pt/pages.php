@@ -4,6 +4,8 @@ return [
     'menu-home' => 'Início',
     'menu-animes' => 'Animes',
     'menu-dmca' => 'DMCA',
+    'menu-articles' => 'Notícias',
+    'menu-forum' => 'Fórum',
 
     'episode' => 'Episódio',
 

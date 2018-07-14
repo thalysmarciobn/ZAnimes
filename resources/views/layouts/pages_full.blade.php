@@ -29,23 +29,24 @@
     <script type='text/javascript' src='{{ asset('js/jquery.themepunch.revolution.min.js?ver=5.4.6.2') }}'></script>
 </head>
 <body class="@yield('body') page-template page-template-page-templates page vc_responsive">
-<div class="wrap">
-    <div class="body-wrap">
-        @include('inc.header')
-        <div class="site-content">
-            <div class="c-page-content style-1">
-                @yield("header")
-                <div class="content-area">
-                    <div class="container">
-                        <div class="row">
-                            @if (session('info'))
-                                <div class="alert alert-info" role="info">
-                                    <h4 class="alert-heading">@lang('pages.info')</h4>
-                                    <p>{{ session('info') }}</p>
+    <div class="wrap">
+        <div class="body-wrap">
+            @include('inc.header')
+            <div class="site-content">
+                <div class="c-page-content style-1">
+                    @yield("header")
+                    <div class="content-area">
+                        <div class="container">
+                            <div class="row">
+                                @if (session('info'))
+                                    <div class="alert alert-info" role="info">
+                                        <h4 class="alert-heading">@lang('pages.info')</h4>
+                                        <p>{{ session('info') }}</p>
+                                    </div>
+                                @endif
+                                <div class="col-md-12">
+                                    @yield("container")
                                 </div>
-                            @endif
-                            <div class="col-md-12">
-                                @yield("container")
                             </div>
                         </div>
                     </div>
@@ -53,46 +54,47 @@
             </div>
         </div>
     </div>
-</div>
-<footer id="main-footer">
+    @yield('footer')
+    <div class="clear"></div>
+    <footer id="main-footer">
 
-    <div id="info">
-        <div class="container wrap">
+        <div id="info">
+            <div class="container wrap">
 
-            <div class="row">
-                <div class="col-md-12">
-                    <div id="logo">
-                        <p>Copyright <i class="fa fa-copyright"></i> <strong>{{ config('app.name', 'Laravel') }}</strong> - 2018</p>
-                    </div>
-                    <div id="contact">
-                        <ul class="inline-list">
-                            <li><a dhref="">Termos de Uso</a></li>
-                            <li><a href="{{ route('dmca') }}">DMCA</a></li>
-                            <li><a dhref="">Facebook</a></li>
-                            <li><a dhref="">Contato</a></li>
-                        </ul>
-                        <p>
-                            Desenvolvido por Thalys Márcio
-                        </p>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="logo">
+                            <p>Copyright <i class="fa fa-copyright"></i> <strong>{{ config('app.name', 'Laravel') }}</strong> - 2018</p>
+                        </div>
+                        <div id="contact">
+                            <ul class="inline-list">
+                                <li><a dhref="">Termos de Uso</a></li>
+                                <li><a href="{{ route('dmca') }}">DMCA</a></li>
+                                <li><a dhref="">Facebook</a></li>
+                                <li><a dhref="">Contato</a></li>
+                            </ul>
+                            <p>
+                                Desenvolvido por Thalys Márcio
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
+    </footer>
+
+    <div class="go-to-top active">
+        <i class="ion-android-arrow-up"></i>
     </div>
+    <script type='text/javascript' src='{{ asset('js/lazysizes.min.js?ver=2.0.7') }}'></script>
+    <script type='text/javascript' src='{{ asset('js/bootstrap.min.js?ver=3.3.7') }}'></script>
+    <script type='text/javascript' src='{{ asset('js/imagesloaded.min.js?ver=3.2.0') }}'></script>
 
-</footer>
+    <script type='text/javascript' src='{{ asset('js/template.js?ver=4.9.6') }}'></script>
+    <script type='text/javascript' src='{{ asset('js/script.js?ver=4.9.6') }}'></script>
 
-<div class="go-to-top active">
-    <i class="ion-android-arrow-up"></i>
-</div>
-<script type='text/javascript' src='{{ asset('js/lazysizes.min.js?ver=2.0.7') }}'></script>
-<script type='text/javascript' src='{{ asset('js/bootstrap.min.js?ver=3.3.7') }}'></script>
-<script type='text/javascript' src='{{ asset('js/imagesloaded.min.js?ver=3.2.0') }}'></script>
-
-<script type='text/javascript' src='{{ asset('js/template.js?ver=4.9.6') }}'></script>
-<script type='text/javascript' src='{{ asset('js/script.js?ver=4.9.6') }}'></script>
-
-<script type='text/javascript' src='{{ asset('js/slick.min.js?ver=1.7.1') }}'></script>
+    <script type='text/javascript' src='{{ asset('js/slick.min.js?ver=1.7.1') }}'></script>
 
 </body>
 
