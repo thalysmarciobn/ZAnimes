@@ -59,7 +59,6 @@ return [
     'live' => false,
 
     'ignore' => [
-        'resources/views/watch',
     ],
 
 ];

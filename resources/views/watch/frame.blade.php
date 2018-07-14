@@ -32,7 +32,7 @@ function time_updated(time_update_event){
     if(time > duration || time_update_event.type === "ended") {
         time = 0;
     }
-    if (last == 20 || time_update_event.type === "ended" || time_update_event.type === "play" || time_update_event.type === "pause") {
+    if (last == 120 || last % 120 == 0 || time_update_event.type === "ended" || time_update_event.type === "play" || time_update_event.type === "pause") {
         var xhttp = new XMLHttpRequest();
         xhttp.open("POST", "{{ route('api_episode') }}", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
