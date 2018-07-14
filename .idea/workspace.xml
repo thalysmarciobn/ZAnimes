@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8982cb6a-9ce3-4ccf-93c2-10b7d58ed68a" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/app/Models/Animes.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Animes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PanelController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PanelController.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -24,15 +24,6 @@
               <folding>
                 <element signature="e#32#74#0#PHP" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UsersEpisodes.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Models/UsersEpisodes.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="66" selection-start-line="10" selection-start-column="66" selection-end-line="10" selection-end-column="66" />
             </state>
           </provider>
         </entry>
@@ -64,7 +55,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Animes.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Animes.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Models/Animes.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="238">
@@ -72,6 +63,15 @@
               <folding>
                 <element signature="e#30#37#0#PHP" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AnimesSeasons.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Models/AnimesSeasons.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
             </state>
           </provider>
         </entry>
@@ -97,11 +97,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PanelController.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="PanelController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PanelController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="271">
-              <caret line="219" column="18" lean-forward="true" selection-start-line="219" selection-start-column="18" selection-end-line="219" selection-end-column="18" />
+            <state relative-caret-position="339">
+              <caret line="184" column="65" lean-forward="true" selection-start-line="184" selection-start-column="65" selection-end-line="184" selection-end-column="65" />
               <folding>
                 <element signature="e#39#46#0#PHP" expanded="true" />
               </folding>
@@ -129,7 +129,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>-&gt;anime</find>
       <find>getEpisodeOrFail</find>
       <find>.c-blog__heading.style-2 h4</find>
       <find>$episode-&gt;a</find>
@@ -159,6 +158,7 @@
       <find>try</find>
       <find>updateEpisodeUser</find>
       <find>-&gt;userid</find>
+      <find>season_id</find>
     </findStrings>
     <dirStrings>
       <dir>C:\Users\thaly\Documents\gitlab\PHP\ZAnimes\resources</dir>
@@ -230,8 +230,8 @@
         <option value="$PROJECT_DIR$/app/Models/AnimesSeasonsEpisodes.php" />
         <option value="$PROJECT_DIR$/resources/views/pages/anime.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Controller.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/PanelController.php" />
         <option value="$PROJECT_DIR$/app/Models/Animes.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/PanelController.php" />
       </list>
     </option>
   </component>
@@ -568,7 +568,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="257003000" />
+    <option name="totallyTimeSpent" value="257180000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -707,13 +707,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" selection-start-line="7" selection-end-line="10" selection-end-column="83" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Models/AnimesSeasons.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="15" column="97" selection-start-line="15" selection-start-column="97" selection-end-line="15" selection-end-column="97" />
         </state>
       </provider>
     </entry>
@@ -928,22 +921,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PanelController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="219" column="18" lean-forward="true" selection-start-line="219" selection-start-column="18" selection-end-line="219" selection-end-column="18" />
-          <folding>
-            <element signature="e#39#46#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Models/Animes.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="14" column="31" lean-forward="true" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
           <folding>
             <element signature="e#30#37#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Models/AnimesSeasons.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PanelController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="339">
+          <caret line="184" column="65" lean-forward="true" selection-start-line="184" selection-start-column="65" selection-end-line="184" selection-end-column="65" />
+          <folding>
+            <element signature="e#39#46#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>

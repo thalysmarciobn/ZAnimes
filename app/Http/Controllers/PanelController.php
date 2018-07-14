@@ -137,11 +137,11 @@ class PanelController extends Controller {
                 'title' => 'required|max:255',
                 'season' => 'integer'
             ]);
-            if (AnimesSeasons::where('anime_id', $anime->id)->where('season_id', $request->input('season'))->doesntExist()) {
+            if (AnimesSeasons::where('anime_id', $anime->id)->where('season', $request->input('season'))->doesntExist()) {
                 $season = new AnimesSeasons([
                     'anime_id' => $anime->id,
                     'title' => $request->input('title'),
-                    'season_id' => $request->input('season')
+                    'season' => $request->input('season')
                 ]);
                 if ($anime->seasons()->save($season)) {
                     return redirect()->route('panel-anime-edit-season', ['slug' => $anime->slug_name, 'season' => $request->input('season')])->with('success', 'Season \'' . $season->title . '\' added.');
@@ -235,11 +235,11 @@ class PanelController extends Controller {
                     $episode->duration = $ZAnimes->getDuration($episode->video);
                 }
                 if ($request->has('poster') && $request->input('poster') != "") {
-                    ZAnimesControl::put("animes/" . $anime->slug_name . "/episodes/" . $season->season_id . "_" . $request->input('episode') . ".jpg", Image::make($request->input('poster'))->resize(185, 105)->encode('jpg', 80));
-                    ZAnimesControl::put("animes/" . $anime->slug_name . "/episodes/" . $season->season_id . "_" . $request->input('episode') . "_poster.jpg", Image::make($request->input('poster'))->resize(640, 360)->encode('jpg', 80));
+                    ZAnimesControl::put("animes/" . $anime->slug_name . "/episodes/" . $season->season . "_" . $request->input('episode') . ".jpg", Image::make($request->input('poster'))->resize(185, 105)->encode('jpg', 80));
+                    ZAnimesControl::put("animes/" . $anime->slug_name . "/episodes/" . $season->season . "_" . $request->input('episode') . "_poster.jpg", Image::make($request->input('poster'))->resize(640, 360)->encode('jpg', 80));
 
-                    $episode->image = $anime->slug_name . "/episodes/" . $season->season_id . "_" . $episode->episode_id . ".jpg?" . str_random(20);
-                    $episode->poster = $anime->slug_name . "/episodes/" . $season->season_id . "_" . $episode->episode_id . "_poster.jpg?" . str_random(20);
+                    $episode->image = $anime->slug_name . "/episodes/" . $season->season . "_" . $episode->episode_id . ".jpg?" . str_random(20);
+                    $episode->poster = $anime->slug_name . "/episodes/" . $season->season . "_" . $episode->episode_id . "_poster.jpg?" . str_random(20);
                 }
                 if ($episode->save()) {
                     $anime->latest_episode = Carbon::now();
