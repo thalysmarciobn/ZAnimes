@@ -36,7 +36,7 @@ class Controller extends BaseController {
             return abort(403);
         }
         if ($request->current_time != 0 || $request->duration != 0) {
-            if ($z_animes->checkEpisodeUser(Auth::user(),$request->anime_id, $request->season_id, $request->episode_id, $request->current_time, $request->duration)) {
+            if ($z_animes->checkEpisodeUser(Auth::user(), $request->anime_id, $request->season_id, $request->episode_id)) {
                 $z_animes->addEpisodeUser(Auth::user(), $request->anime_id, $request->season_id, $request->episode_id, $request->current_time, $request->duration);
             } else {
                 $z_animes->updateEpisodeUser(Auth::user(), $request->anime_id, $request->season_id, $request->episode_id, $request->current_time, $request->duration);
