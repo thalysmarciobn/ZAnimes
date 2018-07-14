@@ -55,7 +55,7 @@
     <div class="widget col-md-12">
         <div class="row">
             <div class="c-widget-wrap">
-                <div class="c-blog__heading style-2 font-heading">
+                <div class="c-blog__heading style-2 episode font-heading">
                     <h4><b>{{ $episode->season->anime->name }}</b>: {{ $episode->title }}</h4>
                     <div class="pull-right">
                         <span>@lang('watch.views', ['views' => $episode->views_count])</span>

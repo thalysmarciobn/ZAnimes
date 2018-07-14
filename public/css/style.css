@@ -431,7 +431,7 @@ h6,
   margin: 0;
   height: 30px;
 }
-.c-blog__heading.style-2 span {
+.c-blog__heading.style-2.episode span {
   display: block;
   font-size: 12px;
 }
