@@ -97,7 +97,7 @@ class PanelController extends Controller {
 
     public function editAnime(Request $request, $slug) {
         $anime = Animes::where('slug_name', $slug)->firstOrFail();
-        if (Auth::user()->editor <= 1 && $anime->userid != Auth::user()->id) {
+        if (Auth::user()->editor <= 1 && $anime->user_id != Auth::user()->id) {
             return view('pages.panel.not-have-permission', [
                 'anime' => $anime
             ]);
@@ -162,7 +162,7 @@ class PanelController extends Controller {
 
     public function editSeason(Request $request, ZAnimesInterface $ZAnimes, $slug, $season) {
         $anime = Animes::where('slug_name', $slug)->firstOrFail();
-        if (Auth::user()->editor <= 1 && $anime->userid != Auth::user()->id) {
+        if (Auth::user()->editor <= 1 && $anime->user_id != Auth::user()->id) {
             return view('pages.panel.not-have-permission', [
                 'anime' => $anime
             ]);
@@ -218,7 +218,7 @@ class PanelController extends Controller {
 
     public function editEpisode(Request $request, ZAnimesInterface $ZAnimes, $slug, $season_i, $episode_i) {
         $anime = Animes::where('slug_name', $slug)->firstOrFail();
-        if (Auth::user()->editor <= 1 && $anime->userid != Auth::user()->id) {
+        if (Auth::user()->editor <= 1 && $anime->user_id != Auth::user()->id) {
             return view('pages.panel.not-have-permission', [
                 'anime' => $anime
             ]);
