@@ -36,7 +36,9 @@ interface ZAnimesInterface {
 
     public function updateEpisodeUser($user, $anime_id, $season_id, $episode_id, $current_time, $duration);
 
+    public function flashEpisodeKey($session, $season, $episode);
+
     public function paginateAnimes($request, $count);
 
-    public function flashEpisodeKey($session, $season, $episode);
+    public function getDuration($video);
 }

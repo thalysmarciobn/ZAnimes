@@ -162,4 +162,15 @@ class ZAnimes implements ZAnimesInterface {
         $paginate = $anime->paginate($count);
         return $paginate;
     }
+
+    public function getDuration($video)
+    {
+        try {
+            $result = shell_exec('..\FFmpeg\bin\ffmpeg -i ' . $video . ' 2>&1');
+            preg_match('/(?<=Duration: )(\d{2}:\d{2}:\d{2})\.\d{2}/', $result, $match);
+            return $match[1];
+        } catch (\Exception $e) {
+            throw new \Exception('Can\'t get video duration.');
+        }
+    }
 }

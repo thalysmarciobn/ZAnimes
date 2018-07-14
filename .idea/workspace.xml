@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8982cb6a-9ce3-4ccf-93c2-10b7d58ed68a" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PanelController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PanelController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Services/Contracts/ZAnimesInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Services/Contracts/ZAnimesInterface.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Services/ZAnimes.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Services/ZAnimes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ZAnimesControl.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/ZAnimesControl.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,7 +22,7 @@
         <entry file="file://$PROJECT_DIR$/app/Services/ZAnimes.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="288">
-              <caret line="120" column="43" selection-start-line="120" selection-start-column="43" selection-end-line="120" selection-end-column="43" />
+              <caret line="119" column="35" selection-start-line="119" selection-start-column="20" selection-end-line="119" selection-end-column="35" />
               <folding>
                 <element signature="e#32#74#0#PHP" expanded="true" />
               </folding>
@@ -31,8 +33,8 @@
       <file leaf-file-name="ZAnimesControl.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/ZAnimesControl.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="26" column="8" lean-forward="true" selection-start-line="26" selection-start-column="8" selection-end-line="28" selection-end-column="9" />
+            <state relative-caret-position="306">
+              <caret line="18" column="5" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -88,16 +90,16 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ZAnimesInterface.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ZAnimesInterface.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Services/Contracts/ZAnimesInterface.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="612">
-              <caret line="36" column="81" selection-start-line="36" selection-start-column="45" selection-end-line="36" selection-end-column="81" />
+            <state relative-caret-position="646">
+              <caret line="38" column="65" selection-start-line="38" selection-start-column="65" selection-end-line="38" selection-end-column="65" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PanelController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PanelController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PanelController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="339">
@@ -129,7 +131,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>getEpisodeOrFail</find>
       <find>.c-blog__heading.style-2 h4</find>
       <find>$episode-&gt;a</find>
       <find>load</find>
@@ -155,10 +156,11 @@
       <find>.anime</find>
       <find>addEpisodeUser</find>
       <find>Validator</find>
-      <find>try</find>
-      <find>updateEpisodeUser</find>
       <find>-&gt;userid</find>
       <find>season_id</find>
+      <find>try</find>
+      <find>updateEpisodeUser</find>
+      <find>flashEpisodeKey</find>
     </findStrings>
     <dirStrings>
       <dir>C:\Users\thaly\Documents\gitlab\PHP\ZAnimes\resources</dir>
@@ -204,7 +206,6 @@
         <option value="$PROJECT_DIR$/resources/lang/pt/home.php" />
         <option value="$PROJECT_DIR$/resources/views/pages/animes.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/layouts/pages_full.blade.php" />
-        <option value="$PROJECT_DIR$/app/ZAnimesControl.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/PagesController.php" />
         <option value="$PROJECT_DIR$/resources/lang/pt/episode.php" />
         <option value="$PROJECT_DIR$/app/Models/AnimesSeasonsEpisodesViews.php" />
@@ -225,13 +226,14 @@
         <option value="$PROJECT_DIR$/app/Models/UsersEpisodes.php" />
         <option value="$PROJECT_DIR$/resources/views/watch/frame.blade.php" />
         <option value="$PROJECT_DIR$/routes/web.php" />
-        <option value="$PROJECT_DIR$/app/Services/Contracts/ZAnimesInterface.php" />
-        <option value="$PROJECT_DIR$/app/Services/ZAnimes.php" />
         <option value="$PROJECT_DIR$/app/Models/AnimesSeasonsEpisodes.php" />
         <option value="$PROJECT_DIR$/resources/views/pages/anime.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Controller.php" />
         <option value="$PROJECT_DIR$/app/Models/Animes.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/PanelController.php" />
+        <option value="$PROJECT_DIR$/app/ZAnimesControl.php" />
+        <option value="$PROJECT_DIR$/app/Services/ZAnimes.php" />
+        <option value="$PROJECT_DIR$/app/Services/Contracts/ZAnimesInterface.php" />
       </list>
     </option>
   </component>
@@ -568,7 +570,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="257180000" />
+    <option name="totallyTimeSpent" value="257349000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -866,23 +868,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Services/ZAnimes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="120" column="43" selection-start-line="120" selection-start-column="43" selection-end-line="120" selection-end-column="43" />
-          <folding>
-            <element signature="e#32#74#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/ZAnimesControl.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="26" column="8" lean-forward="true" selection-start-line="26" selection-start-column="8" selection-end-line="28" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Models/AnimesSeasonsEpisodes.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -901,13 +886,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="726">
           <caret line="208" column="14" selection-start-line="208" selection-start-column="14" selection-end-line="208" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Services/Contracts/ZAnimesInterface.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="36" column="81" selection-start-line="36" selection-start-column="45" selection-end-line="36" selection-end-column="81" />
         </state>
       </provider>
     </entry>
@@ -945,6 +923,30 @@
           <folding>
             <element signature="e#39#46#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/ZAnimesControl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="5" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Services/ZAnimes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="119" column="35" selection-start-line="119" selection-start-column="20" selection-end-line="119" selection-end-column="35" />
+          <folding>
+            <element signature="e#32#74#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Services/Contracts/ZAnimesInterface.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="38" column="65" selection-start-line="38" selection-start-column="65" selection-end-line="38" selection-end-column="65" />
         </state>
       </provider>
     </entry>
