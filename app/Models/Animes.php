@@ -10,7 +10,7 @@ class Animes extends Model
 {
     protected $table = 'animo_animes';
 
-    protected $fillable = ['id', 'name', 'slug_name', 'sinopse', 'image', 'author', 'status', 'year', 'genres', 'userid'];
+    protected $fillable = ['id', 'name', 'slug_name', 'sinopse', 'image', 'author', 'status', 'year', 'genres', 'user_id'];
 
     public function seasons() {
         return $this->hasMany('App\Models\AnimesSeasons', 'anime_id', 'id')->orderByDesc('id');
