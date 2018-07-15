@@ -39,6 +39,8 @@ return array(
     'League\\Flysystem\\Sftp\\' => array($vendorDir . '/league/flysystem-sftp/src'),
     'League\\Flysystem\\' => array($vendorDir . '/league/flysystem/src'),
     'Laravel\\Tinker\\' => array($vendorDir . '/laravel/tinker/src'),
+    'Jaybizzle\\LaravelCrawlerDetect\\' => array($vendorDir . '/jaybizzle/laravel-crawler-detect/src'),
+    'Jaybizzle\\CrawlerDetect\\' => array($vendorDir . '/jaybizzle/crawler-detect/src'),
     'Intervention\\Image\\' => array($vendorDir . '/intervention/image/src/Intervention/Image'),
     'Illuminate\\' => array($vendorDir . '/laravel/framework/src/Illuminate'),
     'HTMLMin\\HTMLMin\\' => array($vendorDir . '/htmlmin/htmlmin/src'),

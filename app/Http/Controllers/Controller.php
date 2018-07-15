@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Crawler;
 use App\Services\Contracts\ZAnimesInterface;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
@@ -9,6 +10,19 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class Controller extends BaseController {
+
+    public function api_banner(ZAnimesInterface $z_animes) {
+        header('Content-type: image/png');
+        $out = imagecreatetruecolor(400, 230);
+
+        $jpeg = imagecreatefromjpeg('http://cdn.zanimes.com/animes/nanatsu-no-taizai/episodes/3_23.jpg?lTSYRrZKNRh9tmxhnXj2');
+
+        imagecopyresampled($out, $jpeg, 0, 0, 0, 0, 200, 200, 600, 600);
+
+        header('Content-type: image/png');
+        imagepng($out);
+        imagedestroy($out);
+    }
 
     public function api_animes(ZAnimesInterface $z_animes) {
         return response()->json($z_animes->animes());
@@ -46,7 +60,7 @@ class Controller extends BaseController {
 
     public function watch(ZAnimesInterface $z_animes, $key, $id, $slug) {
         $episode = $z_animes->getWatchOrFail(session(), $key, $id, $slug);
-        if ($z_animes->checkWatchAccess(request()->ip(), $episode->anime_id, $episode->season_id, $episode->id)) {
+        if (!Crawler::isCrawler() && $z_animes->checkWatchAccess(request()->ip(), $episode->anime_id, $episode->season_id, $episode->id)) {
             $z_animes->addWatchAccess(request()->ip(), $episode->anime_id, $episode->season_id, $episode->id);
         }
         return view('watch.frame', [

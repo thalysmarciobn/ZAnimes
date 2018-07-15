@@ -98,7 +98,7 @@
                     text: 'Stats'
                 },
                 xAxis: {
-                    categories: [@foreach ( $analystic_users as $date => $count )'{{ $date }}',@endforeach]
+                    categories: [@foreach ( $analystic_users as $date => $count )'{{ date('d M', strtotime($date)) }}',@endforeach]
                 },
                 yAxis: {
                     title: {
@@ -114,7 +114,7 @@
                     }
                 },
                 series: [{
-                    name: 'Users',
+                    name: 'Animes',
                     data: [@foreach ( $analystic_users as $date => $count ){{ $count }},@endforeach]
                 }
                 ]
@@ -131,7 +131,7 @@
                     text: 'Stats'
                 },
                 xAxis: {
-                    categories: [@foreach ( $analystic_views as $date => $count )'{{ $date }}',@endforeach]
+                    categories: [@foreach ( $analystic_views as $date => $count )'{{ date('d M', strtotime($date)) }}',@endforeach]
                 },
                 yAxis: {
                     title: {

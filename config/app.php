@@ -161,6 +161,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         HTMLMin\HTMLMin\HTMLMinServiceProvider::class,
+        Jaybizzle\LaravelCrawlerDetect\LaravelCrawlerDetectServiceProvider::class,
 
     ],
 
@@ -211,6 +212,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'ZAnimesControl' => App\ZAnimesControl::class,
+        'Crawler' => Jaybizzle\LaravelCrawlerDetect\Facades\LaravelCrawlerDetect::class,
 
         'HTMLMin' => HTMLMin\HTMLMin\Facades\HTMLMin::class,
 

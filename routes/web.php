@@ -3,8 +3,9 @@
 Route::get('/', 'PagesController@home')->name('home');
 Route::get('/animes', 'PagesController@animes')->name('animes');
 Route::get('/dmca', 'PagesController@dmca')->name('dmca');
-Route::get('/watch/{key}/{id}/{slug}', 'Controller@watch')->name('watch');
+Route::any('/watch/{key}/{id}/{slug}', 'Controller@watch')->name('watch');
 Route::prefix('api')->group(function () {
+    Route::get('/banner', 'Controller@api_banner')->name('api_banner');
     Route::get('/animes', 'Controller@api_animes')->name('api_animes');
     Route::get('/genres', 'Controller@api_genres')->name('api_genres');
     Route::group(['middleware' => ['auth']], function () {

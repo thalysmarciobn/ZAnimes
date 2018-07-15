@@ -21,7 +21,7 @@ class PanelController extends Controller {
         $analystic_users = collect();
         $analystic_views = collect();
         foreach(range(-14, 0) as $i) {
-            $date = Carbon::now()->addDays($i)->format('Y-m-d');
+            $date = Carbon::now()->addDays($i)->format('Y-m-d H:i:s');
             $analystic_users->put($date, 0);
             $analystic_views->put($date, 0);
         }
@@ -181,8 +181,8 @@ class PanelController extends Controller {
             ]);
             if (AnimesSeasonsEpisodes::where('season_id', $season->id)->where('episode', $request->input('episode'))->doesntExist()) {
                 $episode = new AnimesSeasonsEpisodes([
-                    'title' => $request->input('title'),
-                    'slug' => str_slug($request->input('title')),
+                    'title' => $request->title,
+                    'slug' => str_slug($request->title),
                     'prev' => $request->input('prev'),
                     'episode' => $request->input('episode'),
                     'video' => $request->input('video'),

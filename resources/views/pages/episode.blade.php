@@ -63,7 +63,10 @@
                     </div>
                     <span>@lang('watch.episode', ['episode' => $episode->episode])</span>
                 </div>
+                <div class="c-blog-listing c-page__content manga_content">
 
+                    <div class="prev">{{ $episode->prev }}</div>
+                </div>
             </div>
         </div>
     </div>

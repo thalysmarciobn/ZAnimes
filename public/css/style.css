@@ -2779,9 +2779,9 @@ body.search.search-results .search-wrap .tab-content-wrap .c-tabs-item .c-tabs-i
     height:80%;
     background:linear-gradient(transparent, rgba(0,0,0,0.6))
 }
-.top5__item:first-child .top5__title{
-  font-size: 16px;
-  color: #666;
+.top5__item:first-child .top5__title {
+    color: #ffffff;
+    padding-bottom: 3px;
 }
 .top5__item .top5__title {
   position: relative;

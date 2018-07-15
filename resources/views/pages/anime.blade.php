@@ -178,34 +178,7 @@
 @section('sidebar')
     <div class="widget col-xs-12 col-md-12 default no-icon heading-style-1 c-popular">
         <div class="row">
-            <div class="c-widget-content style-1">
-                <div class="c-blog__heading style-2 font-heading">
-                    <h4>@lang('anime.also_liked')</h4>
-                </div>
-                <div class="widget-content">
-                    @foreach ($similar as $anime)
-                        <div class="popular-item-wrap">
-                            <div class="popular-img widget-thumbnail c-image-hover">
-                                <a title="{{ $anime->title }}" href="{{ route('anime', ['anime_slug' => $anime->slug_name]) }}">
-                                    <img width="50" height="75" data-src="{{ ZAnimesControl::url('animes/' . $anime->slug_name . '/' . $anime->image) }}" data-srcset="{{ ZAnimesControl::url('animes/' . $anime->slug_name . '/' . $anime->image) }}" data-sizes="(max-width: 50px) 75vw, 50px" class="img-responsive lazyload effect-fade" src="{{ asset('images/video_empty.png') }}" style="padding-top:180px; " alt="{{ $anime->name }}"/>
-                                </a>
-                            </div>
-                            <div class="popular-content">
-                                <h5 class="widget-title">
-                                    <a title="{{ $anime->name }}" href="{{ route('anime', ['anime_slug' => $anime->slug_name]) }}">{{ $anime->name }}</a>
-                                </h5>
-                                <div class="list-chapter">
-                                    <div class="chapter-item">
-                                        <span class="post-on font-meta">{{ $anime->author }}</span>
-                                        <span class="post-on font-meta">{{ $anime->year }}</span>
-                                        <span class="post-on font-meta count">{{ $anime->monthly_views->count() }}  <i class="fa fa-star fa-1x"></i></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
+            @include('inc.similar_animes')
         </div>
     </div>
 @stop

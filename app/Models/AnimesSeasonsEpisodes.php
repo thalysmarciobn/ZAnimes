@@ -8,7 +8,7 @@ class AnimesSeasonsEpisodes extends Model
 {
     protected $table = 'animo_animes_seasons_episodes';
 
-    protected $fillable = ['id', 'title', 'episode', 'season_id', 'video', 'image', 'duration', 'prev', 'poster'];
+    protected $fillable = ['id', 'title', 'slug', 'episode', 'season_id', 'video', 'image', 'duration', 'prev', 'poster'];
 
     public function current($user_id, $episode_id) {
         try {
