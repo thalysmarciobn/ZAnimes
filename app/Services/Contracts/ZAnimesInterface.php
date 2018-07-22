@@ -30,7 +30,9 @@ interface ZAnimesInterface {
 
     public function addWatchAccess($address, $anime_id, $season_id, $episode_id);
 
-    public function episodeUser($user, $anime_id, $season_id, $episode_id, $current_time);
+    public function episodeUser($user, $completed, $anime_id, $season_id, $episode_id, $current_time);
+
+    public function getUserEpisode($user, $anime_id, $season_id, $episode_id);
 
     public function flashEpisodeKey($session, $season, $episode);
 

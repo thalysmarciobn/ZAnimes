@@ -101,11 +101,8 @@ class ZAnimes implements ZAnimesInterface {
         $view->save();
     }
 
-    public function checkEpisodeUser($user, $anime_id, $season_id, $episode_id) {
-        return $users_episodes = UsersEpisodes::where('user_id', $user->id)->where('anime_id', $anime_id)->where('season_id', $season_id)->where('episode_id', $episode_id)->doesntExist();
-    }
-
-    public function episodeUser($user, $anime_id, $season_id, $episode_id, $current_time) {
+    public function episodeUser($user, $completed, $anime_id, $season_id, $episode_id, $current_time = 0)
+    {
         if (UsersEpisodes::where('user_id', $user->id)->where('anime_id', $anime_id)->where('season_id', $season_id)->where('episode_id', $episode_id)->doesntExist()) {
             $episode = AnimesSeasonsEpisodes::where('anime_id', $anime_id)->where('season_id', $season_id)->where('id', $episode_id)->firstOrFail();
             $user_episode = new UsersEpisodes([
@@ -114,14 +111,23 @@ class ZAnimes implements ZAnimesInterface {
                 'season_id' => $season_id,
                 'episode_id' => $episode_id,
                 'current_time' => $current_time,
-                'duration' => $episode->duration
+                'duration' => $episode->duration,
+                'completed' => 0
             ]);
             $user_episode->save();
         } else {
-            UsersEpisodes::where('user_id', $user->id)->where('anime_id', $anime_id)->where('season_id', $season_id)->where('episode_id', $episode_id)->update([
-                'current_time' => $current_time
-            ]);
+            $episode = UsersEpisodes::where('user_id', $user->id)->where('anime_id', $anime_id)->where('season_id', $season_id)->where('episode_id', $episode_id);
+            if ($current_time >= $episode->first()->current_time) {
+                $episode->update([
+                    'current_time' => $current_time,
+                    'completed' => $completed == "true" ? 1 : 0
+                ]);
+            }
         }
+    }
+
+    public function getUserEpisode($user, $anime_id, $season_id, $episode_id) {
+        return UsersEpisodes::where('user_id', $user->id)->where('anime_id', $anime_id)->where('season_id', $season_id)->where('episode_id', $episode_id)->first();
     }
 
     public function flashEpisodeKey($session, $season, $episode) {

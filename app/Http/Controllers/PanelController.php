@@ -67,8 +67,12 @@ class PanelController extends Controller {
     public function weekEdit(Request $request, $id_week) {
         $week = Week::findOrFail($id_week);
         if ($request->has('id') && $request->has('action')) {
-            if (Animes::where('id', $request->id)->doesntExist()) {
+            $_query = Animes::where('id', $request->id);
+            if ($_query->doesntExist()) {
                 return redirect('/panel/week/' . $id_week)->with('warning', 'The anime with id \'' . $request->id . '\'. doesn\'t exists');
+            }
+            if (optional($_query->first())->status != 0) {
+                return redirect('/panel/week/' . $id_week)->with('warning', 'The anime with id \'' . $request->id . '\'. isn\'t Ongoing');
             }
             if ($request->action == "Add" && $request->has('hour')) {
                 if ($week->animes()->where(['week_id' => $id_week, 'anime_id' => $request->id])->exists()) {

@@ -12,6 +12,6 @@ class WeekAnimes extends Model
 
     public function anime()
     {
-        return $this->hasOne('App\Models\Animes', 'id', 'anime_id')->where('status', 0);
+        return $this->hasOne('App\Models\Animes', 'id', 'anime_id');
     }
 }

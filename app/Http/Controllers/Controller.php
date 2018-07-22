@@ -34,11 +34,13 @@ class Controller extends BaseController {
 
     public function setEpisode(Request $request, ZAnimesInterface $z_animes) {
         $validator = Validator::make($request->all(), [
+            'completed' => 'required|max:255',
             'anime_id' => 'required|max:255',
             'season_id' => 'required|max:255',
             'episode_id' => 'required|max:255',
             'current_time' => 'required|max:255'
         ], [
+            'completed.required',
             'anime_id.required',
             'season_id.required',
             'episode_id.required',
@@ -48,7 +50,7 @@ class Controller extends BaseController {
             return abort(403);
         }
         if ($request->current_time != (0 || "0") || $request->duration != (0 || "0")) {
-            $z_animes->episodeUser(Auth::user(), $request->anime_id, $request->season_id, $request->episode_id, $request->current_time);
+            $z_animes->episodeUser(Auth::user(), $request->completed, $request->anime_id, $request->season_id, $request->episode_id, $request->current_time);
         }
     }
 
@@ -59,6 +61,7 @@ class Controller extends BaseController {
         }
         return view('watch.frame', [
             'episode' => $episode,
+            'cache' => $z_animes->getUserEpisode(Auth::user(), $episode->anime_id, $episode->season_id, $episode->id),
             'next' => $episode->next()
         ]);
     }
