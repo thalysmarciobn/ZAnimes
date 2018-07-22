@@ -1,4 +1,4 @@
-@extends('layouts.pages')
+@extends('layouts.pages_full')
 
 @section('title', $episode->title . ' - ' . $episode->season->anime->name)
 
@@ -13,24 +13,53 @@
 
 @section('container')
     <div class="widget col-md-12">
-        <div class="c-widget-wrap">
+        <div class="row">
+            <div class="widget col-md-12 col-lg-8">
+                <div class="c-widget-wrap">
 
-            <div class="player embed-responsive embed-responsive-16by9">
-                <div id="player" style="position: absolute;width: 100%;height: 100%;">
-                    <video id="video-player" height="100%" class="video-js vjs-default-skin"  poster="{{ ZAnimesControl::url('animes/' . $episode->poster) }}" style="width: 100%; height: 100%"></video>
+                    <div class="player embed-responsive embed-responsive-16by9">
+                        <div id="player" style="position: absolute;width: 100%;height: 100%;">
+                            <video id="video-player" height="100%" class="video-js vjs-default-skin"  poster="{{ ZAnimesControl::url('animes/' . $episode->poster) }}" style="width: 100%; height: 100%"></video>
+                        </div>
+                    </div>
+                    <div class="c-blog__heading style-2 episode">
+                        <h4><b><a href="{{ route('anime.default', ['anime_slug' => $episode->season->anime->slug_name]) }}">{{ $episode->season->anime->name }}</a></b> - {{ $episode->title }}</h4>
+
+                        <div class="action-icon">
+                            <ul class="action_list_icon list-inline">
+                                <li>
+                                    <a href="#" class="wp-manga-action-button" data-action="bookmark" data-post="302" data-chapter="1328" data-page="" title="Bookmark"><i class="ion-android-bookmark"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="c-blog__heading style-2 episode">
-                <h4><b><a href="{{ route('anime.default', ['anime_slug' => $episode->season->anime->slug_name]) }}">{{ $episode->season->anime->name }}</a></b> - {{ $episode->title }}</h4>
 
-                <div class="action-icon">
-                    <ul class="action_list_icon list-inline">
-                        <li>
-                            <a href="#" class="wp-manga-action-button" data-action="bookmark" data-post="302" data-chapter="1328" data-page="" title="Bookmark"><i class="ion-android-bookmark"></i></a>                                    </li>
-                    </ul>
+            <div class="widget col-md-12 col-lg-4">
+                <div class="c-page__content">
+
+                    <div class="c-blog__heading style-2 font-heading">
+                        <h4>
+                            @lang('watch.episode', ['episode' => $episode->episode])
+                        </h4>
+                    </div>
+
+                    <div class="description-summary">
+                        <div class="summary__content" style="height: 120px;">
+                            <p>{{ $episode->prev }}</p>
+
+                        </div>
+                        <div class="c-content-readmore">
+                            <span class="btn btn-link content-readmore less" style="display: inline-block;">Mostrar mais  </span>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="c-blog__heading style-2 views">
+            <div class="widget col-md-12 col-lg-4 default no-icon heading-style-1 c-popular pull-right">
+                @include('inc.similar_animes')
+            </div>
+            <div class="widget col-md-12 col-lg-8">
                 <div class="widget col-md-9">
                     <div class="row">
                         assa
@@ -42,6 +71,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 @stop

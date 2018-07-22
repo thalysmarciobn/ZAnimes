@@ -69,7 +69,7 @@ player.suggestedVideoEndcap({
     url: '{{ route('anime.episode', ['anime_slug' => $next->season->anime->slug_name, 'episode' => $next->episode, 'episode_slug' => $next->slug, 'season' => $next->season_id]) }}',
     image: '{{ ZAnimesControl::url('animes/' . $next->poster) }}',
     alt: 'Description of photo',
-    target: '_blank'
+    target: ''
 });
 @endif
 

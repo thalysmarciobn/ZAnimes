@@ -12,6 +12,6 @@ class Week extends Model
 
     public function animes()
     {
-        return $this->hasMany('App\Models\WeekAnimes', 'week_id');
+        return $this->hasMany('App\Models\WeekAnimes', 'week_id')->orderByDesc('hour');
     }
 }

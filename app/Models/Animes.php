@@ -16,9 +16,12 @@ class Animes extends Model
         return $this->hasMany('App\Models\AnimesSeasons', 'anime_id', 'id')->orderByDesc('id');
     }
 
-    public function episodes()
-    {
+    public function episodes() {
         return $this->hasMany('App\Models\AnimesSeasonsEpisodes', 'anime_id')->orderByDesc('id');
+    }
+
+    public function latest_episodes() {
+        return $this->hasOne('App\Models\AnimesSeasonsEpisodes', 'anime_id')->orderByDesc('created_at')->with('season');
     }
 
     public function genres() {
