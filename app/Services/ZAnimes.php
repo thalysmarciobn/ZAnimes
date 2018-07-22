@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\AnimesSeasons;
 use App\Models\AnimesSeasonsEpisodesViews;
 use App\Models\Genres;
 use App\Models\UsersEpisodes;
@@ -30,22 +31,22 @@ class ZAnimes implements ZAnimesInterface {
 
     public function weeklyRecommendation($count) {
         return Cache::store('file')->remember('weeklyRecommendation', Carbon::now()->endOfWeek()->diffInMinutes(), function () use ($count) {
-            return Animes::all()->random($count);
+            return Animes::withCount(['weekly_views'])->orderByDesc('weekly_views_count')->limit($count)->get()->random($count);
         });
     }
 
     public function animesInRelease() {
-        return Animes::where('status', 0)->get();
+        return Animes::where('status', 0)->orderByDesc('year')->get();
     }
 
     public function episodesInRelease($take) {
         return AnimesSeasonsEpisodes::whereHas('anime', function ($query) {
             return $query->where('status', 0);
-        })->orderByDesc('created_at')->get()->unique('anime_id')->take($take);
+        })->orderByDesc('created_at')->with('anime')->get()->unique('anime_id')->take($take);
     }
 
     public function recentEpisodesViews($limit) {
-        return AnimesSeasonsEpisodes::orderByDesc('access_at')->limit($limit)->get();
+        return AnimesSeasonsEpisodes::orderByDesc('access_at')->with('anime')->limit($limit)->get();
     }
 
     public function latestAnimes($limit) {
@@ -57,13 +58,19 @@ class ZAnimes implements ZAnimesInterface {
     }
 
     public function getSimilarAnimes($anime, $limit) {
-        return Animes::withCount(['monthly_views'])->whereIn('genres', explode(',', $anime->genres))->orWhere('id', '!=', $anime->id)->orderByDesc('monthly_views_count')->limit($limit)->get();
+        $animes = Animes::query()->where('id', '!=', $anime->id);
+        $animes->withCount(['genres' => function ($query) use ($anime) {
+            foreach ($anime->genres()->get() as $genre) {
+                $query->orWhere('genre_id', $genre->id);
+            }
+        }]);
+        return $animes->orderByDesc('genres_count')->get()->take($limit);
     }
 
     public function getEpisodeOrFail($anime_slug, $season, $episode, $episode_slug) {
         return AnimesSeasonsEpisodes::whereHas('anime', function ($query) use ($anime_slug) {
             return $query->where('slug_name', $anime_slug);
-        })->withCount(['views', 'comments'])->where('season_id', $season)->where('episode', $episode)->where('slug', $episode_slug)->firstOrFail();
+        })->withCount(['views', 'comments'])->with('anime')->where('season_id', $season)->where('episode', $episode)->where('slug', $episode_slug)->firstOrFail();
     }
 
     public function getWatchOrFail($session, $key, $id, $slug) {
@@ -98,23 +105,23 @@ class ZAnimes implements ZAnimesInterface {
         return $users_episodes = UsersEpisodes::where('user_id', $user->id)->where('anime_id', $anime_id)->where('season_id', $season_id)->where('episode_id', $episode_id)->doesntExist();
     }
 
-    public function addEpisodeUser($user, $anime_id, $season_id, $episode_id, $current_time, $duration) {
-        $episode = new UsersEpisodes([
-            'user_id' => $user->id,
-            'anime_id' => $anime_id,
-            'season_id' => $season_id,
-            'episode_id' => $episode_id,
-            'current_time' => $current_time,
-            'duration' => $duration
-        ]);
-        $episode->save();
-    }
-
-    public function updateEpisodeUser($user, $anime_id, $season_id, $episode_id, $current_time, $duration) {
-        UsersEpisodes::where('user_id', $user->id)->where('anime_id', $anime_id)->where('season_id', $season_id)->where('episode_id', $episode_id)->update([
-            'current_time' => $current_time,
-            'duration' => $duration
-        ]);
+    public function episodeUser($user, $anime_id, $season_id, $episode_id, $current_time) {
+        if (UsersEpisodes::where('user_id', $user->id)->where('anime_id', $anime_id)->where('season_id', $season_id)->where('episode_id', $episode_id)->doesntExist()) {
+            $episode = AnimesSeasonsEpisodes::where('anime_id', $anime_id)->where('season_id', $season_id)->where('id', $episode_id)->firstOrFail();
+            $user_episode = new UsersEpisodes([
+                'user_id' => $user->id,
+                'anime_id' => $anime_id,
+                'season_id' => $season_id,
+                'episode_id' => $episode_id,
+                'current_time' => $current_time,
+                'duration' => $episode->duration
+            ]);
+            $user_episode->save();
+        } else {
+            UsersEpisodes::where('user_id', $user->id)->where('anime_id', $anime_id)->where('season_id', $season_id)->where('episode_id', $episode_id)->update([
+                'current_time' => $current_time
+            ]);
+        }
     }
 
     public function flashEpisodeKey($session, $season, $episode) {
@@ -146,7 +153,9 @@ class ZAnimes implements ZAnimesInterface {
         if ($request->has("genre")) {
             if (is_array($request->genre)) {
                 foreach ($request->genre as $genre) {
-                    $anime->orWhere("genres", 'LIKE', '%' . $genre . '%');
+                    $anime->whereHas('genres', function($query) use ($genre) {
+                        $query->where('name', $genre);
+                    });
                 }
             }
         }
@@ -161,6 +170,13 @@ class ZAnimes implements ZAnimesInterface {
         }
         $paginate = $anime->paginate($count);
         return $paginate;
+    }
+
+    function timeToSeconds($time, $seconds = 0) {
+        foreach (array_reverse(explode(':', $time)) as $key => $value) {
+            $seconds += pow(60, $key) * $value;
+        };
+        return $seconds;
     }
 
     public function getDuration($video)

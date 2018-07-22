@@ -1,11 +1,15 @@
 <?php
 
 return [
-    'menu-home' => 'Início',
-    'menu-animes' => 'Animes',
-    'menu-dmca' => 'DMCA',
-    'menu-articles' => 'Notícias',
-    'menu-forum' => 'Fórum',
+    'menu' => [
+        'home' => 'Início',
+        'animes' => 'Animes',
+        'season' => 'Temporada',
+        'staff' => 'Equipe',
+        'dmca' => 'DMCA',
+        'articles' => 'Notícias',
+        'forum' => 'Fórum',
+    ],
 
     'episode' => 'Episódio',
 

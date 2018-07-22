@@ -30,6 +30,12 @@
         <script src="https://code.highcharts.com/highcharts.js"></script>
         <script src="https://code.highcharts.com/modules/exporting.js"></script>
         <script src="https://code.highcharts.com/modules/export-data.js"></script>
+
+
+        <script src="http://demo.itsolutionstuff.com/plugin/jquery.js"></script>
+        <script src="https://foliotek.github.io/Croppie/croppie.js"></script>
+        <link rel="stylesheet" href="http://demo.itsolutionstuff.com/plugin/bootstrap-3.min.css">
+        <link rel="stylesheet" href="http://demo.itsolutionstuff.com/plugin/croppie.css">
     </head>
     <body class="page-template page-template-page-templates page vc_responsive panel-open">
     <div class="wrap">

@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\ZAnimesControl;
 use Auth;
 use App\User;
 use Illuminate\Http\Request;
@@ -52,7 +53,8 @@ class AuthController extends Controller {
             'email' => $request->input('email'),
             'password' => bcrypt($request->input('password')),
             'remember_token' => "",
-            'editor' => 0
+            'editor' => 0,
+            'avatar' => ZAnimesControl::url('avatars/default.jpg')
         ]);
         if ($user->save()) {
             Auth::login($user);

@@ -24,4 +24,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function animes() {
+        return $this->hasMany('App\Models\Animes', 'user_id')->orderByDesc('created_at');
+    }
+
+    public function staffLog() {
+        return $this->hasMany('App\Models\LogsStaff', 'user_id');
+    }
 }

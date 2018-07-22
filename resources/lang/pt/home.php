@@ -1,7 +1,8 @@
 <?php
 
 return [
-    'title' => 'Início',
+    'title' => 'De Fã para Fã!!',
+    'episodes' => 'Episódios: :count',
     'releases' => 'Lançamentos',
     'latest-releases' => 'Últimos Lançamentos',
     'latest-animes' => 'Últimos Animes',

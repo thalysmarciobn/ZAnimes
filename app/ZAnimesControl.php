@@ -21,4 +21,12 @@ class ZAnimesControl {
     public static function hashing($x, $y) {
         return strrev(strtoupper(substr(hash('sha512', $y . strtolower($x)), strlen($x), 30)));
     }
+
+    public static function porcentage($time, $multi = 100) {
+        try {
+            return (($time->current_time * $multi) / $time->duration);
+        } catch (\Exception $e) {
+            return 0;
+        }
+    }
 }

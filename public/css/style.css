@@ -89,10 +89,11 @@ html {
   overflow-y: scroll;
 }
 body {
-  font: 14px/2 "Apple SD Gothic Neo", NanumBarunGothic, NanumGothic, "Malgun Gothic", dotum, sans-serif;
-  font-size: 14px;
-  line-height: 1.5;
-  color: #333;
+    font: 14px/2 "Apple SD Gothic Neo", NanumBarunGothic, NanumGothic, "Malgun Gothic", dotum, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #333;
+    background: #f2f2f2;
 }
 .sub-lineheight {
   line-height: 1.45;
@@ -385,61 +386,28 @@ h6,
   margin-bottom: 30px;
 }
 .c-blog__heading.style-2 {
-  margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 .c-blog__heading.style-2 > * {
   display: inline-block;
   vertical-align: middle;
 }
-.c-blog__heading.style-2 i {
-  font-size: 18px;
-  width: 30px;
-  height: 30px;
-  background: #000;
-  color: #fff;
-  position: relative;
-  margin-right: 16px;
-  margin-bottom: -2px;
-  vertical-align: middle;
-  display: inline-block;
-}
-.c-blog__heading.style-2 i:before {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
-.c-blog__heading.style-2 i:after {
-  content: "";
-  width: 0;
-  height: 0;
-  border-top: 5px solid transparent;
-  border-bottom: 5px solid transparent;
-  border-left: 5px solid #000;
-  position: absolute;
-  left: 100%;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  -o-transform: translateY(-50%);
-  transform: translateY(-50%);
-}
 .c-blog__heading.style-2 h4 {
-  margin: 0;
-  height: 30px;
+    margin: 0;
+    height: 30px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
-.c-blog__heading.style-2.episode span {
-  display: block;
-  font-size: 12px;
+.c-blog__heading.style-2.views {
+    margin-top: 15px;
+}
+.c-blog__heading.style-2.views span {
+     display: block;
+    font-size: 12px;
 }
 .c-blog__heading.style-2 .pull-right {
   text-align: right;
-}
-.c-blog__heading.style-2 > *:not(i):not(h4) {
-  margin-top: -5px;
 }
 .c-blog__heading.background {
   border-bottom: none;
@@ -594,17 +562,16 @@ h6,
   margin: 9px 8px 8px 9px;
 }
 .c-btn.c-btn_style-1 {
-  padding: 15px 40px;
-  border: none;
-  color: #fff;
-  -webkit-transition: all 200ms ease;
-  -moz-transition: all 200ms ease;
-  -o-transition: all 200ms ease;
-  transition: all 200ms ease;
-  background-color: #848d95;
+    padding: 15px 40px;
+    border: none;
+    color: #000;
+    -webkit-transition: all 200ms ease;
+    -moz-transition: all 200ms ease;
+    -o-transition: all 200ms ease;
+    transition: all 200ms ease;
+    background-color: #dadada;
 }
 .c-btn.c-btn_style-1:hover {
-  color: #fff;
   background-color: #bbc0c4;
 }
 .c-btn.c-btn_style-2 {
@@ -873,17 +840,40 @@ img.lazyloaded {
   }
 }
 .navbar-default {
-  margin-bottom: 0;
-  background: #fff;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    background: #1a1b1d;
+    box-shadow: 0 0 4px 0 rgba(0,0,0, 0.7);
+    border: 0;
+    border-radius: 0;
+    margin: 0;
+}
+.navbar-default {
+
 }
 .navbar-default .navbar-nav>li>a {
     text-transform: uppercase;
     margin-right: 11px;
+    font-size: 12px;
+    color: #a0a0a0;
+}
+.navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover {
+    color: #fff;
+}
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+    color: #fff;
+    background-color: #1a1b1d;
 }
 .navbar-default .navbar-nav>li .avatar {
-  padding: 0px;
-  border: 0;
+    padding: 0;
+    position: inherit;
+    display: inline;
+}
+.navbar-default .navbar-nav>li .avatar img {
+    border-radius: 50%;
+    height: 36px;
+    width: 36px;
+    margin: 7px;
+    border: 2px solid #000;
+    position: relative;
 }
 .navbar-nav>li>.dropdown-menu {
   background: rgba(255, 255, 255, 0.95);
@@ -1732,7 +1722,7 @@ input[type=radio]:checked + label:before {
   padding-bottom: 37px;
 }
 .c-search-header__wrapper {
-  background: #242729;
+  background: #1a1b1d;
   padding-top: 10px;
   padding-bottom: 10px;
 }
@@ -1748,8 +1738,7 @@ input[type=radio]:checked + label:before {
   padding-right: 0;
 }
 .c-search-header__wrapper .search-content {
-  margin-top: 15px;
-  margin-bottom: 15px;
+    padding: 15px 0;
 }
 .c-search-header__wrapper .search-content:after {
   display: table;
@@ -1812,6 +1801,78 @@ input[type=radio]:checked + label:before {
     height: 40px;
   }
 }
+.action-icon {
+    float: right;
+}
+.action-icon ul {
+    margin-bottom: 0;
+}
+.action-icon ul li a {
+    width: 30px;
+    height: 30px;
+    display: block;
+    text-align: center;
+    background-color: #eeeeee;
+    position: relative;
+    border-radius: 50%;
+    color: #242729;
+    -webkit-transition: all ease-in-out 0.2s;
+    -moz-transition: all ease-in-out 0.2s;
+    -o-transition: all ease-in-out 0.2s;
+    transition: all ease-in-out 0.2s;
+}
+.action-icon ul li a i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+    display: inline-block;
+}
+.manga-action {
+    padding-top: 5px;
+    display: -webkit-box;
+}
+.manga-action .add-bookmark {
+    width: 50%;
+    padding: 0 15px;
+}
+
+.manga-action .add-bookmark .action_icon {
+    text-align: center;
+    line-height: 1.35;
+}
+.manga-action .add-bookmark .action_icon a {
+    display: inline-block;
+}
+.manga-action .add-bookmark .action_icon a i {
+    font-size: 36px;
+    color: #ec3649;
+}
+.manga-action .add-bookmark .action_icon a i {
+    font-size: 36px;
+    color: #363d41;
+}
+.manga-action .add-bookmark .action_detail {
+    text-align: center;
+    line-height: 1.35;
+}
+.action-icon ul li:hover a{
+    background-color: #171718;
+    color: #242729;
+}
+.c-breadcrumb {
+    display: inline-block;
+}
+@media (max-width: 480px) {
+    .action-icon,
+    .c-breadcrumb {
+        display: block;
+        float: none;
+    }
+}
 .c-search-header__wrapper .search-content .search-form label:after {
   content: "\f4a5";
   display: inline-block;
@@ -1871,13 +1932,12 @@ input[type=radio]:checked + label:before {
   }
 }
 .c-search-header__wrapper .search-content .btn-search-adv {
-  padding: 17px 25px 16px;
-  float: right;
-  color: #848d95;
-  font-weight: 700;
+    padding: 17px 25px 16px;
+    float: right;
+    color: #e1e1e1;
 }
 .c-search-header__wrapper .search-content .btn-search-adv:hover {
-  color: #bbc0c4;
+  color: #fff;
 }
 @media (max-width: 480px) {
   .c-search-header__wrapper .search-content .btn-search-adv {
@@ -1912,7 +1972,7 @@ input[type=radio]:checked + label:before {
   content: "\f35f";
 }
 .c-search-header__wrapper .search-content .btn-search-adv:hover {
-  color: #bbc0c4;
+  color: #fff;
   cursor: pointer;
 }
 .c-search-header__wrapper #search-advanced .search-advanced-form .form-group .checkbox-inline {
@@ -1982,10 +2042,10 @@ input[type=radio]:checked + label:before {
   text-align: center;
 }
 body.search.search-results .search-wrap .tab-content-wrap .c-tabs-item .c-tabs-item__content {
-  margin-bottom: 10px;
-  background: #fff;
-  border-bottom: 1px solid #c5cbd3;
-  padding: 10px;
+    margin-bottom: 10px;
+    background: #fff;
+    border-bottom: 1px solid #dddfe2;
+    padding: 10px;
 }
 @media (max-width: 767px) {
   body.search.search-results .search-wrap .tab-content-wrap .c-tabs-item .c-tabs-item__content .tab-thumb img {
@@ -2296,8 +2356,7 @@ body.search.search-results .search-wrap .tab-content-wrap .c-tabs-item .c-tabs-i
   margin: 0 -15px;
 }
 .popular-slider .slider__container .slider__item {
-  padding-left: 7px;
-  padding-right: 7px;
+    padding: 1px 6px;
 }
 .item__wrap:after {
   display: table;
@@ -2475,9 +2534,6 @@ body.search.search-results .search-wrap .tab-content-wrap .c-tabs-item .c-tabs-i
 .popular-slider.style-3 .c-blog__heading.style-2 {
   margin-bottom: 10px;
 }
-.popular-slider.style-3 .c-blog__heading.style-2 i {
-  vertical-align: bottom;
-}
 .popular-slider.style-3 .widget-heading {
   margin-bottom: 10px;
 }
@@ -2501,40 +2557,148 @@ body.search.search-results .search-wrap .tab-content-wrap .c-tabs-item .c-tabs-i
   border-bottom: 2px solid #c5cbd3;
   min-height: 380px;
 }
+.profile {
+
+}
+
+.profile .wall {
+    height: 210px;
+}
+.player {
+    margin-bottom: 10px;
+}
 .anime {
-  z-index: 3;
-  position: relative;
+    position: relative;
+    background: #fff;
+    padding: 10px;
+    box-shadow: 0 1px 1px rgba(0,0,0,.2);
 }
-.anime .episode {
-  background: #fff;
-  border-bottom: 1px solid #c5cbd3;
+.anime:hover {
+    box-shadow: 0 1px 3px rgba(0,0,0,.55);
 }
-.anime .episode .data {
-  padding: 10px;
+.anime .info {
+    width: 100%;
+    z-index: 2;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    white-space: nowrap;
+}
+.anime .info .title {
+    color: #3f3f3f;
+    font-weight: 600;
+    font-size: 13px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    margin-top: 5px;
+}
+.anime .info .eps {
+    color: grey;
+    font-size: 12px;
+}
+.calendar .days {
+    display: table;
+    width: 100%;
+    padding: 10px;
+}
+.calendar .day {
+    display: table-cell;
+    width: 13.7%;
+    box-sizing: border-box;
+    min-width: 8.125rem;
+    padding: .3125rem;
+    vertical-align: top;
+}
+.day .head {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 10px;
+}
+.day .head h2 {
+    font-weight: 800;
+    color: #000;
+    line-height: 1;
+    text-transform: uppercase;
+    font-size: 16px;
+    text-align: center;
+}
+.day .head h4 {
+    color: #a09895;
+    line-height: 0.1;
+    text-transform: uppercase;
+    font-size: 12px;
+    text-align: center;
+}
+.day .animes {
+    padding: 0 0 2rem .5rem;
+}
+.day .animes li {
+    display: inline-grid;
+    position: relative;
+}
+.day .animes li .name {
+}
+.c-breadcrumb-wrapper h4 {
+    color: #f2f2f2;
+}
+.c-breadcrumb-wrapper .anime {
+    background: 0;
+    border: 1px solid #18191a;
+    padding: 0;
+}
+.c-breadcrumb-wrapper .anime .shadow {
+    background: linear-gradient(to bottom,rgba(0,0,0,0.9),transparent);
+    position: absolute;
+    height: 145px;
+    width: 100%;
+    top: 0;
+    z-index: 1;
+}
+.c-breadcrumb-wrapper .anime .info {
+    top: 0;
+    position: absolute;
+    padding: 7px 10px;
+}
+.c-breadcrumb-wrapper .anime .info .title {
+    margin: 0;
+    color: #fff;
+    font: 600 0.8em 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+}
+.c-breadcrumb-wrapper .anime .info .episodes {
+    margin: 0;
+    color: #eee;
+    font: 400 0.6em 'Montserrat', sans-serif;
+    font-size: 12px;
+}
+.c-breadcrumb-wrapper .anime .poster img {
+    border: 0;
 }
 .anime .episode .data h3 {
-  font-size: 13px;
-  line-height: 20px;
-  margin: 0;
-  width: 100%;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  font-weight: 400;
+    font-size: 12px;
+    line-height: 20px;
+    margin-top: 5px;
+    margin-bottom: 0;
+    width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-weight: 600;
+    color: #3f3f3f;
 }
 .anime .episode .extra {
-  border-top: 1px solid #eff1f4;
-  padding: 5px 10px;
 }
 .anime .episode .extra .name {
-  font-size: 11px;
-  line-height: 15px;
-  margin: 0;
-  width: 100%;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  font-weight: 400;
+    color: grey;
+    font-size: 11px;
+    line-height: 15px;
+    margin: 0;
+    width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-weight: 400;
 }
 .anime .episode .thumb img {
   width: 100%;
@@ -2553,147 +2717,105 @@ body.search.search-results .search-wrap .tab-content-wrap .c-tabs-item .c-tabs-i
     border-radius: 3px;
     z-index: 1;
 }
-.anime .info {
-  position: absolute;
-  padding: 5px 8px 30px;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 00));
-  width: 100%;
-  z-index: 2;
-  top: 0;
-  color: #fff;
-  font-family: 'Montserrat', sans-serif;
-  white-space: nowrap;
-}
-.anime .info .title {
-  font-size: 13px;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-.anime .info .year {
-  color: #eee;
-  font-size: 12px;
-}
 .anime .poster img {
-  width: 100%;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #eaeaea;
 }
-#seasons,
-#seasons .se-c {
-  width: 100%;
-  float: left;
-  margin-bottom: 5px;
+#seasons {
+    margin-bottom: 10px;
+    position: relative;
+    display: flow-root;
 }
-#seasons .se-c:last-child {
-  margin-bottom: 0
+#seasons .episodes {
+    margin-right: -5px;
+    margin-left: -5px;
+    position: relative;
 }
-#seasons .se-c .se-q {
-  background: #fff;
-  cursor: pointer;
-  line-height: 25px;
-  float: left;
-  width: 100%;
-  padding-left: 110px;
-  position: relative;
-  border-bottom: 1px solid #c5cbd3;
+#seasons .episodes .menu {
+    background: #eeeeee;
+    border: 1px solid #dddfe2;
+    width: 100%;
+    display: inline-block;
+    padding: 10px;
+    font-weight: 800;
+    margin-bottom: 10px;
 }
-#seasons .se-c .se-q span.title {
-  float: left;
-  padding: 13px 0;
-  font-size: 15px;
-  width: 100%;
-  overflow: hidden;
-  font-weight: 500
+#seasons .episodes i.icon:before {
+    content: "\f462";
 }
-#seasons .se-c .se-q span.title i {
-  font-style: normal;
-  font-size: 12px;
-  margin-left: 10px;
-  font-weight: 300
+#seasons .episodes .episode {
+    min-height: 140px;
+    position: relative;
+    display: flow-root;
 }
-#seasons .se-c .se-q span.se-t {
-    line-height: 21px;
-    font-family: sans-serif;
-    float: left;
-    font-size: 21px;
-    padding: 15.5px 0;
+#seasons .episodes .episode .anime {
+    margin-right: -11px;
+    margin-left: -11px;
+    margin-bottom: 8px;
+}
+#seasons .episodes .episode .data .episode_progress {
+     background: #dbdbdb;
+     height: 5px;
+     width: 100%;
+     margin-top: 5px;
+ }
+#seasons .episodes .episode .data .episode_progress .ep_progress {
+    height: 100%;
+    display: block;
+    background: #888;
+}
+.summary__content {
+    height: 119px;
+    display: block;
+    overflow: hidden;
+    word-wrap: break-word;
+    line-height: 30px;
+    position: relative;
+}
+.summary__content:after {
+    content: "";
+    display: block;
+    width: 100%;
+    background: rgba(255, 255, 255, 0);
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0.5)), to(#f8f8f8));
+    background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.5), #f8f8f8);
+    background: -moz-linear-gradient(top, rgba(255, 255, 255, 0.5), #f8f8f8);
+    background: -ms-linear-gradient(top, rgba(255, 255, 255, 0.5), #f8f8f8);
+    background: -o-linear-gradient(top, rgba(255, 255, 255, 0.5), #f8f8f8);
     position: absolute;
-    left: 0;
-    width: 90px;
+    bottom: 0;
+    height: 30px;
+    opacity: 1;
+    -webkit-transition: opacity 0.3s;
+    -moz-transition: opacity 0.3s;
+    -o-transition: opacity 0.3s;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+.summary__content.active:after {
+    opacity: 0;
+}
+.c-content-readmore {
     text-align: center;
-    background: #242729;
-    color: #fff;
+    margin-top: -15px;
 }
-#seasons .se-c .se-a,
-#seasons .se-c .se-a ul.episodes {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.content-readmore, body.manga-page .chapter-readmore {
+    -webkit-transition: color 200ms;
+    -moz-transition: color 200ms;
+    -o-transition: color 200ms;
+    transition: color 200ms;
+    font-weight: 600;
+    color: #333333;
+    text-decoration: none;
+    position: relative;
 }
-#seasons .se-c .se-a ul.episodes li {
-  width: 100%;
-  float: left;
-  margin-top: 5px;
-  padding: 5px;
-  background: #fff;
-  border-bottom: 1px solid #c5cbd3;
-}
-#seasons .se-c .se-a ul.episodes li:last-child {
-  margin-bottom: 5px;
-}
-#seasons .se-c .se-a ul.episodes li .duration {
-  float: left;
-  padding: 15px;
-  margin: 10px 0;
-  width: 80px;
-  text-align: center;
-  font-weight: 600;
-  font-size: 10px;
-  border-right: 1px solid #c5cbd3;
-}
-#seasons .se-c .se-a ul.episodes li .thumb {
-  width: 105px;
-  float: left;
-  margin-top: 3px;
-  position: relative;
-  z-index: 99;
-}
-#seasons .se-c .se-a ul.episodes li .thumb img {
-  width: 100%
-}
-#seasons .se-c .se-a ul.episodes li .episode {
-  float: left;
-  padding: 15px;
-  width: 50%;
-  position: relative;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-}
-#seasons .se-c .se-a ul.episodes li .episode a {
-  width: 100%;
-  line-height: 18px;
-  float: left;
-  font-size: 14px;
-  font-weight: 500;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-}
-#seasons .se-c .se-a ul.episodes li .episode span.title {
-  float: left;
-  width: 100%;
-  font-size: 11px;
-  font-weight: 300;
-}
-#seasons .se-c .se-a ul.episodes li .episode_progress {
-  background: #dbdbdb;
-  height: 5px;
-  width: 100%;
-  margin-top: 3px;
-}
-#seasons .se-c .se-a ul.episodes li .episode_progress .ep_progress {
-  height: 100%;
-  display: block;
-  background: #888;
+.content-readmore:after {
+    content: "\f0d7";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
 }
 .top5__row{
   padding-bottom:20px;
@@ -2733,33 +2855,25 @@ body.search.search-results .search-wrap .tab-content-wrap .c-tabs-item .c-tabs-i
 }
 
 .top5__list {
-  background: #fff;
+    background: #fff;
 }
 .top5__item{
     position:relative
 }
-.top5__item:first-child{
-    width:100%;
-    height:0;
-    padding-bottom:50%;
+.top5__item:first-child {
+    width: 100%;
+    height: 100px;
 }
 
 .top5__item{
   list-style: none;
 }
-
-.top5__link{
-    display:block;
-    position:relative
-}
 .top5__link {
-  display:block;
-  position:relative;
-  padding-top: 19px;
-  padding-left: 26.455026455%;
-  border-bottom: 1px solid #c5cbd3;
-  padding: 17px 70px 17px 60px;
-  overflow: hidden;
+    display: block;
+    position: relative;
+    padding: 17px 70px 17px 60px;
+    overflow: hidden;
+    border-bottom: 1px solid #dddfe2;
 }
 
 .top5__item:first-child .top5__link{
@@ -2769,106 +2883,96 @@ body.search.search-results .search-wrap .tab-content-wrap .c-tabs-item .c-tabs-i
     padding:0;
     border:0
 }
-.top5__item:first-child .top5__link:after{
-    content:'';
-    position:absolute;
-    bottom:0;
-    left:0;
-    z-index:1;
-    width:100%;
-    height:80%;
-    background:linear-gradient(transparent, rgba(0,0,0,0.6))
-}
-.top5__item:first-child .top5__title {
-    color: #ffffff;
-    padding-bottom: 3px;
+.top5__item:first-child .top5__link:after {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0,0,0,0.89) 0%,rgba(0,0,0,0.89) 21%,rgba(0,0,0,0.23) 99%,rgba(0,0,0,0.23) 100%);
+    border-bottom: 1px solid #000;
 }
 .top5__item .top5__title {
-  position: relative;
-  margin: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  line-height: 1;
-  padding: 2px 0 2px 0;
-  font-size: 14px;
-  font-weight: 500;
-  color: #666;
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: 1;
+    padding: 2px 0 2px 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: #666;
+    margin-left: 10px;
 }
-
 .top5__ranking {
-  position: absolute;
-  top: 19px;
-  left: 0;
-  width: 50px;
-  letter-spacing: -.05em;
-  font-size: 22px;
-  font-weight: 100;
-  color: #000;
-  text-align: center;
-  border-right: 1px solid #c5cbd3;
+    position: absolute;
+    top: 19px;
+    right: 0;
+    width: 50px;
+    letter-spacing: -.05em;
+    font-size: 22px;
+    font-weight: 100;
+    color: #000;
+    text-align: center;
 }
 
-.top5__item:first-child .top5__ranking{
-  z-index:2;
-  top:auto;
-  bottom:12px;
-  color:#FFF;
-  color:rgba(255,255,255,0.8);
-  border-right-color:#fff
+.top5__item:first-child .top5__ranking {
+    z-index: 2;
+    top: auto;
+    bottom: 12px;
+    color: #FFF;
+    font-weight: 600;
 }
 
 .top5__item img {
-  position:absolute;
-  top:0;
-  background-size:cover;
-  background-position:center;
-  right: 0;
-  width: 65px;
-  height: 75px;
-  border-left: 1px solid #c5cbd3;
+    position: absolute;
+    top: 0;
+    background-size: cover;
+    background-position: center;
+    left: 0;
+    width: 60px;
+    height: 70px;
+    border-right: 1px solid #c5cbd3;
 }
 
 .top5__item:first-child img {
-  z-index: 1;
-  width: 100%;
-  height: auto;
-  margin-top: -20%;
+    z-index: 1;
+    width: 100%;
+    height: auto;
+    border: 0;
 }
 
 .top5__item:first-child .top5__title {
-  position: absolute;
-  z-index: 2;
-  font-size: 16px;
-  bottom: 27px;
-  width: 100%;
-  padding-right: 5px;
-  padding-left: 60px;
+    color: #ffffff;
+    padding-bottom: 3px;
+    position: absolute;
+    z-index: 2;
+    font-size: 16px;
+    bottom: 27px;
+    width: 100%;
+    font-weight: 600;
 }
 .top5__item:first-child .top5__title a {
   color: #FFF;
 }
 .top5__item .top5__author {
-  display: block;
-  font-size: 11px;
-  bottom: 3px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  color: #000;
+    margin-left: 10px;
+    display: block;
+    font-size: 11px;
+    bottom: 3px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #000;
 }
 .top5__item:first-child .top5__author {
-  display: block;
-  position: absolute;
-  z-index: 2;
-  bottom: 13px;
-  padding: 0 30px 0 60px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-size: 13px;
-  line-height: 1.2;
-  color: #FFF;
+    position: absolute;
+    z-index: 2;
+    bottom: 13px;
+    font-size: 13px;
+    line-height: 1.2;
+    color: #FFF;
 }
 .pagination>li>a, .pagination>li>span {
   padding: 0 15px 5px 15px;
@@ -2898,29 +3002,27 @@ body.search.search-results .search-wrap .tab-content-wrap .c-tabs-item .c-tabs-i
   background: #fafafa;
 }
 
-.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+.search-wrap .pagination>.active>a, .search-wrap .pagination>.active>a:focus, .search-wrap .pagination>.active>a:hover, .search-wrap .pagination>.active>span, .search-wrap .pagination>.active>span:focus, .search-wrap .pagination>.active>span:hover {
   color: rgba(51, 51, 51, 0.75);
   font-size: 13px;
   background: #fafafa;
   border: solid 1px #dbdee3;
-  padding: 3px 15px 2px 15px;
 }
 /**
  * :: Shortcodes
  * -------------------------------------------------- */
-.shortcode-manga-chapter {
-  background: #eee;
+
+.item-thumb {
+    min-height: 485px;
+    padding: 10px;
+    background: #fff;
+    border-bottom: 1px solid #dddfe2;
 }
-.shortcode-manga-chapter .item-thumb {
-  max-width: 193px;
-  float: left;
-  overflow: hidden;
-  margin-right: 20px;
-  padding: 10px;
-  background: #fff;
+.item-thumb img {
+    border: 1px solid #eaeaea;
 }
 @media (max-width: 992px) {
-  .shortcode-manga-chapter .item-thumb {
+   .item-thumb {
     max-width: none;
     width: auto;
     float: none;
@@ -2930,21 +3032,21 @@ body.search.search-results .search-wrap .tab-content-wrap .c-tabs-item .c-tabs-i
     padding: 15px;
     background-color: rgba(0, 0, 0, 0.1);
   }
-  .shortcode-manga-chapter .item-thumb:after {
+   .item-thumb:after {
     display: table;
     content: "";
     clear: both;
   }
 }
-.shortcode-manga-chapter .item-summary {
+ .item-summary {
   overflow: hidden;
 }
 @media (max-width: 992px) {
-  .shortcode-manga-chapter .item-summary {
+   .item-summary {
     text-align: left;
   }
 }
-.shortcode-manga-chapter .manga-title-badges {
+ .manga-title-badges {
   width: 24px;
   height: 24px;
   border-radius: 50%;
@@ -2961,38 +3063,38 @@ body.search.search-results .search-wrap .tab-content-wrap .c-tabs-item .c-tabs-i
   -ms-transform: rotate(-10deg);
   -o-transform: rotate(-10deg);
 }
-.shortcode-manga-chapter .manga-title-badges.new {
+ .manga-title-badges.new {
   background-color: #37b7da;
 }
-.shortcode-manga-chapter .manga-title-badges.hot {
+ .manga-title-badges.hot {
   background-color: #EB3349;
 }
-.shortcode-manga-chapter .post-title {
+ .post-title {
   margin-bottom: 14px;
 }
-.shortcode-manga-chapter .post-rating {
+ .post-rating {
   line-height: 30px;
   margin-bottom: 10px;
 }
-.shortcode-manga-chapter .post-rating i {
+ .post-rating i {
   font-size: 26px;
   margin: 0 1px;
   color: #333;
 }
-.shortcode-manga-chapter .post-rating i.rating_current,
-.shortcode-manga-chapter .post-rating i.rating_current_half {
+ .post-rating i.rating_current,
+ .post-rating i.rating_current_half {
   color: #FFD900;
 }
-.shortcode-manga-chapter .post-rating .total_votes {
+ .post-rating .total_votes {
   margin-left: 8px;
   font-weight: 600;
   color: #333;
   font-size: 22px;
 }
-.shortcode-manga-chapter .post-content_item {
+ .post-content_item {
   font-size: 0;
 }
-.shortcode-manga-chapter .post-content_item * {
+ .post-content_item * {
   display: inline-block;
   font-size: 14px;
   vertical-align: top;
@@ -3000,40 +3102,47 @@ body.search.search-results .search-wrap .tab-content-wrap .c-tabs-item .c-tabs-i
   margin-bottom: 3px;
   margin-top: 0;
 }
-.shortcode-manga-chapter .post-content_item .summary-heading {
-  width: 106px;
+ .post-content_item .summary-heading {
+  width: 75px;
 }
-.shortcode-manga-chapter .post-content_item .summary-content {
+ .post-content_item .summary-content {
   word-break: break-word;
-  width: calc(100% - 106px);
+  width: calc(100% - 75px);
 }
-.shortcode-manga-chapter .post-content_item .summary-sinopse {
-   word-break: break-word;
-   width: 100%;
-   font-size: 12px;
-}
-.shortcode-manga-chapter .post-content_item .summary-heading h4 {
+ .post-content_item .summary-heading h4 {
   font-size: 16px;
   font-weight: 400;
 }
-.shortcode-manga-chapter .manga-info {
-  margin-bottom: 30px;
-  display: flow-root;
+.manga-info {
+    margin-bottom: 5px;
+    margin-top: 10px;
+}
+
+.manga-info h4 {
+    color: #3c4043;
+    font-weight: 800;
+    font-size: 14px;
+}
+.manga-info .description-summary {
+    margin-top: -10px;
+}
+.manga-info .description-summary .summary__content p {
+    line-height: 24px;
 }
 @media (max-width: 992px) {
-  .shortcode-manga-chapter .manga-info {
+    .manga-info {
     text-align: center;
   }
 }
-.shortcode-manga-chapter .list-chapter {
+ .list-chapter {
   display: block;
 }
-.shortcode-manga-chapter .list-chapter:after {
+ .list-chapter:after {
   content: '';
   display: table;
   clear: both;
 }
-.shortcode-manga-chapter .list-chapter .chapter {
+ .list-chapter .chapter {
   background-color: #ebebeb;
   padding: 4px 10px;
   border-radius: 10px;
@@ -3045,37 +3154,37 @@ body.search.search-results .search-wrap .tab-content-wrap .c-tabs-item .c-tabs-i
   display: inline-block;
   margin-right: 6px;
 }
-.shortcode-manga-chapter .list-chapter .chapter a {
+ .list-chapter .chapter a {
   color: #666666;
   font-weight: 600;
 }
-.shortcode-manga-chapter .list-chapter .chapter:hover {
+ .list-chapter .chapter:hover {
   background-color: #eb3349;
 }
-.shortcode-manga-chapter .list-chapter .chapter:hover a {
+ .list-chapter .chapter:hover a {
   color: #fff;
 }
-.shortcode-manga-chapter .list-chapter .chapter-item {
+ .list-chapter .chapter-item {
   margin-bottom: 10px;
 }
-.shortcode-manga-chapter .list-chapter .chapter-item span {
+ .list-chapter .chapter-item span {
   margin-right: 8px;
   display: inline-block;
 }
-.shortcode-manga-chapter .list-chapter .chapter-item span:last-child {
+ .list-chapter .chapter-item span:last-child {
   margin-right: 0;
 }
-.shortcode-manga-chapter .list-chapter .chapter-item a {
+ .list-chapter .chapter-item a {
   font-weight: 600;
 }
-.shortcode-manga-chapter .list-chapter .chapter-item a:not(:hover) {
+ .list-chapter .chapter-item a:not(:hover) {
   color: #333333;
 }
 /**
  * :: Widgets
  * -------------------------------------------------- */
 .widget {
-  margin-bottom: 15px;
+  margin-bottom: 5px;
   padding-left: 15px;
   padding-right: 15px;
 }
@@ -3153,20 +3262,6 @@ body.search.search-results .search-wrap .tab-content-wrap .c-tabs-item .c-tabs-i
   top: 7px;
   right: 10px;
   font-size: 24px;
-}
-.widget:not(.default):not(.background) > .c-widget-wrap {
-  border: 3px solid #e1e1e1;
-  padding: 20px;
-}
-.widget:not(.default).c-popular .popular-item-wrap:last-of-type {
-  border-bottom: none;
-  padding-bottom: 0;
-  margin-bottom: 0;
-}
-.widget.hot-topics .hot-topics-item-wrap {
-  border-bottom: 1px solid #eff1f4;
-  padding-bottom: 20px;
-  margin-bottom: 20px;
 }
 .widget.hot-topics .hot-topics-item-wrap:last-child {
   border-bottom: none;
@@ -3382,9 +3477,10 @@ body.search.search-results .search-wrap .tab-content-wrap .c-tabs-item .c-tabs-i
  * :: Footer
  * -------------------------------------------------- */
 #main-footer {
-  background: #242729;
-  color: #6a737c;
-  width: 100%;
+    margin-top: 15px;
+    background: #242729;
+    color: #6a737c;
+    width: 100%;
 }
 
 #main-footer #info {

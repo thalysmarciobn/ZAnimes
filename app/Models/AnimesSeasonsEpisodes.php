@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use DB;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class AnimesSeasonsEpisodes extends Model
 {
@@ -10,16 +12,8 @@ class AnimesSeasonsEpisodes extends Model
 
     protected $fillable = ['id', 'title', 'slug', 'episode', 'season_id', 'video', 'image', 'duration', 'prev', 'poster'];
 
-    public function current($user_id, $episode_id) {
-        try {
-            $user_episode = UsersEpisodes::where('user_id', $user_id)->where('episode_id', $episode_id)->first();
-            if ($user_episode != null) {
-                return ($user_episode["current_time"] * 100) / $user_episode["duration"];
-            }
-        } catch (\Exception $e) {
-            return 0;
-        }
-        return 0;
+    public function current() {
+        return $this->hasOne('App\Models\UsersEpisodes','episode_id', 'id')->where('user_id', Auth::id())->select('episode_id', 'current_time', 'duration', DB::raw('(current_time * 100) / duration as current'));
     }
 
     public function season() {
@@ -38,5 +32,13 @@ class AnimesSeasonsEpisodes extends Model
     public function comments()
     {
         return $this->hasMany('App\Models\AnimesSeasonsEpisodesComments', 'episode_id');
+    }
+
+    public function next() {
+        return self::where('id', '>', $this->id)->where('anime_id', $this->anime_id)->orderBy('id', 'asc')->first();
+    }
+
+    public  function previous() {
+        return self::where('id', '<', $this->id)->where('anime_id', $this->anime_id)->orderBy('id', 'desc')->first();
     }
 }

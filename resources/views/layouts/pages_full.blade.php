@@ -4,6 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link rel="icon" type="image/png" href="{{ asset('favicon/favicon-32x32.png') }}" sizes="32x32">
+    <link rel="icon" type="image/png" href="{{ asset('favicon/favicon-16x16.png') }}" sizes="16x16">
+    <link rel="shortcut icon" href="{{ asset('favicon/favicon.ico') }}">
+
+    <meta name="description" content="@yield('og_description')" />
+    <meta name="keywords" content="zanimes,desenhos onlines,assistir animes onlines,desenhos online gratis,desenhos completo online,animes completo,animes para assistir,lancamentos de animes,animes completos, animes em smartphone,animes em tablets,animes em iphone, animes em celular, baixar animes, download de animes" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="{{ config('app.name', 'Laravel') }}" />
+    <meta property="og:url" content="{{ Request::url() }}" />
+    <meta property="og:title" content="@yield('og_title')" />
+    <meta property="og:description" content="@yield('og_description')" />
+    <meta property="og:image" content="@yield('og_image')" />
+
     <title>{{ config('app.name', 'Laravel') }} - @yield('title')</title>
 
     <link rel='stylesheet' id='apss-font-awesome-css' href='{{ asset('css/font-awesome/font-awesome.min.css?ver=4.3.5') }}' type='text/css' media='all' />
@@ -17,12 +30,11 @@
     <link rel='stylesheet' id='fontawesome-css' href='{{ asset('css/font-awesome/fontawesome-all.min.css?ver=5.0.6') }}' type='text/css' media='all' />
     <link rel='stylesheet' id='ionicons-css' href='{{ asset('css/ionicons.min.css?ver=4.9.6') }}' type='text/css' media='all' />
     <link rel='stylesheet' id='bootstrap-css' href='{{ asset('css/bootstrap.min.css?ver=4.9.6') }}' type='text/css' media='all' />
-    <link rel='stylesheet' id='bootstrap-css' href='{{ asset('css/morris.css?ver=4.9.6') }}' type='text/css' media='all' />
     <link rel='stylesheet' id='slick-css' href='{{ asset('css/slick/slick.css?ver=4.9.6') }}' type='text/css' media='all' />
     <link rel='stylesheet' id='slick-theme-css' href='{{ asset('css/slick/slick-theme.css?ver=4.9.6') }}' type='text/css' media='all' />
     <link rel='stylesheet' id='loaders-css' href='{{ asset('css/loaders.min.css?ver=4.9.6') }}' type='text/css' media='all' />
 
-    <link rel='stylesheet' id='madara-css-css' href='{{ asset('css/style.css?ver=4.9.6') }}' type='text/css' media='all' />
+    <link rel='stylesheet' id='madara-css-css' href='{{ asset('css/style.css?ver=4.9.6') }}{{ time() }}' type='text/css' media='all' />
 
     <script type='text/javascript' src='{{ asset('js/jquery.js?ver=1.12.4') }}'></script>
     <script type='text/javascript' src='{{ asset('js/jquery.themepunch.tools.min.js?ver=5.4.6.2') }}'></script>
@@ -91,11 +103,19 @@
     <script type='text/javascript' src='{{ asset('js/bootstrap.min.js?ver=3.3.7') }}'></script>
     <script type='text/javascript' src='{{ asset('js/imagesloaded.min.js?ver=3.2.0') }}'></script>
 
-    <script type='text/javascript' src='{{ asset('js/template.js?ver=4.9.6') }}'></script>
+    <script type='text/javascript' src='{{ asset('js/template.js?ver=4.9.6') }}{{ time() }}'></script>
     <script type='text/javascript' src='{{ asset('js/script.js?ver=4.9.6') }}'></script>
 
     <script type='text/javascript' src='{{ asset('js/slick.min.js?ver=1.7.1') }}'></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122720424-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
+        gtag('config', 'UA-122720424-1');
+    </script>
 </body>
 
 </html>

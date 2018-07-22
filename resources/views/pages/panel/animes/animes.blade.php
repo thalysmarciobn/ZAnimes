@@ -40,7 +40,7 @@
                                     <td>{{ $anime->creator->name }}</td>
                                     <td>{{ $anime->created_at }}</td>
                                     <td>{{ $anime->updated_at }}</td>
-                                    <td style="width: 105px;text-align: center;"><a href="{{ route('panel-anime-edit', array('slug' => $anime->slug_name)) }}"><button type="button" class="btn btn-default">Edit</button></a></td>
+                                    <td style="width: 105px;text-align: center;"><a href="{{ route('panel.animes.edit.default', array('slug' => $anime->slug_name)) }}"><button type="button" class="btn btn-default">Edit</button></a></td>
                                 </tr>
                             @endforeach
                             </tbody>

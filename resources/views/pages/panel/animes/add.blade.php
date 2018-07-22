@@ -64,8 +64,8 @@
                                     <div class="form-group checkbox-group row">
                                         @foreach ($genres as $genre)
                                             <div class="checkbox col-xs-3 ">
-                                                <input id="{{ $genre->slug }}" name="genre[{{ $genre->slug }}]" value="{{ $genre->slug }}" type="checkbox">
-                                                <label for="{{ $genre->slug }}"> {{ $genre->name }} </label>
+                                                <input id="{{ $genre->id }}" name="genre[{{ $genre->id }}]" value="{{ $genre->id }}" type="checkbox">
+                                                <label for="{{ $genre->id }}"> {{ $genre->name }} </label>
                                             </div>
                                         @endforeach
                                     </div>

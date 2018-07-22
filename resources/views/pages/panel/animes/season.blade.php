@@ -10,6 +10,11 @@
                     {{ session('success') }}
                 </div>
             @endif
+            @if (session('warning'))
+                <div class="alert alert-warning" role="warning">
+                    {{ session('warning') }}
+                </div>
+            @endif
         </div>
     </div>
     <div class="row">
@@ -94,7 +99,7 @@
                                     <td>{{ $episode->title }}</td>
                                     <td>{{ $episode->created_at }}</td>
                                     <td>{{ $episode->updated_at }}</td>
-                                    <td style="width: 105px;text-align: center;"><a href="{{ route('panel-anime-edit-season-episode', array('slug' => $anime->slug_name, 'season' => $season->season, 'episode' => $episode->episode)) }}"><button type="button" class="btn btn-default">Edit</button></a></td>
+                                    <td style="width: 105px;text-align: center;"><a href="{{ route('panel.animes.edit.episode', array('slug' => $anime->slug_name, 'season' => $season->season, 'episode' => $episode->episode)) }}"><button type="button" class="btn btn-default">Edit</button></a></td>
                                 </tr>
                             @endforeach
                             </tbody>

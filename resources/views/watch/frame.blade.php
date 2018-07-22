@@ -32,9 +32,9 @@ function time_updated(time_update_event){
     if(time > duration || time_update_event.type === "ended") {
         time = 0;
     }
-    if (last == 120 || last % 120 == 0 || time_update_event.type === "ended" || time_update_event.type === "play" || time_update_event.type === "pause") {
+    if (last == 240 || last % 240 == 0 || time_update_event.type === "ended" || time_update_event.type === "play" || time_update_event.type === "pause") {
         var xhttp = new XMLHttpRequest();
-        xhttp.open("POST", "{{ route('api_episode') }}", true);
+        xhttp.open("POST", "{{ route('user.setEpisode') }}", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.setRequestHeader('x-csrf-token', "{{ csrf_token() }}");
         xhttp.send("anime_id={{ $episode->anime->id }}&season_id={{ $episode->season->id }}&episode_id={{ $episode->id }}&current_time=" + current_time + "&duration=" + duration);
@@ -61,23 +61,16 @@ player.hotkeys({
     enableModifiersForNumbers: false
 });
 
-
+@if ($next != null)
 player.suggestedVideoEndcap({
-    header: 'You may also like…',
-    suggestions: [
-        {
-            title: 'Suggested Video One',
-            url: '/another-video.html',
-            image: 'http://placehold.it/250',
-            alt: 'Description of photo',
-            target: '_blank'
-        },
-        {
-            title: 'Suggested Article One',
-            url: '/a-different-article.html',
-            image: 'http://placehold.it/250',
-            target: '_self'
-        }
-    ]
+    header: 'Próximo Episódio',
+    prev: "&nbsp;&nbsp;{{ $next->prev }}",
+    episode: "{{ $next->title }}",
+    url: '{{ route('anime.episode', ['anime_slug' => $next->season->anime->slug_name, 'episode' => $next->episode, 'episode_slug' => $next->slug, 'season' => $next->season_id]) }}',
+    image: '{{ ZAnimesControl::url('animes/' . $next->poster) }}',
+    alt: 'Description of photo',
+    target: '_blank'
 });
+@endif
+
 

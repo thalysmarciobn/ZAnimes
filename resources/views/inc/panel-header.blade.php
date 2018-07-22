@@ -10,9 +10,11 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ route('panel') }}">Dashboard</a></li>
-                    <li><a href="{{ route('panel-animes') }}">Animes</a></li>
-                    <li><a href="{{ route('panel-animes-add') }}">Add Anime</a></li>
+                    <li><a href="{{ route('panel.dashboard') }}">Dashboard</a></li>
+                    <li><a href="{{ route('panel.animes.default') }}">Animes</a></li>
+                    <li><a href="{{ route('panel.animes.add') }}">Add Anime</a></li>
+                    <li><a href="{{ route('panel.week.default') }}">Week</a></li>
+                    <li><a href="{{ route('panel.logs') }}">Logs</a></li>
                 </ul>
             </div>
         </div>

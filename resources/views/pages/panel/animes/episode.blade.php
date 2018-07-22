@@ -27,6 +27,10 @@
                             <div class="col-lg-9">
                                 {{ csrf_field() }}
                                 <div class="form-group">
+                                    <label for="episode">Episode</label>
+                                    <input type="text" class="form-control" name="episode" value="{{ $episode->episode  }}">
+                                </div>
+                                <div class="form-group">
                                     <label for="title">Title</label>
                                     <input type="text" class="form-control" name="title" value="{{ $episode->title  }}">
                                 </div>
@@ -41,6 +45,12 @@
                                 <div class="form-group">
                                     <label for="poster">Poster ( 640x360 )</label>
                                     <input type="text" class="form-control" name="poster" value="">
+                                </div>
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        <input id="delete" name="delete" value="delete" type="checkbox">
+                                        <label for="delete"> Delete </label>
+                                    </div>
                                 </div>
                                 <button type="submit" class="btn btn-default">Edit</button>
                             </div>

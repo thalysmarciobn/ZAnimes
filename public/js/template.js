@@ -233,16 +233,15 @@
             $this_parent.find(".c-blog__heading.style-3").toggleClass("active");
         });
         // accordion  view chap
-        $(".listing-chapters_wrap ul.main li.has-child").append('<i class="icon ion-ios-plus-empty"></i>');
 
-        $(".listing-chapters_wrap ul.main > li.has-child").on('click', function (e) {
+        $(".listing-chapters_wrap .main > .has-child").on('click', function (e) {
             var $this = $(this);
-            $(e.target).toggleClass("active").children("ul").slideToggle(300);
+            $(e.target).toggleClass("active").children("div.sub-chap").slideToggle(300);
         });
 
-        $(".listing-chapters_wrap ul.main > li a.has-child").on('click', function (e) {
+        $(".listing-chapters_wrap .main > .has-child").on('click', function (e) {
             var $this = $(this);
-            $(e.target).toggleClass("active").next("ul").slideToggle(300);
+            $(e.target).toggleClass("active").next("div.sub-chap").slideToggle(300);
         });
 
         // check-all
@@ -480,14 +479,14 @@
                 if (btn.hasClass('less')) {
                     btn.removeClass('less');
                     btn.addClass('more');
-                    btn.text('Show less  ');
+                    btn.text('Mostrar menos  ');
                     text.addClass('active');
                     text.animate({'height': h});
                 } else {
                     btn.addClass('less');
                     btn.removeClass('more');
                     text.removeClass('active');
-                    btn.text('Show more  ');
+                    btn.text('Mostrar mais  ');
                     text.animate({'height': '120px'});
                 }
             });

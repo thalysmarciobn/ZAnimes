@@ -1,6 +1,9 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\LogsStaff;
+use App\Models\Week;
+use App\Models\WeekAnimes;
 use DB;
 use Auth;
 use App\User;
@@ -28,7 +31,6 @@ class PanelController extends Controller {
         return view('pages.panel.panel', [
             'analystic_users' => $analystic_users->merge(Animes::where('created_at', '>=', $analystic_users->keys()->first())
                 ->groupBy('date')
-                ->orderBy('date')
                 ->get([
                     DB::raw('DATE(created_at) as date'),
                     DB::raw('COUNT(*) as "count"')
@@ -52,7 +54,42 @@ class PanelController extends Controller {
 
     public function animes() {
         return view('pages.panel.animes.animes', [
-            'animes' => Animes::paginate(10)
+            'animes' => Animes::orderByDesc('created_at')->paginate(30)
+        ]);
+    }
+
+    public function week() {
+        return view('pages.panel.week', [
+            'weeks' => Week::all()
+        ]);
+    }
+
+    public function weekEdit(Request $request, $id_week) {
+        $week = Week::findOrFail($id_week);
+        if ($request->has('id') && $request->has('action')) {
+            if (Animes::where('id', $request->id)->doesntExist()) {
+                return redirect('/panel/week/' . $id_week)->with('warning', 'The anime with id \'' . $request->id . '\'. doesn\'t exists');
+            }
+            if ($request->action == "Add" && $request->has('hour')) {
+                if ($week->animes()->where(['week_id' => $id_week, 'anime_id' => $request->id])->exists()) {
+                    return redirect('/panel/week/' . $id_week)->with('warning', 'The anime with id \'' . $request->id . '\'. exists');
+                }
+                $week->animes()->create(['week_id' => $id_week, 'anime_id' => $request->id, 'hour' => $request->hour]);
+            } else {
+                if ($week->animes()->where(['week_id' => $id_week, 'anime_id' => $request->id])->doesntExist()) {
+                    return redirect('/panel/week/' . $id_week)->with('warning', 'The anime with id \'' . $request->id . '\'. doesn\'t exists');
+                }
+                $week->animes()->where(['week_id' => $id_week, 'anime_id' => $request->id])->forceDelete();
+            }
+        }
+        return view('pages.panel.week.edit', [
+            'week' => $week
+        ]);
+    }
+
+    public function logs() {
+        return view('pages.panel.logs', [
+            'logs' => LogsStaff::orderByDesc('created_at')->paginate(30)
         ]);
     }
 
@@ -78,12 +115,13 @@ class PanelController extends Controller {
                     'author' => $request->input('author'),
                     'status' => $request->input('status'),
                     'year' => $request->input('year'),
-                    'genres' => implode(",", $request->input('genre')),
                     'user_id' => Auth::user()->id
                 ]);
                 if ($anime->save()) {
                     ZAnimesControl::put("animes/" . $anime->slug_name . "/cover.jpg", Image::make($request->file('image')->getRealPath())->resize(340, 510)->encode('jpg', 80));
-                    return redirect()->route('panel-anime-edit', ['slug' => $anime->slug_name]);
+                    $anime->staffLog()->save(new LogsStaff(['user_id' => optional(Auth::user())->id, 'message' => 'Has added the anime ' . $anime->id]));
+                    $anime->genres()->sync($request->input('genre'));
+                    return redirect()->route('panel.animes.edit.default', ['slug' => $anime->slug_name]);
                 } else {
                     return redirect('/panel/animes/add')->with('danger', 'Can\'t add \'' . $anime->name . '\'.');
                 }
@@ -107,6 +145,7 @@ class PanelController extends Controller {
             $anime->seasons()->delete();
             $anime->delete();
             ZAnimesControl::deleteDirectory('animes/' . $slug);
+            $anime->staffLog()->save(new LogsStaff(['user_id' => optional(Auth::user())->id, 'message' => 'Has deleted the anime ' . $anime->id]));
             return redirect()->route('panel-animes', ['slug' => $anime->slug_name])->with('success', 'Anime \'' . $anime->name . '\' deleted.');
         } else if ($request->has('name') && $request->has('author') && $request->has('year') && $request->has('status') && $request->has('sinopse')) {
             $request->validate([
@@ -121,7 +160,7 @@ class PanelController extends Controller {
             $anime->author = $request->input('author');
             $anime->year = $request->input('year');
             if ($request->has('genre')) {
-                $anime->genres = implode(",", $request->input('genre'));
+                $anime->genres()->sync($request->input('genre'));
             }
             $anime->status = $request->input('status');
             $anime->sinopse = $request->input('sinopse');
@@ -130,8 +169,10 @@ class PanelController extends Controller {
                 $anime->image = "cover.jpg?t=" . str_random(20) . time();
                 ZAnimesControl::put("animes/" . $anime->slug_name . "/cover.jpg", Image::make($request->file('image')->getRealPath())->resize(340, 510)->encode('jpg', 80));
             }
-            $anime->save();
-            return redirect()->route('panel-anime-edit', ['slug' => $anime->slug_name])->with('success', '\'' . $anime->name . '\' edited.');
+            if ($anime->save()) {
+                $anime->staffLog()->save(new LogsStaff(['user_id' => optional(Auth::user())->id, 'message' => 'Has edited the anime ' . $anime->id]));
+                return redirect()->route('panel.animes.edit.default', ['slug' => $anime->slug_name])->with('success', '\'' . $anime->name . '\' edited.');
+            }
         } else if ($request->has('title') && $request->has('season')) {
             $request->validate([
                 'title' => 'required|max:255',
@@ -144,18 +185,13 @@ class PanelController extends Controller {
                     'season' => $request->input('season')
                 ]);
                 if ($anime->seasons()->save($season)) {
-                    return redirect()->route('panel-anime-edit-season', ['slug' => $anime->slug_name, 'season' => $request->input('season')])->with('success', 'Season \'' . $season->title . '\' added.');
+                    $anime->staffLog()->save(new LogsStaff(['user_id' => optional(Auth::user())->id, 'message' => 'Has added the season ' . $season->id]));
+                    return redirect()->route('panel.animes.edit.season', ['slug' => $anime->slug_name, 'season' => $request->input('season')])->with('success', 'Season \'' . $season->title . '\' added.');
                 }
             }
         }
-        $anime_genres = array();
-        foreach(explode(',', $anime->genres) as $genre)
-        {
-            array_push($anime_genres, $genre);
-        }
         return view('pages.panel.animes.edit', [
             'anime' => $anime,
-            'anime_genres' => $anime_genres,
             'genres' => Genres::get()
         ]);
     }
@@ -171,33 +207,36 @@ class PanelController extends Controller {
         if ($request->has('delete')) {
             $season->episodes()->delete();
             $season->delete();
-            return redirect()->route('panel-anime-edit', ['slug' => $anime->slug_name])->with('success', 'Season \'' . $season->title . '\' deleted.');
+            $anime->staffLog()->save(new LogsStaff(['user_id' => optional(Auth::user())->id, 'message' => 'Has deleted the season ' . $season->id]));
+            return redirect()->route('panel.animes.edit.default', ['slug' => $anime->slug_name])->with('success', 'Season \'' . $season->title . '\' deleted.');
         } else if ($request->has('title') && $request->has('episode') && $request->has('video') && $request->has('poster') && $request->has('prev')) {
-            $request->validate([
-                'title' => 'required|max:255',
-                'episode' => 'integer',
-                'poster' => 'required|max:255',
-                'prev' => 'required|max:255'
-            ]);
-            if (AnimesSeasonsEpisodes::where('season_id', $season->id)->where('episode', $request->input('episode'))->doesntExist()) {
-                $episode = new AnimesSeasonsEpisodes([
-                    'title' => $request->title,
-                    'slug' => str_slug($request->title),
-                    'prev' => $request->input('prev'),
-                    'episode' => $request->input('episode'),
-                    'video' => $request->input('video'),
-                    'image' => $anime->slug_name . "/episodes/" . $season->season . "_" . $request->input('episode') . ".jpg?" . str_random(20),
-                    'poster' => $anime->slug_name . "/episodes/" . $season->season . "_" . $request->input('episode') . "_poster.jpg?" . str_random(20),
-                    'anime_id' => $anime->id,
-                    'season_id' => $season->id,
-                    'duration' => $ZAnimes->getDuration($request->input('video'))
-                ]);
-                if ($request->input('poster') != "") {
-                    ZAnimesControl::put("animes/" . $anime->slug_name . "/episodes/" . $season->season . "_" . $request->input('episode') . ".jpg", Image::make($request->input('poster'))->resize(185, 105)->encode('jpg', 80));
-                    ZAnimesControl::put("animes/" . $anime->slug_name . "/episodes/" . $season->season . "_" . $request->input('episode') . "_poster.jpg", Image::make($request->input('poster'))->resize(640, 360)->encode('jpg', 80));
-                }
-                if ($anime->episodes()->save($episode)) {
-                    return redirect()->route('panel-anime-edit-season', ['slug' => $anime->slug_name, 'season' => $season->season])->with('success', 'Episode \'' . $request->input('title') . '\' added.');
+            if (AnimesSeasonsEpisodes::where('season_id', $season->id)->where('episode', $request->episode)->doesntExist()) {
+                try {
+                    $episode = new AnimesSeasonsEpisodes([
+                        'title' => $request->title,
+                        'slug' => str_slug($request->title),
+                        'prev' => $request->prev,
+                        'episode' => $request->episode,
+                        'video' => $request->video,
+                        'image' => $anime->slug_name . "/episodes/" . $season->season . "_" . $request->episode . ".jpg?" . str_random(20),
+                        'poster' => $anime->slug_name . "/episodes/" . $season->season . "_" . $request->episode . "_poster.jpg?" . str_random(20),
+                        'anime_id' => $anime->id,
+                        'season_id' => $season->id,
+                        'duration' => $ZAnimes->timeToSeconds($ZAnimes->getDuration($request->video))
+                    ]);
+                    if ($request->poster != "") {
+                        $request->poster = str_replace('widestar', 'wide', $request->poster);
+                        $request->poster = str_replace('_wide.jpg', '_fwide.jpg', $request->poster);
+                        ZAnimesControl::put("animes/" . $anime->slug_name . "/episodes/" . $season->season . "_" . $request->episode . ".jpg", Image::make($request->poster)->resize(185, 105)->encode('jpg', 80));
+                        ZAnimesControl::put("animes/" . $anime->slug_name . "/episodes/" . $season->season . "_" . $request->episode . "_poster.jpg", Image::make($request->poster)->resize(640, 360)->encode('jpg', 80));
+                    }
+                    if ($anime->episodes()->save($episode)) {
+                        $anime->staffLog()->save(new LogsStaff(['user_id' => optional(Auth::user())->id, 'message' => 'Has added the episode ' . $episode->id]));
+                        return redirect()->route('panel.animes.edit.season', ['slug' => $anime->slug_name, 'season' => $season->season])->with('success', 'Episode \'' . $request->title . '\' added.');
+                    }
+
+                } catch (\Exception $e) {
+                    return redirect()->route('panel.animes.edit.season', ['slug' => $anime->slug_name, 'season' => $season->season])->with('warning', $e->getMessage());
                 }
             }
         } else if ($request->has('name')) {
@@ -206,7 +245,8 @@ class PanelController extends Controller {
             ]);
             $season->title = $request->input('name');
             if ($season->save()) {
-                return redirect()->route('panel-anime-edit-season', ['slug' => $anime->slug_name, 'season' => $season->season])->with('success', 'Season \'' . $season->title . '\' edited.');
+                $anime->staffLog()->save(new LogsStaff(['user_id' => optional(Auth::user())->id, 'message' => 'Has edited the season ' . $season->id]));
+                return redirect()->route('panel.animes.edit.season', ['slug' => $anime->slug_name, 'season' => $season->season])->with('success', 'Season \'' . $season->title . '\' edited.');
             }
         }
         return view('pages.panel.animes.season', [
@@ -226,29 +266,42 @@ class PanelController extends Controller {
         $season = AnimesSeasons::where('anime_id', $anime->id)->where('season', $season_i)->firstOrFail();
         $episode = AnimesSeasonsEpisodes::where('season_id', $season->id)->where('episode', $episode_i)->firstOrFail();
         try {
-            if ($request->has('title') && $request->has('prev')) {
+            if ($request->has('delete')) {
+                $episode->delete();
+                $anime->staffLog()->save(new LogsStaff(['user_id' => optional(Auth::user())->id, 'message' => 'Has deleted the episode ' . $episode->id]));
+                return redirect()->route('panel.animes.edit.default', ['slug' => $anime->slug_name])->with('success', 'Season \'' . $season->title . '\' deleted.');
+            } else if ($request->has('episode') && $request->has('title') && $request->has('prev')) {
                 $episode->title = $request->input('title');
                 $episode->slug = str_slug($episode->title);
                 $episode->prev = $request->input('prev');
+                if ($request->episode != $episode->episode) {
+                    if (AnimesSeasonsEpisodes::where('anime_id', $anime->id)->where('season_id', $season->id)->where('episode', $request->episode)->doesntExist()) {
+                        $episode->episode = $request->episode;
+                    } else {
+                        return redirect()->route('panel.animes.edit.episode', ['slug' => $anime->slug_name, 'season' => $season_i, 'episode' => $episode->episode])->with('warning', 'Episode \'' . $episode->title . '\' can\'t use the episode \'' . $request->episode . '\'.');
+                    }
+                }
                 if ($request->has('video') && $request->input('video') != $episode->video) {
                     $episode->video = $request->input('video');
-                    $episode->duration = $ZAnimes->getDuration($episode->video);
+                    $episode->duration = $ZAnimes->timeToSeconds($ZAnimes->getDuration($episode->video));
                 }
                 if ($request->has('poster') && $request->input('poster') != "") {
-                    ZAnimesControl::put("animes/" . $anime->slug_name . "/episodes/" . $season->season . "_" . $request->input('episode') . ".jpg", Image::make($request->input('poster'))->resize(185, 105)->encode('jpg', 80));
-                    ZAnimesControl::put("animes/" . $anime->slug_name . "/episodes/" . $season->season . "_" . $request->input('episode') . "_poster.jpg", Image::make($request->input('poster'))->resize(640, 360)->encode('jpg', 80));
-
-                    $episode->image = $anime->slug_name . "/episodes/" . $season->season . "_" . $episode->episode_id . ".jpg?" . str_random(20);
-                    $episode->poster = $anime->slug_name . "/episodes/" . $season->season . "_" . $episode->episode_id . "_poster.jpg?" . str_random(20);
+                    $request->poster = str_replace('widestar', 'wide', $request->poster);
+                    $request->poster = str_replace('_wide.jpg', '_fwide.jpg', $request->poster);
+                    ZAnimesControl::put("animes/" . $anime->slug_name . "/episodes/" . $season->season . "_" . $request->episode . ".jpg", Image::make($request->poster)->resize(185, 105)->encode('jpg', 80));
+                    ZAnimesControl::put("animes/" . $anime->slug_name . "/episodes/" . $season->season . "_" . $request->episode . "_poster.jpg", Image::make($request->poster)->resize(640, 360)->encode('jpg', 80));
+                    $episode->image = $anime->slug_name . "/episodes/" . $season->season . "_" . $episode->episode . ".jpg?" . str_random(20);
+                    $episode->poster = $anime->slug_name . "/episodes/" . $season->season . "_" . $episode->episode . "_poster.jpg?" . str_random(20);
                 }
                 if ($episode->save()) {
                     $anime->latest_episode = Carbon::now();
                     $anime->save();
-                    return redirect()->route('panel-anime-edit-season-episode', ['slug' => $anime->slug_name, 'season' => $season_i, 'episode' => $episode_i])->with('success', 'Episode \'' . $episode->title . '\' edited.');
+                    $anime->staffLog()->save(new LogsStaff(['user_id' => optional(Auth::user())->id, 'message' => 'Has edited the episode ' . $episode->id]));
+                    return redirect()->route('panel.animes.edit.episode', ['slug' => $anime->slug_name, 'season' => $season_i, 'episode' => $episode->episode])->with('success', 'Episode \'' . $episode->title . '\' edited.');
                 }
             }
         } catch (\Exception $e) {
-            return redirect()->route('panel-anime-edit-season-episode', ['slug' => $anime->slug_name, 'season' => $season_i, 'episode' => $episode_i])->with('warning', $e->getMessage());
+            return redirect()->route('panel.animes.edit.episode', ['slug' => $anime->slug_name, 'season' => $season_i, 'episode' => $episode->episode])->with('warning', $e->getMessage());
         }
         return view('pages.panel.animes.episode', [
             'anime' => $anime,

@@ -66,8 +66,8 @@
                                     <div class="form-group checkbox-group row">
                                         @foreach ($genres as $genre)
                                             <div class="checkbox col-xs-3 ">
-                                                <input id="{{ $genre->slug }}" name="genre[{{ $genre->slug }}]" value="{{ $genre->slug }}" type="checkbox" @if( in_array($genre->slug, $anime_genres) ) checked @endif>
-                                                <label for="{{ $genre->slug }}"> {{ $genre->name }} </label>
+                                                <input id="{{ $genre->id }}" name="genre[{{ $genre->id }}]" value="{{ $genre->id }}" type="checkbox" @if( $anime->genres()->get()->contains($genre->id) ) checked @endif>
+                                                <label for="{{ $genre->id }}"> {{ $genre->name }} </label>
                                             </div>
                                         @endforeach
                                     </div>
@@ -131,7 +131,7 @@
                                 <tr>
                                     <td>{{ $season->season }}</td>
                                     <td>{{ $season->title }}</td>
-                                    <td style="width: 105px;text-align: center;"><a href="{{ route('panel-anime-edit-season', array('slug' => $anime->slug_name, 'season' => $season->season)) }}"><button type="button" class="btn btn-default">Editar</button></a></td>
+                                    <td style="width: 105px;text-align: center;"><a href="{{ route('panel.animes.edit.season', array('slug' => $anime->slug_name, 'season' => $season->season)) }}"><button type="button" class="btn btn-default">Editar</button></a></td>
                                 </tr>
                             @endforeach
                             </tbody>

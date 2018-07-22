@@ -10,20 +10,27 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="{{ Request::is('/') ? 'active' : 'non' }}"><a href="{{ route('home') }}">@lang('pages.menu-home')</a></li>
-                    <li class="{{ Request::is('animes') ? 'active' : 'non' }}"><a href="{{ route('animes') }}">@lang('pages.menu-animes')</a></li>
-                    <li class="{{ Request::is('noticias') ? 'active' : 'non' }}"><a href="{{ route('home') }}">@lang('pages.menu-articles')</a></li>
-                    <li class="{{ Request::is('forum') ? 'active' : 'non' }}"><a href="{{ route('home') }}">@lang('pages.menu-forum')</a></li>
+                    <li class="{{ Request::is('/') ? 'active' : 'non' }}"><a href="{{ route('home') }}">@lang('pages.menu.home')</a></li>
+                    <li class="{{ Request::is('animes') ? 'active' : 'non' }}"><a href="{{ route('animes') }}">@lang('pages.menu.animes')</a></li>
+                    <li class="{{ Request::is('temporada') ? 'active' : 'non' }}"><a href="{{ route('season') }}">@lang('pages.menu.season')</a></li>
+                    <li class="{{ Request::is('noticias') ? 'active' : 'non' }}"><a href="{{ route('home') }}">@lang('pages.menu.articles')</a></li>
+                    <li class="{{ Request::is('forum') ? 'active' : 'non' }}"><a href="{{ route('home') }}">@lang('pages.menu.forum')</a></li>
                 </ul>
                 <ul class="pull-right nav navbar-nav">
                     @auth
-                        <a class="avatar nav-link dropdown-toggle" href="#">
-                            <img src="http://1.gravatar.com/avatar/1f2281df65a4de28c1547e09710b68c0?s=50&amp;d=mm&amp;r=g" srcset="http://1.gravatar.com/avatar/1f2281df65a4de28c1547e09710b68c0?s=100&amp;d=mm&amp;r=g 2x" class="avatar avatar-50 photo" height="50" width="50">
-                        </a>
                         @if(Auth::user()->editor)
-                            <li><a href="{{ route('panel') }}">@lang('pages.panel')</a></li>
+                            <li>
+                                <a href="{{ route('panel.dashboard') }}">@lang('pages.panel')</a>
+                            </li>
                         @endif
-                        <li><a href="{{ route('logout') }}">@lang('pages.logout')</a></li>
+                        <li>
+                            <a href="{{ route('logout') }}">@lang('pages.logout')</a>
+                        </li>
+                        <li>
+                            <a class="avatar nav-link dropdown-toggle" href="{{ route('profile', ['name' => Auth::user()->name]) }}">
+                                <img src="{{ ZAnimesControl::url('avatars/default.jpg') }}" srcset="{{ Auth::user()->avatar }}" data-src="{{ Auth::user()->avatar }}" data-srcset="{{ Auth::user()->avatar }}" height="50" width="50">
+                            </a>
+                        </li>
                     @endauth
                     @guest
                         <li><a href="{{ route('login') }}">@lang('pages.login')</a></li>

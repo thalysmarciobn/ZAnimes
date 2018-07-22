@@ -2,20 +2,14 @@
 
 Route::get('/', 'PagesController@home')->name('home');
 Route::get('/animes', 'PagesController@animes')->name('animes');
+Route::get('/temporada', 'PagesController@season')->name('season');
 Route::get('/dmca', 'PagesController@dmca')->name('dmca');
+Route::get('/equipe', 'PagesController@dmca')->name('staff');
 Route::any('/watch/{key}/{id}/{slug}', 'Controller@watch')->name('watch');
-Route::prefix('api')->group(function () {
-    Route::get('/banner', 'Controller@api_banner')->name('api_banner');
-    Route::get('/animes', 'Controller@api_animes')->name('api_animes');
-    Route::get('/genres', 'Controller@api_genres')->name('api_genres');
-    Route::group(['middleware' => ['auth']], function () {
-        Route::post('/episode', 'Controller@api_episode')->name('api_episode');
-    });
-});
-Route::prefix('anime')->group(function () {
-    Route::get('/{anime_slug}', 'PagesController@anime')->name('anime');
-    Route::get('/{anime_slug}/{season}/episodio-{episode}/{episode_slug}', 'PagesController@episode')->name('episode');
-});
+
+
+Route::get('/perfil/{name}', 'PagesController@perfil')->name('profile');
+
 Route::group(['middleware' => ['guest']], function () {
     Route::get('/logar', 'PagesController@login')->name('login');
     Route::post('/logar', 'AuthController@login');
@@ -23,6 +17,9 @@ Route::group(['middleware' => ['guest']], function () {
     Route::post('/cadastro', 'AuthController@register');
 });
 Route::group(['middleware' => ['auth']], function () {
+    Route::prefix('user')->name('user.')->group(function () {
+        Route::post('/episode', 'Controller@setEpisode')->name('setEpisode');
+    });
     Route::get('/sair', function () {
         Auth::logout();
         Session::flush();
@@ -30,16 +27,24 @@ Route::group(['middleware' => ['auth']], function () {
     })->name('logout');
 });
 Route::group(['middleware' => ['editor:1']], function () {
-    Route::prefix('panel')->group(function () {
-        Route::match(['get', 'post'], '/', 'PanelController@panel')->name('panel');
-        Route::prefix('animes')->group(function () {
-            Route::match(['get', 'post'], '/', 'PanelController@animes')->name('panel-animes');
-            Route::match(['get', 'post'], '/add', 'PanelController@animesAdd')->name('panel-animes-add');
-            Route::prefix('edit')->group(function () {
-                Route::match(['get', 'post'], '/{slug}', 'PanelController@editAnime')->name('panel-anime-edit');
-                Route::match(['get', 'post'], '/{slug}/season/{season}', 'PanelController@editSeason')->name('panel-anime-edit-season');
-                Route::match(['get', 'post'], '/{slug}/season/{season}/episode/{episode}', 'PanelController@editEpisode')->name('panel-anime-edit-season-episode');
+    Route::prefix('panel')->name('panel.')->group(function () {
+        Route::get('/logs', 'PanelController@logs')->name('logs');
+        Route::match(['get', 'post'], '/', 'PanelController@panel')->name('dashboard');
+        Route::prefix('week')->name('week.')->group(function () {
+            Route::get('/', 'PanelController@week')->name('default');
+            Route::match(['get', 'post'], '/{week}', 'PanelController@weekEdit')->name('edit');
+        });
+        Route::prefix('animes')->name('animes.')->group(function () {
+            Route::match(['get', 'post'], '/', 'PanelController@animes')->name('default');
+            Route::match(['get', 'post'], '/add', 'PanelController@animesAdd')->name('add');
+            Route::prefix('edit')->name('edit.')->group(function () {
+                Route::match(['get', 'post'], '/{slug}', 'PanelController@editAnime')->name('default');
+                Route::match(['get', 'post'], '/{slug}/season/{season}', 'PanelController@editSeason')->name('season');
+                Route::match(['get', 'post'], '/{slug}/season/{season}/episode/{episode}', 'PanelController@editEpisode')->name('episode');
             });
         });
     });
 });
+Route::get('/{anime_slug}', 'PagesController@anime')->name('anime.default');
+Route::get('/{anime_slug}/{season}/episodio-{episode}/{episode_slug}', 'PagesController@episode')->name('anime.episode');
+

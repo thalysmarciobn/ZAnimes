@@ -11,5 +11,7 @@ return [
     'sinopse' => 'Sinopse',
     'episode' => 'Episódio :episode',
     'also_liked' => 'Também Gostaram De',
-    'seasons_episodes' => 'Temporadas e Episódios',
+    'episodes' => 'Episódios',
+    'info' => 'Informações',
+    'about' => 'Sobre a Série',
 ];
