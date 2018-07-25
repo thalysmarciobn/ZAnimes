@@ -1,7 +1,9 @@
 <?php
 
 return [
-    'poster' => 'Postador',
+    'studio' => 'Estúdio',
+    'age_group' => 'Classificação',
+    'uploader' => 'Postador',
     'genres' => 'Gêneros',
     'author' => 'Autor',
     'status' => 'Status',

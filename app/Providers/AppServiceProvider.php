@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Carbon\Carbon;
 use App\Services\ZAnimes;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -16,6 +17,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Carbon::setLocale('pt');
+        Validator::extend('without_spaces', function($attr, $value){
+            return preg_match('/^\S*$/u', $value);
+        });
     }
 
     /**

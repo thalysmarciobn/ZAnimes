@@ -13,16 +13,12 @@ player = videojs ("video-player", {
             src: '{{ $episode->video }}',
             type: 'video/mp4',
             label: '360'
-        },
-        {
-            src: 'sds',
-            type: 'video/mp4',
-            label: '720'
-            }
+        }
         ]);
     }
 );
 
+@if ($user != null)
 var last = 0;
 var start = 0;
 function time_updated(time_update_event){
@@ -57,6 +53,7 @@ player.on('timeupdate', time_updated);
 player.on('ended', time_updated);
 player.on('pause', time_updated);
 
+@endif
 player.hotkeys({
     volumeStep: 0.1,
     seekStep: 5,
@@ -74,7 +71,7 @@ player.suggestedVideoEndcap({
     prev: "&nbsp;&nbsp;{{ $next->prev }}",
     episode: "{{ $next->title }}",
     url: '{{ route('anime.episode', ['anime_slug' => $next->season->anime->slug_name, 'episode' => $next->episode, 'episode_slug' => $next->slug, 'season' => $next->season_id]) }}',
-    image: '{{ ZAnimesControl::url('animes/' . $next->poster) }}',
+    image: '{{ ZAnimesControl::url('animes/' . $next->image) }}',
     alt: 'Description of photo',
     target: ''
 });

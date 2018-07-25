@@ -8,8 +8,9 @@ return [
 
     'failed' => 'Usuário ou senha não foram encontrados.',
     'logged' => 'Logado com sucesso.',
-    'title' => 'Login',
+    'title' => 'Área do Usuário',
     'email' => 'Email',
     'password' => 'Senha',
     'submit' => 'Logar',
+    'register' => 'Registrar',
 ];

@@ -65,6 +65,10 @@
             _sve.classList.add('is-active');
         }).on('play', function() {
             _sve.classList.remove('is-active');
+        }).on('timeupdate', function() {
+            _sve.classList.remove('is-active');
+        }).on('pause', function() {
+            _sve.classList.remove('is-active');
         });
         player.ready(function() {
             constructSuggestedVideoEndcapContent();

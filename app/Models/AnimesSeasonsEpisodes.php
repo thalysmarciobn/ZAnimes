@@ -10,7 +10,7 @@ class AnimesSeasonsEpisodes extends Model
 {
     protected $table = 'animo_animes_seasons_episodes';
 
-    protected $fillable = ['id', 'title', 'slug', 'episode', 'season_id', 'video', 'image', 'duration', 'prev', 'poster'];
+    protected $fillable = ['id', 'title', 'slug', 'episode', 'season_id', 'video', 'image', 'duration', 'prev'];
 
     public function current() {
         return $this->hasOne('App\Models\UsersEpisodes','episode_id', 'id')->where('user_id', Auth::id())->select('episode_id', 'current_time', 'duration', DB::raw('(current_time * 100) / duration as current'));

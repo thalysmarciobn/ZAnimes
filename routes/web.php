@@ -11,20 +11,21 @@ Route::any('/watch/{key}/{id}/{slug}', 'Controller@watch')->name('watch');
 Route::get('/perfil/{name}', 'PagesController@perfil')->name('profile');
 
 Route::group(['middleware' => ['guest']], function () {
-    Route::get('/logar', 'PagesController@login')->name('login');
-    Route::post('/logar', 'AuthController@login');
+    Route::post('/logar', 'AuthController@login')->name('login');
     Route::get('/cadastro', 'PagesController@register')->name('register');
     Route::post('/cadastro', 'AuthController@register');
 });
 Route::group(['middleware' => ['auth']], function () {
-    Route::prefix('user')->name('user.')->group(function () {
+    Route::prefix('usuario')->name('user.')->group(function () {
+        Route::post('/avatar', 'AuthController@avatar')->name('avatar');
+        Route::post('/configuracoes', 'PagesController@settings')->name('settings');
         Route::post('/episode', 'Controller@setEpisode')->name('setEpisode');
+        Route::get('/sair', function () {
+            Auth::logout();
+            Session::flush();
+            return redirect('/');
+        })->name('logout');
     });
-    Route::get('/sair', function () {
-        Auth::logout();
-        Session::flush();
-        return redirect('/');
-    })->name('logout');
 });
 Route::group(['middleware' => ['editor:1']], function () {
     Route::prefix('panel')->name('panel.')->group(function () {
@@ -33,6 +34,11 @@ Route::group(['middleware' => ['editor:1']], function () {
         Route::prefix('week')->name('week.')->group(function () {
             Route::get('/', 'PanelController@week')->name('default');
             Route::match(['get', 'post'], '/{week}', 'PanelController@weekEdit')->name('edit');
+        });
+        Route::group(['middleware' => ['editor:3']], function () {
+            Route::prefix('avatar')->name('avatar.')->group(function () {
+                Route::any('/', 'PanelController@avatars')->name('default');
+            });
         });
         Route::prefix('animes')->name('animes.')->group(function () {
             Route::match(['get', 'post'], '/', 'PanelController@animes')->name('default');

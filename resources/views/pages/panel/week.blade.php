@@ -14,9 +14,9 @@
     </div>
     <div class="row">
         <div class="col-lg-12 col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">Week</div>
-                <div class="panel-body">
+            <div class="card">
+                <div class="card-header">Week</div>
+                <div class="card-body">
                     <div class="table-responsive">
                         <table class="table">
                             <thead>

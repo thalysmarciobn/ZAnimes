@@ -7,20 +7,17 @@
         <div class="container">
             <div class="c-breadcrumb-wrapper">
                 <div class="container">
-                    <div class="col-md-12">
-                        <div class="c-breadcrumb">
-                            <ol class="breadcrumb">
-                                <li>
-                                    <a href="{{ route('home') }}">
-                                        @lang('pages.menu.home')
-                                    </a>
-                                </li>
-                                <li class="active">
-                                    @lang('pages.menu.season')
-                                </li>
-                            </ol>
-                        </div>
-                    </div>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="{{ route('home') }}">
+                                    @lang('pages.menu.home')
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item"><a href="#">Anime</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">@lang('pages.menu.season')</li>
+                        </ol>
+                    </nav>
                 </div>
             </div>
         </div>

@@ -7,7 +7,7 @@
             <div class="popular-item-wrap">
                 <a title="{{ $anime->name }}" href="{{ route('anime.default', ['anime_slug' => $anime->slug_name]) }}">
                     <div class="popular-img widget-thumbnail c-image-hover">
-                            <img width="50" height="75" data-src="{{ ZAnimesControl::url('animes/' . $anime->slug_name . '/' . $anime->image) }}" data-srcset="{{ ZAnimesControl::url('animes/' . $anime->slug_name . '/' . $anime->image) }}" data-sizes="(max-width: 50px) 75vw, 50px" class="img-responsive lazyload effect-fade" src="{{ asset('images/video_empty.png') }}" style="padding-top:180px; " alt="{{ $anime->name }}"/>
+                        <img width="50" height="75" data-src="{{ ZAnimesControl::url('animes/' . $anime->slug_name . '/' . $anime->image) }}" data-srcset="{{ ZAnimesControl::url('animes/' . $anime->slug_name . '/' . $anime->image) }}" data-sizes="(max-width: 50px) 75vw, 50px" class="img-responsive lazyload effect-fade" src="{{ asset('images/video_empty.png') }}" style="padding-top:180px; " alt="{{ $anime->name }}"/>
                     </div>
                     <div class="popular-content">
                         <h5 class="widget-title">

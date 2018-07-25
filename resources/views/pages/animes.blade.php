@@ -102,61 +102,69 @@
                 <div role="tabpanel" class="c-tabs-item">
                     @foreach ($animes as $anime)
                         <div class="c-tabs-item__content">
-                            <div class="col-lg-1 col-md-2 col-sm-2">
+                            <div class="col-12">
                                 <div class="row">
-                                    <div class="tab-thumb c-image-hover">
-                                        <a href="{{ route('anime.default', ['anime_slug' => $anime->slug_name]) }}" title="{{ $anime->title }}">
-                                            <img width="193" height="278" data-src="{{ ZAnimesControl::url('animes/' . $anime->slug_name . '/' . $anime->image) }}" data-srcset="{{ ZAnimesControl::url('animes/' . $anime->slug_name . '/' . $anime->image) }} 193w, {{ ZAnimesControl::url('animes/' . $anime->slug_name . '/' . $anime->image) }} 125w" data-sizes="(max-width: 193px) 100vw, 193px" class="img-responsive effect-fade lazyloaded" src="{{ ZAnimesControl::url('animes/' . $anime->slug_name . '/' . $anime->image) }}" style="padding-top:278px; " sizes="(max-width: 193px) 100vw, 193px" srcset="{{ ZAnimesControl::url('animes/' . $anime->slug_name . '/' . $anime->image) }} 193w, {{ ZAnimesControl::url('animes/' . $anime->slug_name . '/' . $anime->image) }} 125w">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-11 col-md-10 col-sm-10">
-                                <div class="tab-summary">
-                                    <div class="post-title">
-                                        <h4><a title="{{ $anime->title }}" href="{{ route('anime.default', ['anime_slug' => $anime->slug_name]) }}">{{ $anime->name }}</a></h4>
-                                    </div>
-                                    <div class="post-content">
-                                        <div class="post-content_item mg_author">
-                                            <div class="summary-heading">
-                                                <h5>
-                                                    @lang('animes.author')
-                                                </h5>
-                                            </div>
-                                            <div class="summary-content">
-                                                {{ $anime->author }}
-                                            </div>
-                                        </div>
-                                        <div class="post-content_item mg_status">
-                                            <div class="summary-heading">
-                                                <h5>
-                                                    @lang('animes.content')
-                                                </h5>
-                                            </div>
-                                            <div class="summary-content">
-                                                @if($anime->status == 1)
-                                                    @lang('animes.completed')
-                                                @else
-                                                    @lang('animes.on_going')
-                                                @endif
-                                            </div>
-                                        </div>
-                                        <div class="post-content_item mg_release">
-                                            <div class="summary-heading">
-                                                <h5>
-                                                    @lang('animes.release')
-                                                </h5>
-                                            </div>
-                                            <div class="summary-content release-year">
-                                                {{ $anime->year }}
+                                    <div class="col-lg-1 col-md-2 col-sm-2">
+                                        <div class="row">
+                                            <div class="tab-thumb c-image-hover">
+                                                <a href="{{ route('anime.default', ['anime_slug' => $anime->slug_name]) }}" title="{{ $anime->title }}">
+                                                    <img width="193" height="278" data-src="{{ ZAnimesControl::url('animes/' . $anime->slug_name . '/' . $anime->image) }}" data-srcset="{{ ZAnimesControl::url('animes/' . $anime->slug_name . '/' . $anime->image) }} 193w, {{ ZAnimesControl::url('animes/' . $anime->slug_name . '/' . $anime->image) }} 125w" data-sizes="(max-width: 193px) 100vw, 193px" class="img-fluid effect-fade lazyloaded" src="{{ ZAnimesControl::url('animes/' . $anime->slug_name . '/' . $anime->image) }}" style="padding-top:278px; " sizes="(max-width: 193px) 100vw, 193px" srcset="{{ ZAnimesControl::url('animes/' . $anime->slug_name . '/' . $anime->image) }} 193w, {{ ZAnimesControl::url('animes/' . $anime->slug_name . '/' . $anime->image) }} 125w">
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="tab-meta">
-                                    @foreach($anime->genres as $genre)
-                                        <span class="genre">{{ $genre->name }}</span>
-                                    @endforeach
+                                    <div class="col-lg-11 col-md-10 col-sm-10">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="tab-summary">
+                                                    <div class="post-title">
+                                                        <h4><a title="{{ $anime->title }}" href="{{ route('anime.default', ['anime_slug' => $anime->slug_name]) }}">{{ $anime->name }}</a></h4>
+                                                    </div>
+                                                    <div class="post-content">
+                                                        <div class="post-content_item mg_author">
+                                                            <div class="summary-heading">
+                                                                <h5>
+                                                                    @lang('animes.author')
+                                                                </h5>
+                                                            </div>
+                                                            <div class="summary-content">
+                                                                {{ $anime->author }}
+                                                            </div>
+                                                        </div>
+                                                        <div class="post-content_item mg_status">
+                                                            <div class="summary-heading">
+                                                                <h5>
+                                                                    @lang('animes.content')
+                                                                </h5>
+                                                            </div>
+                                                            <div class="summary-content">
+                                                                @if($anime->status == 1)
+                                                                    @lang('animes.completed')
+                                                                @else
+                                                                    @lang('animes.on_going')
+                                                                @endif
+                                                            </div>
+                                                        </div>
+                                                        <div class="post-content_item mg_release">
+                                                            <div class="summary-heading">
+                                                                <h5>
+                                                                    @lang('animes.release')
+                                                                </h5>
+                                                            </div>
+                                                            <div class="summary-content release-year">
+                                                                {{ $anime->year }}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-meta">
+                                                    @foreach($anime->genres as $genre)
+                                                        <span class="genre">{{ $genre->name }}</span>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

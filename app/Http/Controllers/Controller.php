@@ -24,14 +24,6 @@ class Controller extends BaseController {
         imagedestroy($out);
     }
 
-    public function api_animes(ZAnimesInterface $z_animes) {
-        return response()->json($z_animes->animes());
-    }
-
-    public function api_genres(ZAnimesInterface $z_animes) {
-        return response()->json($z_animes->genres());
-    }
-
     public function setEpisode(Request $request, ZAnimesInterface $z_animes) {
         $validator = Validator::make($request->all(), [
             'completed' => 'required|max:255',
@@ -59,9 +51,11 @@ class Controller extends BaseController {
         if (!Crawler::isCrawler() && $z_animes->checkWatchAccess(request()->ip(), $episode->anime_id, $episode->season_id, $episode->id)) {
             $z_animes->addWatchAccess(request()->ip(), $episode->anime_id, $episode->season_id, $episode->id);
         }
+        $user = optional(Auth::user());
         return view('watch.frame', [
             'episode' => $episode,
-            'cache' => $z_animes->getUserEpisode(Auth::user(), $episode->anime_id, $episode->season_id, $episode->id),
+            'user' => $user,
+            'cache' => $z_animes->getUserEpisode($user, $episode->anime_id, $episode->season_id, $episode->id),
             'next' => $episode->next()
         ]);
     }

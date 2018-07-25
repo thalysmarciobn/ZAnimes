@@ -41,65 +41,43 @@
     <script type='text/javascript' src='{{ asset('js/jquery.themepunch.revolution.min.js?ver=5.4.6.2') }}'></script>
 </head>
 <body class="@yield('body') page-template  page">
-    <div class="wrap">
-        <div class="body-wrap">
-            @include('inc.header')
-            <div class="site-content">
-                <div class="c-page-content style-1">
-                    @yield("header")
-                    <div class="content-area">
-                        <div class="container">
-                            <div class="col-md-12">
-                                @if ($errors->any())
-                                    @foreach($errors->all() as $message)
-                                        <div class="alert alert-danger" role="danger">
-                                            {{ $message }}
-                                        </div>
-                                    @endforeach
-                                @endif
-                                @if (session('info'))
-                                    <div class="alert alert-info" role="info">
-                                        <p>{{ session('info') }}</p>
-                                    </div>
-                                @endif
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    @yield("container")
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<div class="wrap">
+    <div class="body-wrap">
+        @include('inc.header')
+        <div class="site-content">
+            <div class="c-page-content style-1">
+                @yield("header")
+                @yield("content")
             </div>
         </div>
     </div>
-    @include('inc.footer')
+</div>
+@include('inc.footer')
 
-    <div class="go-to-top active">
-        <i class="ion-android-arrow-up"></i>
-    </div>
-    <script type='text/javascript' src='{{ asset('js/lazysizes.min.js?ver=2.0.7') }}'></script>
-    <script type='text/javascript' src='{{ asset('js/imagesloaded.min.js?ver=3.2.0') }}'></script>
+<div class="go-to-top active">
+    <i class="ion-android-arrow-up"></i>
+</div>
+<script type='text/javascript' src='{{ asset('js/lazysizes.min.js?ver=2.0.7') }}'></script>
+<script type='text/javascript' src='{{ asset('js/imagesloaded.min.js?ver=3.2.0') }}'></script>
 
-    <script type='text/javascript' src='{{ asset('js/template.js?ver=4.9.6') }}{{ time() }}'></script>
-    <script type='text/javascript' src='{{ asset('js/script.js?ver=4.9.6') }}'></script>
+<script type='text/javascript' src='{{ asset('js/template.js?ver=4.9.6') }}{{ time() }}'></script>
+<script type='text/javascript' src='{{ asset('js/script.js?ver=4.9.6') }}'></script>
 
-    <script type='text/javascript' src='{{ asset('js/slick.min.js?ver=1.7.1') }}'></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script type='text/javascript' src='{{ asset('js/slick.min.js?ver=1.7.1') }}'></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122720424-1"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-122720424-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-        gtag('config', 'UA-122720424-1');
-    </script>
-    @yield('footer')
+    gtag('config', 'UA-122720424-1');
+</script>
+@yield('footer')
 </body>
 
 </html>

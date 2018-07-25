@@ -1,43 +1,84 @@
-<div class="navbar navbar-default">
+<nav class="navbar navbar-expand-md navbar-dark">
     <div class="container">
-        <div class="row">
-            <div class="navbar-header">
-                <a class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li class="{{ Request::is('/') ? 'active' : 'non' }}"><a href="{{ route('home') }}">@lang('pages.menu.home')</a></li>
-                    <li class="{{ Request::is('animes') ? 'active' : 'non' }}"><a href="{{ route('animes') }}">@lang('pages.menu.animes')</a></li>
-                    <li class="{{ Request::is('temporada') ? 'active' : 'non' }}"><a href="{{ route('season') }}">@lang('pages.menu.season')</a></li>
-                    <li class="{{ Request::is('noticias') ? 'active' : 'non' }}"><a href="{{ route('home') }}">@lang('pages.menu.articles')</a></li>
-                    <li class="{{ Request::is('forum') ? 'active' : 'non' }}"><a href="{{ route('home') }}">@lang('pages.menu.forum')</a></li>
-                </ul>
-                <ul class="pull-right nav navbar-nav">
-                    @auth
-                        @if(Auth::user()->editor)
-                            <li>
-                                <a href="{{ route('panel.dashboard') }}">@lang('pages.panel')</a>
+        <div class="col-12">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-menu" aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse" id="mobile-menu">
+                <div class="w-100">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item {{ Request::is('/') ? 'active' : 'non' }}"><a class="nav-link" href="{{ route('home') }}">@lang('pages.menu.home')</a></li>
+                        <li class="{{ Request::is('animes') ? 'active' : 'non' }}"><a class="nav-link" href="{{ route('animes') }}">@lang('pages.menu.animes')</a></li>
+                        <li class="{{ Request::is('temporada') ? 'active' : 'non' }}"><a class="nav-link" href="{{ route('season') }}">@lang('pages.menu.season')</a></li>
+                        <li class="{{ Request::is('noticias') ? 'active' : 'non' }}"><a class="nav-link" href="{{ route('home') }}">@lang('pages.menu.articles')</a></li>
+                        <li class="{{ Request::is('forum') ? 'active' : 'non' }}" ><a class="nav-link" href="{{ route('home') }}">@lang('pages.menu.forum')</a></li>
+                    </ul>
+                </div>
+                <div class="my-2 my-lg-0">
+                    <ul class="navbar-nav ml-auto">
+                        @auth
+                            <li class="nav-item">
+                                <div class="dropdown">
+                                    <a id="conta" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link avatar nav-link dropdown-toggle">
+                                        <img src="{{ ZAnimesControl::url('avatars/default.jpg') }}" srcset="{{ Auth::user()->avatar }}" data-src="{{ Auth::user()->avatar }}" data-srcset="{{ Auth::user()->avatar }}" height="50" width="50">
+                                    </a>
+                                    <div class="fade dropdown-menu dropdown-menu-right account-panel" aria-labelledby="conta">
+                                        @if(Auth::user()->editor)
+                                            <a class="dropdown-item" href="{{ route('panel.dashboard') }}">@lang('pages.panel')</a>
+                                            <div class="dropdown-divider"></div>
+                                        @endif
+                                        <a class="dropdown-item" href="{{ route('profile', ['name' => Auth::user()->name]) }}">{{ Auth::user()->name }}</a>
+                                        <a class="dropdown-item" href="{{ route('user.settings') }}">@lang('pages.settings')</a>
+                                        <a class="dropdown-item" href="{{ route('user.logout') }}">@lang('pages.logout')</a>
+                                    </div>
+                                </div>
                             </li>
-                        @endif
-                        <li>
-                            <a href="{{ route('logout') }}">@lang('pages.logout')</a>
-                        </li>
-                        <li>
-                            <a class="avatar nav-link dropdown-toggle" href="{{ route('profile', ['name' => Auth::user()->name]) }}">
-                                <img src="{{ ZAnimesControl::url('avatars/default.jpg') }}" srcset="{{ Auth::user()->avatar }}" data-src="{{ Auth::user()->avatar }}" data-srcset="{{ Auth::user()->avatar }}" height="50" width="50">
-                            </a>
-                        </li>
-                    @endauth
-                    @guest
-                        <li><a href="{{ route('login') }}">@lang('pages.login')</a></li>
-                        <li><a href="{{ route('register') }}">@lang('pages.register')</a></li>
-                    @endguest
-                </ul>
+                        @else
+                            <li class="nav-item">
+                                <div class="dropdown">
+                                    <a id="conta" data-toggle="modal" data-target="#loginModal" class="nav-link avatar nav-link dropdown-toggle">
+                                        <img src="{{ ZAnimesControl::url('avatars/default.jpg') }}" height="50" width="50">
+                                    </a>
+                                </div>
+                            </li>
+                        @endauth
+                    </ul>
+                </div>
+
             </div>
         </div>
     </div>
+</nav>
+
+@guest
+<!-- Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">@lang('login.title')</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{{ route('login') }}" method="post">
+                <div class="modal-body">
+                    @csrf
+                    <div class="form-group">
+                        <label for="email">@lang('login.email')</label>
+                        <input name="email" type="email" class="form-control" id="email" placeholder="email@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">@lang('login.password')</label>
+                        <input name="password"  type="password" class="form-control" id="password" placeholder="Password">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="{{ route('register') }}" class="btn btn-secondary" role="button">@lang('login.register')</a>
+                    <button type="submit" class="btn btn-primary">@lang('login.submit')</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
+@endguest

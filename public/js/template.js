@@ -258,6 +258,7 @@
             var check_style = $this.parents(".style-3").length;
             var check_rtl = (jQuery("body").css('direction') === "rtl");
             var manga_style_1 = {
+                lazyLoad: 'ondemand',
                 dots: true,
                 infinite: false,
                 speed: 500,
@@ -293,6 +294,7 @@
                 }]
             }
             var manga_style_2 = {
+                lazyLoad: 'ondemand',
                 dots: true,
                 infinite: false,
                 speed: 500,
@@ -320,6 +322,7 @@
                 }]
             }
             var manga_style_3 = {
+                lazyLoad: 'ondemand',
                 dots: true,
                 infinite: false,
                 speed: 500,
@@ -345,6 +348,50 @@
                     }
                 }]
             }
+            var manga_style_4 = {
+                lazyLoad: 'ondemand',
+                dots: true,
+                infinite: false,
+                speed: 500,
+                vertical: true,
+                verticalSwiping: true,
+                slidesToShow: manga_slidesToShow,
+                slidesToScroll: manga_slidesToShow,
+                arrows: false,
+                rtl: check_rtl,
+                responsive: [
+                    {
+                        breakpoint: 1700,
+                        settings: {
+                            slidesToShow: manga_slidesToShow,
+                            slidesToScroll: manga_slidesToShow,
+                        }
+                    },
+                    {
+                        breakpoint: 1200,
+                        settings: {
+                            slidesToShow: manga_slidesToShow,
+                            slidesToScroll: manga_slidesToShow,
+                        }
+                    },
+                    {
+                        breakpoint: 992,
+                        settings: {
+                            slidesToShow: 3,
+                            slidesToScroll: 3,
+                            initialSlide: initial > 1 ? initial + 1 : initial,
+                        }
+                    },
+                    {
+                        breakpoint: 600,
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 2,
+                            initialSlide: initial > 2 ? initial + 2 : initial,
+                        }
+                    },
+                ]
+            }
 
             switch (style) {
                 case 'style-1':
@@ -353,8 +400,11 @@
                 case 'style-2':
                     $this.slick(manga_style_2);
                     break;
-                case 'style-4':
+                case 'style-3':
                     $this.slick(manga_style_3);
+                    break;
+                case 'style-4':
+                    $this.slick(manga_style_4);
                     break;
             }
 
@@ -364,7 +414,9 @@
         $(".popular-slider .slider__container").each(function () {
             var manga_slidesToShow = parseInt($(this).parents(".popular-slider").attr('data-count'));
             var check_rtl = (jQuery("body").css('direction') === "rtl");
+            var initial = parseInt($(this).parents(".popular-slider").attr('data-initial'));
             var popular_style_2 = {
+                lazyLoad: 'ondemand',
                 dots: false,
                 infinite: false,
                 speed: 500,
@@ -404,6 +456,7 @@
                 ]
             }
             var popular_style_1 = {
+                lazyLoad: 'ondemand',
                 dots: false,
                 infinite: false,
                 speed: 500,
@@ -442,6 +495,49 @@
                     },
                 ]
             }
+            var popular_style_4 = {
+                lazyLoad: 'ondemand',
+                dots: true,
+                infinite: false,
+                speed: 500,
+                slidesToShow: manga_slidesToShow,
+                arrows: false,
+                rtl: check_rtl,
+                slidesToScroll: manga_slidesToShow,
+                initialSlide: initial,
+                responsive: [
+                    {
+                        breakpoint: 1700,
+                        settings: {
+                            slidesToShow: manga_slidesToShow,
+                            slidesToScroll: manga_slidesToShow,
+                        }
+                    },
+                    {
+                        breakpoint: 1200,
+                        settings: {
+                            slidesToShow: manga_slidesToShow,
+                            slidesToScroll: manga_slidesToShow,
+                        }
+                    },
+                    {
+                        breakpoint: 992,
+                        settings: {
+                            slidesToShow: 3,
+                            slidesToScroll: 3,
+                            initialSlide: initial > 1 ? initial + 1 : initial,
+                        }
+                    },
+                    {
+                        breakpoint: 600,
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 2,
+                            initialSlide: initial > 2 ? initial + 2 : initial,
+                        }
+                    },
+                ]
+            }
 
             var popular_style_3 = popular_style_1;
 
@@ -456,6 +552,10 @@
                     break;
                 case 'style-3':
                     $this.slick(popular_style_3);
+                    break;
+                case 'style-4':
+                    $this.slick(popular_style_4);
+                    console.log(popular_style_4);
                     break;
             }
 

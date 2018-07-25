@@ -688,6 +688,7 @@ body.reading-manga .related-manga {
   margin-bottom: 24px;
 }
 .c-image-hover {
+    width: 100%;
     position: relative;
     overflow: hidden;
 }
@@ -832,39 +833,33 @@ img.lazyloaded {
     display: none;
   }
 }
-.navbar-default {
+.navbar {
     background: #1a1b1d;
     box-shadow: 0 0 4px 0 rgba(0,0,0, 0.7);
-    border: 0;
+    padding: 10px 0;
     border-radius: 0;
-    margin: 0;
+    position: relative;
+    z-index: 50;
 }
-.navbar-default {
-
-}
-.navbar-default .navbar-nav>li>a {
+.navbar .navbar-nav>li>a {
     text-transform: uppercase;
     margin-right: 11px;
     font-size: 12px;
     color: #a0a0a0;
 }
-.navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover {
-    color: #fff;
-}
-.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
-    color: #fff;
-    background-color: #1a1b1d;
-}
-.navbar-default .navbar-nav>li .avatar {
+.navbar .navbar-nav>li .avatar {
     padding: 0;
     position: inherit;
     display: inline;
+    cursor: pointer;
 }
-.navbar-default .navbar-nav>li .avatar img {
+.navbar .navbar-nav>li .avatar:after {
+    display: none;
+}
+.navbar .navbar-nav>li .avatar img {
     border-radius: 50%;
     height: 36px;
     width: 36px;
-    margin: 7px;
     border: 2px solid #000;
     position: relative;
 }
@@ -1650,28 +1645,24 @@ input[type=radio]:checked + label:before {
 }
 /* ckeckbox style -> move to core  */
 /*  breadcrumb */
-.c-breadcrumb {
+.breadcrumb {
   margin: 0 -15px;
-}
-.c-breadcrumb .breadcrumb {
-  margin-bottom: 0;
   background-color: transparent;
-  display: inline-block;
 }
-.c-breadcrumb .breadcrumb li {
+.breadcrumb .breadcrumb-item {
   font-size: 12px;
   color: #848d95;
 }
-.c-breadcrumb .breadcrumb .active {
+.breadcrumb .active {
   color: #bbc0c4;
 }
-.c-breadcrumb .breadcrumb li a {
+.breadcrumb li a {
   color: #848d95;
 }
-.c-breadcrumb .breadcrumb li a:hover {
+.breadcrumb li a:hover {
   color: #bbc0c4;
 }
-.c-breadcrumb .breadcrumb li + li:before {
+.breadcrumb li + li:before {
   content: "/";
   padding: 0 2px;
 }
@@ -2328,21 +2319,37 @@ body.search.search-results .search-wrap .tab-content-wrap .c-tabs-item .c-tabs-i
   border-bottom: none !important;
 }
 .popular-slider.style-1 .slider__container .slick-list {
-  padding: 40px 10px 15px;
+    padding: 40px 10px 15px;
+}
+.popular-slider.style-4 .slider__container .slick-list {
+    padding: 10px 10px 5px;
+}
+.popular-slider.style-4 .slider__container .slick-dots {
+    position: initial;
 }
 .popular-slider.style-1 .slider__container .slick-arrow {
-  top: 0;
-  -ms-transform: translate(0, 0);
-  -webkit-transform: translate(0, 0);
-  transform: translate(0, 0);
+    top: 0;
+    -ms-transform: translate(0, 0);
+    -webkit-transform: translate(0, 0);
+    transform: translate(0, 0);
 }
 .popular-slider.style-1 .slider__container .slick-next {
   right: 0;
   left: auto;
 }
 .popular-slider.style-1 .slider__container .slick-prev {
-  right: 40px;
-  left: auto;
+    right: 40px;
+    left: auto;
+}
+.popular-slider.style-4 .slider__container .slick-prev {
+    left: 0;
+    top: auto;
+    bottom: -15px;
+}
+.popular-slider.style-4 .slider__container .slick-next {
+    right: 0;
+    top: auto;
+    bottom: -15px;
 }
 .popular-slider.style-2 .slider__container {
   overflow: inherit;
@@ -2388,6 +2395,9 @@ body.search.search-results .search-wrap .tab-content-wrap .c-tabs-item .c-tabs-i
 .popular-slider.style-3 .slider__container .slick-prev {
   left: 0px;
 }
+.c-widget-wrap {
+    margin-bottom: 10px;
+}
 .most-acc {
     padding-top: 50px;
 }
@@ -2399,21 +2409,118 @@ body.search.search-results .search-wrap .tab-content-wrap .c-tabs-item .c-tabs-i
   border-bottom: 2px solid #c5cbd3;
   min-height: 380px;
 }
+.c-panel {
+    margin-top: 25px;
+}
+.card {
+    margin-top: 15px;
+}
 .profile {
 
 }
-
+.modal-open {
+    overflow: hidden;
+    display: contents;
+}
+.modal-body #image-container {
+    margin: 15px auto;
+    border: 2px solid #444;
+    position: relative;
+    display: table;
+}
+.modal-body #image-container img {
+    width: 180px;
+    height: 180px;
+}
+.alert p {
+    margin: 0;
+}
 .profile .wall {
     height: 210px;
+    background: #2a2a2a;
+    position: relative;
 }
-.player {
-    margin-bottom: 10px;
+.profile .wall .menu {
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+}
+.profile .wall .avatar .image {
+    position: absolute;
+    left: 15px;
+    bottom: 15px;
+    z-index: 2;
+    border-radius: 50%;
+    border: 5px solid #fff;
+}
+.profile .wall .avatar .image img {
+    border-radius: 50%;
+}
+.slick-track {
+    display: inline-block;
+}
+.video-js .vjs-control {
+    background: rgba(0, 0, 0, 0.02);
+}
+.dropdown-menu.fade {
+    display: block;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.show > .dropdown-menu.fade {
+    pointer-events: auto;
+    opacity: 1;
+}
+.account-panel {
+    background: #fff;
+    border-radius: 0;
+    margin-top: 11px;
+    min-width: 240px;
+    box-shadow: 0 1px 1px rgba(0,0,0,.2);
+}
+.video {
+    background: #18191b;
+    position: relative;
+    z-index: 1;
+}
+.video .c-widget-wrap {
+    margin: 0;
+}
+.video .c-blog__heading.style-2 {
+    padding: 10px;
+    margin: 0;
+}
+.video .c-blog__heading.style-2 h4 {
+    color: #a0a0a0;
+}
+.video .c-blog__heading.style-2 h4 a {
+    color: rgba(255,255,255,.75);
+    font-weight: 400;
+}
+.video .c-blog__heading.style-2 h4 a:hover {
+    color: #fff;
+}
+.video .c_player {
+    background: #000;
+}
+.episode_loc {
+    background: #242729;
+}
+.episode_loc .episodes {
+    border-top: 5px solid #18191b;
+    background: #1f2123;
+    padding: 5px 0;
+    margin: 0 -15px;
 }
 .anime {
     position: relative;
     background: #fff;
     padding: 10px;
     box-shadow: 0 1px 1px rgba(0,0,0,.2);
+}
+.anime.active {
+    background: #f2f2f2;
 }
 .anime:hover {
     box-shadow: 0 1px 3px rgba(0,0,0,.55);
@@ -2436,6 +2543,118 @@ body.search.search-results .search-wrap .tab-content-wrap .c-tabs-item .c-tabs-i
 .anime .info .eps {
     color: grey;
     font-size: 12px;
+}
+.anime .episode .data h3 {
+    font-size: 12px;
+    line-height: 20px;
+    margin-top: 5px;
+    margin-bottom: 0;
+    width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-weight: 600;
+    color: #3f3f3f;
+}
+.anime .episode .extra .name {
+    color: grey;
+    font-size: 11px;
+    line-height: 15px;
+    margin: 0;
+    width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-weight: 400;
+}
+.anime .episode .thumb img {
+    width: 100%;
+    min-height: 65px;
+}
+.anime .episode .thumb .duration {
+    position: absolute;
+    background: rgba(0,0,0,0.7);
+    float: right;
+    color: #fff;
+    bottom: 5px;
+    right: 5px;
+    padding: 3px 5px;
+    font-size: 11px;
+    border-radius: 3px;
+    z-index: 1;
+}
+.anime .poster img {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #eaeaea;
+}
+.list_5.slick-slider {
+    margin: 0;
+}
+@media only screen and (max-width: 700px) {
+    .list_5 .anime {
+        padding: 5px;
+    }
+    .list_5 .anime .episode .thumb img {
+        min-height: 45px;
+    }
+    .list_5 .anime .episode .thumb .duration {
+        padding: 2px 3px;
+        border-radius: 2px;
+        font-size: 6px;
+    }
+    .list_5 .anime .episode .data h3 {
+        font-size: 9px;
+        line-height: 10px;
+    }
+    .list_5 .anime .episode .extra .name {
+        font-size: 8px;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .list_5 .anime {
+        padding: 5px;
+    }
+    .list_5 .anime .episode .thumb img {
+        min-height: 36px;
+    }
+    .list_5 .anime .episode .thumb .duration {
+        padding: 2px 3px;
+        border-radius: 2px;
+        font-size: 6px;
+        bottom: 3px;
+        right: 3px;
+    }
+    .list_5 .anime .episode .data h3 {
+        font-size: 8px;
+        line-height: 9px;
+    }
+    .list_5 .anime .episode .extra .name {
+        font-size: 7px;
+    }
+}
+@media only screen and (max-width: 500px) {
+    .list_5 .anime {
+        padding: 4px;
+    }
+    .list_5 .anime .episode .thumb img {
+        min-height: 25px;
+    }
+    .list_5 .anime .episode .thumb .duration {
+        padding: 2px 3px;
+        border-radius: 2px;
+        font-size: 4px;
+        bottom: 2px;
+        right: 2px;
+    }
+    .list_5 .anime .episode .data h3 {
+        font-size: 6px;
+        line-height: 8px;
+    }
+    .list_5 .anime .episode .extra .name {
+        font-size: 5px;
+        line-height: 8px;
+    }
 }
 .calendar .days {
     display: inline-flex;
@@ -2575,53 +2794,6 @@ body.search.search-results .search-wrap .tab-content-wrap .c-tabs-item .c-tabs-i
 .c-breadcrumb-wrapper .anime .poster img {
     border: 0;
 }
-.anime .episode .data h3 {
-    font-size: 12px;
-    line-height: 20px;
-    margin-top: 5px;
-    margin-bottom: 0;
-    width: 100%;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    font-weight: 600;
-    color: #3f3f3f;
-}
-.anime .episode .extra {
-}
-.anime .episode .extra .name {
-    color: grey;
-    font-size: 11px;
-    line-height: 15px;
-    margin: 0;
-    width: 100%;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    font-weight: 400;
-}
-.anime .episode .thumb img {
-  width: 100%;
-  min-width: 160px;
-  min-height: 90px;
-}
-.anime .episode .thumb .duration {
-    position: absolute;
-    background: rgba(0,0,0,0.7);
-    float: right;
-    color: #fff;
-    bottom: 5px;
-    right: 5px;
-    padding: 3px 5px;
-    font-size: 11px;
-    border-radius: 3px;
-    z-index: 1;
-}
-.anime .poster img {
-    width: 100%;
-    height: 100%;
-    border: 1px solid #eaeaea;
-}
 #seasons {
     margin-bottom: 10px;
     position: relative;
@@ -2645,22 +2817,20 @@ body.search.search-results .search-wrap .tab-content-wrap .c-tabs-item .c-tabs-i
     content: "\f462";
 }
 #seasons .episodes .episode {
-    min-height: 140px;
     position: relative;
-    display: flow-root;
 }
 #seasons .episodes .episode .anime {
     margin-right: -11px;
     margin-left: -11px;
     margin-bottom: 8px;
 }
-#seasons .episodes .episode .data .episode_progress {
+.anime .episode .data .episode_progress {
      background: #dbdbdb;
      height: 5px;
      width: 100%;
      margin-top: 5px;
  }
-#seasons .episodes .episode .data .episode_progress .ep_progress {
+.anime .episode .data .episode_progress .ep_progress {
     height: 100%;
     display: block;
     background: #888;
@@ -2919,6 +3089,7 @@ body.search.search-results .search-wrap .tab-content-wrap .c-tabs-item .c-tabs-i
     border-bottom: 1px solid #dddfe2;
 }
 .item-thumb img {
+    width: 100%;
     border: 1px solid #eaeaea;
 }
  .item-summary {
@@ -2948,7 +3119,7 @@ body.search.search-results .search-wrap .tab-content-wrap .c-tabs-item .c-tabs-i
   background-color: #EB3349;
 }
  .post-title {
-  margin-bottom: 14px;
+  margin-bottom: 5px;
 }
  .post-rating {
   line-height: 30px;
@@ -2981,11 +3152,10 @@ body.search.search-results .search-wrap .tab-content-wrap .c-tabs-item .c-tabs-i
   margin-top: 0;
 }
  .post-content_item .summary-heading {
-  width: 75px;
+  width: 100px;
 }
  .post-content_item .summary-content {
-  word-break: break-word;
-  width: calc(100% - 75px);
+  width: calc(100% - 100px);
 }
  .post-content_item .summary-heading h4 {
   font-size: 16px;
@@ -3362,11 +3532,11 @@ body.search.search-results .search-wrap .tab-content-wrap .c-tabs-item .c-tabs-i
 
 #main-footer #info {
   position: relative;
-  padding: 60px 0 100px;
+  padding: 10px 0;
 }
 
 #main-footer #info {
-  padding: 60px 0 100px;
+  padding: 25px 0;
 }
 
 #main-footer #info .wrap {
@@ -3375,18 +3545,32 @@ body.search.search-results .search-wrap .tab-content-wrap .c-tabs-item .c-tabs-i
 
 #main-footer #info #logo {
     position: relative;
-    float: left;
-    left: 0;
     width: 200px;
     padding-top: 64px;
     font-size: 12px;
     background: url(../images/logo.png) no-repeat 0 6px;
     background-size: 200px auto;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 #main-footer #info #logo p {
-  text-align: center;
-  color: #fff;
+    text-align: center;
+    color: #c5c5c5;
+}
+
+#main-footer #dev {
+    background: #1f2123;
+    padding: 10px 2px;
+}
+
+#main-footer p {
+    margin: 0;
+}
+
+#main-footer p.dev {
+    text-align: center;
+    color: #7b7b7b;
 }
 
 #main-footer #info #contact {
@@ -3397,19 +3581,26 @@ body.search.search-results .search-wrap .tab-content-wrap .c-tabs-item .c-tabs-i
     float: left;
 }
 
-#main-footer #info #contact ul {
+#main-footer #info #column b {
+    font-size: 13px;
+    color: #7b7b7b;
+    font-weight: 900;
+}
+
+#main-footer #info #column ul {
     padding: 0;
 }
 
-#main-footer #info #contact .inline-list>li {
+#main-footer #info #column .inline-list>li {
   display: inline-block;
 }
 
-#main-footer #info #contact .inline-list>li a {
-  color: rgb(163, 163, 163);
-  padding-right: 10px;
+#main-footer #info #column .inline-list>li a {
+    color: #c5c5c5;
+    padding-right: 10px;
+    font-size: 15px;
 }
 
-#main-footer #info #contact .inline-list>li a:hover {
-  color: #ccc;
+#main-footer #info #column .inline-list>li a:hover {
+  color: #fff;
 }

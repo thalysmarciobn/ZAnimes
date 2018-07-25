@@ -11,14 +11,16 @@ use Illuminate\Support\Facades\Auth;
 
 class PagesController extends Controller {
 
+    var $take = 10;
+
     public function home(ZAnimesInterface $z_animes) {
         return view('pages.home', [
             'releases' => $z_animes->animesInRelease(),
-            'releases_episodes' => $z_animes->episodesInRelease(12),
+            'releases_episodes' => $z_animes->episodesInRelease($this->take),
             'monthly' => $z_animes->monthly(5),
-            'weekly_recommendation' => $z_animes->weeklyRecommendation(12),
-            'episodes_views' => $z_animes->recentEpisodesViews(12),
-            'latests' => $z_animes->latestAnimes(12)
+            'weekly_recommendation' => $z_animes->weeklyRecommendation($this->take),
+            'episodes_views' => $z_animes->recentEpisodesViews($this->take),
+            'latests' => $z_animes->latestAnimes($this->take)
         ]);
     }
 
@@ -41,21 +43,20 @@ class PagesController extends Controller {
     public function animes(ZAnimesInterface $z_animes, Request $request) {
         return view('pages.animes', [
             'genres' => $z_animes->genres(),
-            'animes' => $z_animes->paginateAnimes($request, 10)
+            'animes' => $z_animes->paginateAnimes($request, $this->take)
         ]);
     }
 
     public function season() {
-        print_r(Carbon::now()->isDayOfWeek(1));
         return view('pages.season', [
-            'week' => Week::all()
+            'week' => Week::get()
         ]);
     }
 
     public function anime(ZAnimesInterface $z_animes, $anime_slug) {
         $anime = $z_animes->getAnimeOrFail('slug_name', $anime_slug);
         return view('pages.anime', [
-            'similar' => $z_animes->getSimilarAnimes($anime, 8),
+            'similar' => $z_animes->getSimilarAnimes($anime, $this->take),
             'anime' => $z_animes->getAnimeOrFail('slug_name', $anime_slug),
         ]);
     }
@@ -63,8 +64,11 @@ class PagesController extends Controller {
     public function episode(ZAnimesInterface $z_animes, $anime_slug, $season, $episode, $episode_slug) {
         $z_animes->flashEpisodeKey(session(), $season, $episode);
         $episode = $z_animes->getEpisodeOrFail($anime_slug, $season, $episode, $episode_slug);
+        $episodes = $episode->anime->episodes->sortBy('id');
         return view('pages.episode', [
+            'initial' => $z_animes->noobInitial($episodes, $episode->id),
             'episode' => $episode,
+            'episodes' => $episodes,
             'similar' => $z_animes->getSimilarAnimes($episode->anime, 5),
         ]);
     }

@@ -144,10 +144,10 @@ class ZAnimes implements ZAnimesInterface {
         }
         switch ($request->get(__('animes.type'))) {
             case __('animes._recents'):
-                $anime->orderBy('latest_episode', 'desc');
+                $anime->orderBy('created_at', 'desc');
                 break;
             case __('animes._news'):
-                $anime->orderBy('created_at', 'desc');
+                $anime->orderBy('year', 'desc');
                 break;
             default:
                 $anime->orderBy('name', 'asc');
@@ -194,5 +194,22 @@ class ZAnimes implements ZAnimesInterface {
         } catch (\Exception $e) {
             throw new \Exception('Can\'t get video duration.');
         }
+    }
+
+    public function noobInitial($episodes, $id, $initial = 0, $_initial = 0) {
+        $count = $episodes->count();
+
+            foreach ($episodes as $_episode) {
+                $initial++;
+                if ($id == $_episode->id) {
+                    break;
+                }
+                if ($count > 5) {
+                    if ($initial > 2 && $count > $initial + 2) {
+                        $_initial++;
+                    }
+                }
+            }
+        return [$initial, $_initial];
     }
 }

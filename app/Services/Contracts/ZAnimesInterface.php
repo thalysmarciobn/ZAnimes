@@ -41,4 +41,6 @@ interface ZAnimesInterface {
     public function timeToSeconds($time, $seconds);
 
     public function getDuration($video);
+
+    public function noobInitial($episodes, $id);
 }

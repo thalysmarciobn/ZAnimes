@@ -29,7 +29,7 @@ class PanelController extends Controller {
             $analystic_views->put($date, 0);
         }
         return view('pages.panel.panel', [
-            'analystic_users' => $analystic_users->merge(Animes::where('created_at', '>=', $analystic_users->keys()->first())
+            'analystic_users' => $analystic_users->merge(AnimesSeasonsEpisodes::where('created_at', '>=', $analystic_users->keys()->first())
                 ->groupBy('date')
                 ->get([
                     DB::raw('DATE(created_at) as date'),
@@ -55,6 +55,31 @@ class PanelController extends Controller {
     public function animes() {
         return view('pages.panel.animes.animes', [
             'animes' => Animes::orderByDesc('created_at')->paginate(30)
+        ]);
+    }
+
+    public function avatars(Request $request) {
+        if ($request->has('user_id')) {
+            $user = User::where('id', $request->user_id)->first();
+            if ($request->has('approve')) {
+                if ($request->approve == "ok") {
+                    $user->update(['avatar' => $user->avatar_pending]);
+                } else {
+                    $user->update(['avatar_pending' => $user->avatar]);
+                }
+            } else {
+                $user->update(['avatar_pending' => $user->avatar]);
+            }
+        }
+        return view('pages.panel.avatars.default', [
+            'avatars' => User::orderByDesc('avatar_update')->whereRaw('avatar != avatar_pending')->paginate(30)
+        ]);
+    }
+
+    public function moderateAvatar($user_id) {
+        $user = User::where('id', $user_id)->firstOrFail();
+        return view('pages.panel.avatars.moderate', [
+            'user' => $user
         ]);
     }
 
@@ -104,6 +129,7 @@ class PanelController extends Controller {
                 'name' => 'required|max:255',
                 'author' => 'required|max:255',
                 'year' => 'integer',
+                'age_group' => 'integer',
                 'status' => 'required',
                 'sinopse' => 'required',
                 'genre' => 'required',
@@ -119,6 +145,8 @@ class PanelController extends Controller {
                     'author' => $request->input('author'),
                     'status' => $request->input('status'),
                     'year' => $request->input('year'),
+                    'age_group' => $request->input('age_group'),
+                    'studio' => $request->input('studio'),
                     'user_id' => Auth::user()->id
                 ]);
                 if ($anime->save()) {
@@ -156,6 +184,8 @@ class PanelController extends Controller {
                 'name' => 'required|max:255',
                 'author' => 'required|max:255',
                 'year' => 'integer',
+                'studio' => 'required',
+                'age_group' => 'integer',
                 'status' => 'required',
                 'sinopse' => 'required',
                 'genre' => 'required',
@@ -163,6 +193,8 @@ class PanelController extends Controller {
             $anime->name = $request->input('name');
             $anime->author = $request->input('author');
             $anime->year = $request->input('year');
+            $anime->studio = $request->input('studio');
+            $anime->age_group = $request->input('age_group');
             if ($request->has('genre')) {
                 $anime->genres()->sync($request->input('genre'));
             }
@@ -223,7 +255,6 @@ class PanelController extends Controller {
                         'episode' => $request->episode,
                         'video' => $request->video,
                         'image' => $anime->slug_name . "/episodes/" . $season->season . "_" . $request->episode . ".jpg?" . str_random(20),
-                        'poster' => $anime->slug_name . "/episodes/" . $season->season . "_" . $request->episode . "_poster.jpg?" . str_random(20),
                         'anime_id' => $anime->id,
                         'season_id' => $season->id,
                         'duration' => $ZAnimes->timeToSeconds($ZAnimes->getDuration($request->video))
@@ -231,8 +262,8 @@ class PanelController extends Controller {
                     if ($request->poster != "") {
                         $request->poster = str_replace('widestar', 'wide', $request->poster);
                         $request->poster = str_replace('_wide.jpg', '_fwide.jpg', $request->poster);
-                        ZAnimesControl::put("animes/" . $anime->slug_name . "/episodes/" . $season->season . "_" . $request->episode . ".jpg", Image::make($request->poster)->resize(185, 105)->encode('jpg', 80));
-                        ZAnimesControl::put("animes/" . $anime->slug_name . "/episodes/" . $season->season . "_" . $request->episode . "_poster.jpg", Image::make($request->poster)->resize(640, 360)->encode('jpg', 80));
+                        $request->poster = str_replace('_large.jpg', '_fwide.jpg', $request->poster);
+                        ZAnimesControl::put("animes/" . $anime->slug_name . "/episodes/" . $season->season . "_" . $request->episode . ".jpg", Image::make($request->poster)->resize(640, 360)->encode('jpg', 80));
                     }
                     if ($anime->episodes()->save($episode)) {
                         $anime->staffLog()->save(new LogsStaff(['user_id' => optional(Auth::user())->id, 'message' => 'Has added the episode ' . $episode->id]));
@@ -292,10 +323,9 @@ class PanelController extends Controller {
                 if ($request->has('poster') && $request->input('poster') != "") {
                     $request->poster = str_replace('widestar', 'wide', $request->poster);
                     $request->poster = str_replace('_wide.jpg', '_fwide.jpg', $request->poster);
-                    ZAnimesControl::put("animes/" . $anime->slug_name . "/episodes/" . $season->season . "_" . $request->episode . ".jpg", Image::make($request->poster)->resize(185, 105)->encode('jpg', 80));
-                    ZAnimesControl::put("animes/" . $anime->slug_name . "/episodes/" . $season->season . "_" . $request->episode . "_poster.jpg", Image::make($request->poster)->resize(640, 360)->encode('jpg', 80));
+                    $request->poster = str_replace('_large.jpg', '_fwide.jpg', $request->poster);
+                    ZAnimesControl::put("animes/" . $anime->slug_name . "/episodes/" . $season->season . "_" . $request->episode . ".jpg", Image::make($request->poster)->resize(640, 360)->encode('jpg', 80));
                     $episode->image = $anime->slug_name . "/episodes/" . $season->season . "_" . $episode->episode . ".jpg?" . str_random(20);
-                    $episode->poster = $anime->slug_name . "/episodes/" . $season->season . "_" . $episode->episode . "_poster.jpg?" . str_random(20);
                 }
                 if ($episode->save()) {
                     $anime->latest_episode = Carbon::now();
