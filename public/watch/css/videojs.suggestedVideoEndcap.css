@@ -36,12 +36,13 @@
 .vjs-suggested-video-endcap-header h5 {
     font-size: 24px;
     color: #fff;
-    margin-bottom: 5px;
     margin-top: 0;
+    margin: 0;
+    line-height: 22px;
 }
 .vjs-suggested-video-endcap-header h4 {
     font-weight: 700;
-    color: #fff;
+    color: #f00;
     font-size: 14px;
     margin: 0;
 }
@@ -54,8 +55,9 @@
 }
 .vjs-suggested-video-endcap-content {
     position: absolute;
-    left: 0;
-    padding: 0 2%;
+    left: 230px;
+    bottom: 60px;
+    padding: 2px 0;
 }
 .vjs-suggested-video-endcap-link{
     font:700 14px/1 Arial,sans-serif;
@@ -72,16 +74,16 @@
 }
 .vjs-suggested-video-endcap-img {
     position: absolute;
-    width: 30%;
+    width: 200px;
     z-index: 1;
     left: 15px;
-    bottom: 40px;
+    bottom: 45px;
     border: 4px solid #f2f2f2;
 }
 .vjs-suggested-video-shadow {
     height: 100%;
     width: 100%;
-    background: linear-gradient(to right, rgba(0,0,0,0.9) 10%,rgba(0,0,0,0.89) 25%,rgba(0,0,0,0.25) 40%,rgba(0,0,0,0.05) 100%);
+    background: linear-gradient(to right, rgba(0,0,0,0.9) 10%,rgba(0,0,0,0.89) 20%,rgba(0,0,0,0.25) 40%,rgba(0,0,0,0.05) 100%),linear-gradient(to left, rgba(0,0,0,0.9) 10%,rgba(0,0,0,0.89) 20%,rgba(0,0,0,0.25) 40%,rgba(0,0,0,0.05) 100%);
     position: absolute;
     z-index: 1;
     top: 0;

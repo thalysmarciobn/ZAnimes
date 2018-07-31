@@ -67,13 +67,11 @@ player.hotkeys({
 
 @if ($next != null)
 player.suggestedVideoEndcap({
-    header: 'Próximo Episódio',
+    header: ' &nbsp;Próximo Episódio',
     prev: "&nbsp;&nbsp;{{ $next->prev }}",
-    episode: "{{ $next->title }}",
+    episode: " &nbsp;{{ $next->title }}",
     url: '{{ route('anime.episode', ['anime_slug' => $next->season->anime->slug_name, 'episode' => $next->episode, 'episode_slug' => $next->slug, 'season' => $next->season_id]) }}',
     image: '{{ ZAnimesControl::url('animes/' . $next->image) }}',
-    alt: 'Description of photo',
-    target: ''
 });
 @endif
 

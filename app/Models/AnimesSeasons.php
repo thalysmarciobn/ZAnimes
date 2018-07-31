@@ -13,7 +13,7 @@ class AnimesSeasons extends Model
 
     public function episodes()
     {
-        return $this->hasMany('App\Models\AnimesSeasonsEpisodes', 'season_id')->orderByDesc('id');
+        return $this->hasMany('App\Models\AnimesSeasonsEpisodes', 'season_id')->orderByDesc('episode');
     }
 
     public function anime() {

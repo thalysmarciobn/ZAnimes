@@ -2,6 +2,10 @@
 
 namespace App\Services;
 
+use App\Models\Slides;
+use App\Services\CustomPaginate;
+use App\Models\Week;
+use DB;
 use App\Models\AnimesSeasons;
 use App\Models\AnimesSeasonsEpisodesViews;
 use App\Models\Genres;
@@ -14,6 +18,12 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 
 class ZAnimes implements ZAnimesInterface {
+
+    public function slidesAnimesH() {
+        return Slides::with(['anime' => function ($query) {
+            return $query->withCount(['weekly_views'])->orderByDesc('weekly_views_count');
+        }])->get()->sortByDesc('anime.weekly_views_count');
+    }
 
     public function animes() {
         return Animes::all();
@@ -40,9 +50,33 @@ class ZAnimes implements ZAnimesInterface {
     }
 
     public function episodesInRelease($take) {
-        return AnimesSeasonsEpisodes::whereHas('anime', function ($query) {
-            return $query->where('status', 0);
-        })->orderByDesc('created_at')->with('anime')->get()->unique('anime_id')->take($take);
+        return AnimesSeasonsEpisodes::query()->select(DB::raw('animo_animes_seasons_episodes.*'))
+            ->join('animo_animes', 'animo_animes_seasons_episodes.anime_id', '=', 'animo_animes.id')
+            ->leftJoin('animo_animes_seasons', 'animo_animes_seasons.id', '=', 'animo_animes_seasons_episodes.season_id')
+            ->whereHas('anime', function ($query) {
+                $query->where('status', 0);
+            })
+            ->orderByDesc('animo_animes.latest_episode')
+            ->orderByDesc('animo_animes_seasons.season')
+            ->orderByDesc('animo_animes_seasons_episodes.episode')
+            ->get()->unique('anime_id')->take($take);
+    }
+
+    public function animesAndEpisoesByWeek() {
+        return Week::query()->with(['animes' => function($query) {
+            $query->orderByDesc('hour')->with([
+                'seasons' => function($query) {
+                    return $query->orderByDesc('season')->with([
+                        'episodes' => function($query) {
+                            return $query->orderByDesc('episode');
+                        }
+                    ]);
+                }
+            ])->whereHas('anime', function($query) {
+                $query->where('status', 0);
+            });
+        }])->get()
+        ;
     }
 
     public function recentEpisodesViews($limit) {
@@ -54,23 +88,42 @@ class ZAnimes implements ZAnimesInterface {
     }
 
     public function getAnimeOrFail($key, $value) {
-        return Animes::where($key, $value)->firstOrFail();
+        return Animes::where($key, $value)->with([
+            'seasons' => function($query) {
+                return $query->orderByDesc('season')->with([
+                    'episodes' => function($query) {
+                        return $query->orderByDesc('episode');
+                    }
+                ]);
+            }
+        ])->firstOrFail();
     }
 
     public function getSimilarAnimes($anime, $limit) {
         $animes = Animes::query()->where('id', '!=', $anime->id);
-        $animes->withCount(['genres' => function ($query) use ($anime) {
-            foreach ($anime->genres()->get() as $genre) {
-                $query->orWhere('genre_id', $genre->id);
-            }
-        }]);
-        return $animes->orderByDesc('genres_count')->get()->take($limit);
+        $animes->whereHas('genres', function ($query) use ($anime) {
+            $query->whereIn('genre_id', $anime->genres()->pluck('genre_id'));
+        })->withCount(['weekly_views']);
+        return $animes->orderByDesc('weekly_views_count')->limit($limit)->get()->take($limit);
     }
 
     public function getEpisodeOrFail($anime_slug, $season, $episode, $episode_slug) {
         return AnimesSeasonsEpisodes::whereHas('anime', function ($query) use ($anime_slug) {
             return $query->where('slug_name', $anime_slug);
-        })->withCount(['views', 'comments'])->with('anime')->where('season_id', $season)->where('episode', $episode)->where('slug', $episode_slug)->firstOrFail();
+        })->withCount(['views', 'comments'])->with(['anime', 'episodes' => function($query) {
+            $query->orderBy('episode');
+        }])->where('season_id', $season)->where('episode', $episode)->where('slug', $episode_slug)->firstOrFail();
+    }
+
+    public function getEpisodes($anime) {
+        return AnimesSeasonsEpisodes::query()->select(DB::raw('animo_animes_seasons_episodes.*'))
+            ->join('animo_animes', 'animo_animes_seasons_episodes.anime_id', '=', 'animo_animes.id')
+            ->join('animo_animes_seasons', 'animo_animes_seasons.id', '=', 'animo_animes_seasons_episodes.season_id')
+            ->where('animo_animes.id', $anime->id)
+            ->orderBy('animo_animes_seasons.season')
+            ->orderBy('animo_animes_seasons_episodes.episode')
+            ->distinct()
+            ->get();
     }
 
     public function getWatchOrFail($session, $key, $id, $slug) {
@@ -88,7 +141,7 @@ class ZAnimes implements ZAnimesInterface {
     }
 
     public function checkWatchAccess($address, $anime_id, $season_id, $episode_id) {
-        return AnimesSeasonsEpisodesViews::where('address', $address)->where('anime_id', $anime_id)->where('season_id', $season_id)->where('episode_id', $episode_id)->where('created_at', '>=', Carbon::now()->addMinutes(-30))->doesntExist();
+        return AnimesSeasonsEpisodesViews::where('address', $address)->where('anime_id', $anime_id)->where('season_id', $season_id)->where('episode_id', $episode_id)->where('created_at', '>=', Carbon::now()->addMinutes(-3))->doesntExist();
     }
 
     public function addWatchAccess($address, $anime_id, $season_id, $episode_id) {
@@ -138,7 +191,7 @@ class ZAnimes implements ZAnimesInterface {
         $anime = Animes::query();
         if ($request->has("procura")) {
             if (!empty($request->procura)) {
-                $anime->where('name', 'LIKE', '%' . $request->procura . '%')
+                $anime->where('name', 'LIKE', '%' . str_replace(' ','%', $request->procura) . '%')
                     ->orWhere('slug_name', 'LIKE', '%' . $request->procura . '%');
             }
         }
@@ -196,20 +249,13 @@ class ZAnimes implements ZAnimesInterface {
         }
     }
 
-    public function noobInitial($episodes, $id, $initial = 0, $_initial = 0) {
-        $count = $episodes->count();
-
-            foreach ($episodes as $_episode) {
-                $initial++;
-                if ($id == $_episode->id) {
-                    break;
-                }
-                if ($count > 5) {
-                    if ($initial > 2 && $count > $initial + 2) {
-                        $_initial++;
-                    }
-                }
+    public function noobInitial($episodes, $id, $initial = 0) {
+        foreach ($episodes as $_episode) {
+            $initial++;
+            if ($id == $_episode->id) {
+                break;
             }
-        return [$initial, $_initial];
+        }
+        return $initial;
     }
 }

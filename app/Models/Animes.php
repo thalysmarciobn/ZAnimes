@@ -10,18 +10,18 @@ class Animes extends Model
 {
     protected $table = 'animo_animes';
 
-    protected $fillable = ['id', 'name', 'slug_name', 'sinopse', 'image', 'author', 'status', 'year', 'age_group', 'studio', 'user_id'];
+    protected $fillable = ['id', 'name', 'slug_name', 'sinopse', 'image', 'author', 'latest_episode', 'status', 'year', 'age_group', 'studio', 'user_id'];
 
     public function seasons() {
-        return $this->hasMany('App\Models\AnimesSeasons', 'anime_id', 'id')->orderByDesc('id');
+        return $this->hasMany('App\Models\AnimesSeasons', 'anime_id', 'id')->orderByDesc('season');
     }
 
     public function episodes() {
-        return $this->hasMany('App\Models\AnimesSeasonsEpisodes', 'anime_id')->orderByDesc('id');
+        return $this->hasMany('App\Models\AnimesSeasonsEpisodes', 'anime_id');
     }
 
-    public function latest_episodes() {
-        return $this->hasOne('App\Models\AnimesSeasonsEpisodes', 'anime_id')->orderByDesc('created_at')->with('season');
+    public function latestEpisode() {
+        return $this->hasOne('App\Models\AnimesSeasonsEpisodes', 'anime_id');
     }
 
     public function genres() {
@@ -30,12 +30,12 @@ class Animes extends Model
 
     public function monthly_views()
     {
-        return $this->hasMany('App\Models\AnimesSeasonsEpisodesViews', 'anime_id')->where('created_at', '>=', Carbon::now()->addDays(-30)->format('Y-m-d H:i:s'));
+        return $this->hasMany('App\Models\AnimesSeasonsEpisodesViews', 'anime_id')->where('created_at', '>=', Carbon::now()->addMonths(-1)->format('Y-m-d H:i:s'));
     }
 
     public function weekly_views()
     {
-        return $this->hasMany('App\Models\AnimesSeasonsEpisodesViews', 'anime_id')->where('created_at', '>=', Carbon::now()->addDays(-7)->format('Y-m-d H:i:s'));
+        return $this->hasMany('App\Models\AnimesSeasonsEpisodesViews', 'anime_id')->where('created_at', '>=', Carbon::now()->addWeeks(-1)->format('Y-m-d H:i:s'));
     }
 
     public function creator() {

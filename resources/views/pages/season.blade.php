@@ -59,7 +59,7 @@
                                             </div>
                                         </a>
                                         @if ($anime->episodes->count() > 0)
-                                            @php($episode = $anime->latest_episodes)
+                                            @php($episode = $anime->episodes->first())
                                             <a href="{{ route('anime.episode', ['anime_slug' => $anime->slug_name, 'episode' => $episode->episode, 'episode_slug' => $episode->slug, 'season' => $episode->season_id]) }}">
                                                 <div class="latest">
                                                     @lang('season.latest_episode')

@@ -1,16 +1,6 @@
 (function(videojs) {
     'use strict';
     videojs.plugin('suggestedVideoEndcap', function(opts) {
-        opts = opts || {
-            header: 'You may also like…',
-            suggestions: [{
-                title: '',
-                url: '',
-                image: '',
-                alt: '',
-                target: '_self'
-            }]
-        };
         var player = this;
         var _sve;
 

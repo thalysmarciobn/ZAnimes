@@ -9,7 +9,7 @@
             <div class="container">
                 <div class="col-md-12">
                     <div class="wall">
-                        <a class="avatar" data-toggle="modal" data-target="#avatarModel" href="#">
+                        <div class="avatar">
                             <div class="image">
                                 @if($me)
                                     <img width="120" height="120" src="{{ ZAnimesControl::url('avatars/default.jpg') }}" srcset="{{ $user->avatar_pending }}" data-src="{{ $user->avatar_pending }}" data-srcset="{{ $user->avatar_pending }}" height="50" width="50">
@@ -17,10 +17,17 @@
                                     <img width="120" height="120" src="{{ ZAnimesControl::url('avatars/default.jpg') }}" srcset="{{ $user->avatar }}" data-src="{{ $user->avatar }}" data-srcset="{{ $user->avatar }}" height="50" width="50">
                                 @endif
                             </div>
-                        </a>
-                        <div class="menu">
-                            asa
                         </div>
+                        @if($me)
+                        <div class="menu">
+                            <a data-toggle="modal" data-target="#avatarModel" href="#">
+                                <div class="button">@lang('profile.avatar.change') <i class="ion ion-md-camera"></i></div>
+                            </a>
+                            <a data-toggle="modal" data-target="#avatarModel" href="#">
+                                <div class="button">@lang('profile.wall.change') <i class="ion ion-md-image"></i></div>
+                            </a>
+                        </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -63,7 +70,9 @@
 @section('container')
     @if ($me && $user->avatar_pending != $user->avatar)
     <div class="widget col-md-12">
-        <div class="alert alert-warning" role="warning"> <p>@lang('profile.avatar.pending')</p> </div>
+        <div class="alert alert-warning" role="warning">
+            <p>@lang('profile.avatar.pending')</p>
+        </div>
     </div>
     @endif
     @if ($user->editor)

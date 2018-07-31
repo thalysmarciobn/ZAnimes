@@ -4,6 +4,10 @@ namespace App\Services\Contracts;
 
 interface ZAnimesInterface {
 
+    public function slidesAnimesH();
+
+    public function animes();
+
     public function genres();
 
     public function monthly($count);
@@ -23,6 +27,8 @@ interface ZAnimesInterface {
     public function getSimilarAnimes($anime, $limit);
 
     public function getEpisodeOrFail($anime_slug, $season, $episode, $episode_slug);
+
+    public function getEpisodes($anime);
 
     public function getWatchOrFail($session, $key, $id, $slug);
 

@@ -266,6 +266,7 @@ class PanelController extends Controller {
                         ZAnimesControl::put("animes/" . $anime->slug_name . "/episodes/" . $season->season . "_" . $request->episode . ".jpg", Image::make($request->poster)->resize(640, 360)->encode('jpg', 80));
                     }
                     if ($anime->episodes()->save($episode)) {
+                        $anime->latest_episode = Carbon::now();
                         $anime->staffLog()->save(new LogsStaff(['user_id' => optional(Auth::user())->id, 'message' => 'Has added the episode ' . $episode->id]));
                         return redirect()->route('panel.animes.edit.season', ['slug' => $anime->slug_name, 'season' => $season->season])->with('success', 'Episode \'' . $request->title . '\' added.');
                     }
@@ -311,7 +312,7 @@ class PanelController extends Controller {
                 $episode->prev = $request->input('prev');
                 if ($request->episode != $episode->episode) {
                     if (AnimesSeasonsEpisodes::where('anime_id', $anime->id)->where('season_id', $season->id)->where('episode', $request->episode)->doesntExist()) {
-                        $episode->episode = $request->episode;
+                        $episode->episode = doubleval($request->episode);
                     } else {
                         return redirect()->route('panel.animes.edit.episode', ['slug' => $anime->slug_name, 'season' => $season_i, 'episode' => $episode->episode])->with('warning', 'Episode \'' . $episode->title . '\' can\'t use the episode \'' . $request->episode . '\'.');
                     }
@@ -328,7 +329,6 @@ class PanelController extends Controller {
                     $episode->image = $anime->slug_name . "/episodes/" . $season->season . "_" . $episode->episode . ".jpg?" . str_random(20);
                 }
                 if ($episode->save()) {
-                    $anime->latest_episode = Carbon::now();
                     $anime->save();
                     $anime->staffLog()->save(new LogsStaff(['user_id' => optional(Auth::user())->id, 'message' => 'Has edited the episode ' . $episode->id]));
                     return redirect()->route('panel.animes.edit.episode', ['slug' => $anime->slug_name, 'season' => $season_i, 'episode' => $episode->episode])->with('success', 'Episode \'' . $episode->title . '\' edited.');

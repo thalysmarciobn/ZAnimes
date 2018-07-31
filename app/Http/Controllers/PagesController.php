@@ -15,6 +15,7 @@ class PagesController extends Controller {
 
     public function home(ZAnimesInterface $z_animes) {
         return view('pages.home', [
+            'slides' => $z_animes->slidesAnimesH(),
             'releases' => $z_animes->animesInRelease(),
             'releases_episodes' => $z_animes->episodesInRelease($this->take),
             'monthly' => $z_animes->monthly(5),
@@ -43,13 +44,13 @@ class PagesController extends Controller {
     public function animes(ZAnimesInterface $z_animes, Request $request) {
         return view('pages.animes', [
             'genres' => $z_animes->genres(),
-            'animes' => $z_animes->paginateAnimes($request, $this->take)
+            'animes' => $z_animes->paginateAnimes($request, 10)
         ]);
     }
 
-    public function season() {
+    public function season(ZAnimesInterface $z_animes) {
         return view('pages.season', [
-            'week' => Week::get()
+            'week' => $z_animes->animesAndEpisoesByWeek()
         ]);
     }
 
@@ -64,12 +65,12 @@ class PagesController extends Controller {
     public function episode(ZAnimesInterface $z_animes, $anime_slug, $season, $episode, $episode_slug) {
         $z_animes->flashEpisodeKey(session(), $season, $episode);
         $episode = $z_animes->getEpisodeOrFail($anime_slug, $season, $episode, $episode_slug);
-        $episodes = $episode->anime->episodes->sortBy('id');
+        $episodes = $z_animes->getEpisodes($episode->anime);
         return view('pages.episode', [
             'initial' => $z_animes->noobInitial($episodes, $episode->id),
             'episode' => $episode,
             'episodes' => $episodes,
-            'similar' => $z_animes->getSimilarAnimes($episode->anime, 5),
+            'similar' => $z_animes->getSimilarAnimes($episode->anime, 7),
         ]);
     }
 

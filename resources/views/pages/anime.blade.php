@@ -47,14 +47,14 @@
                             <div class="add-bookmark">
                                 <div class="action_icon">
                                     <a href="#" data-action="bookmark" data-post="302" data-chapter="" data-page="" title="Bookmark">
-                                        <i class="ion-android-bookmark"></i></a></div><div class="action_detail">
+                                        <i class="ion ion-md-bookmark"></i></a></div><div class="action_detail">
                                     <span>Bookmark This</span>
                                 </div>
                             </div>
                             <div class="add-bookmark">
                                 <div class="action_icon">
                                     <a href="#" data-action="bookmark" data-post="302" data-chapter="" data-page="" title="Bookmark">
-                                        <i class="ion-android-star"></i></a></div><div class="action_detail">
+                                        <i class="ion ion-md-bookmark"></i></a></div><div class="action_detail">
                                     <span>Bookmark This</span>
                                 </div>
                             </div>
@@ -147,13 +147,7 @@
 
                         <h4>@lang('anime.about')</h4>
                         <div class="description-summary">
-                            <div class="summary__content" style="height: 120px;">
-                                <p>{{ $anime->sinopse }}</p>
-
-                            </div>
-                            <div class="c-content-readmore">
-                                <span class="btn btn-link content-readmore less" style="display: inline-block;">Mostrar mais  </span>
-                            </div>
+                            {{ $anime->sinopse }}
                         </div>
                     </div>
                 </div>

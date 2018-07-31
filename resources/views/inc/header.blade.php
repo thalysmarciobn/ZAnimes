@@ -16,6 +16,18 @@
                 </div>
                 <div class="my-2 my-lg-0">
                     <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <div class="search-content">
+                                <form role="search" method="get" class="search-form">
+                                    {{ csrf_field() }}
+                                    <label>
+                                        <span class="screen-reader-text">Procurar por:</span>
+                                        <input type="search" class="search-field" placeholder="Procurar" name="procura">
+                                    </label>
+                                    <input type="submit" class="search-submit" value="Search">
+                                </form>
+                            </div>
+                        </li>
                         @auth
                             <li class="nav-item">
                                 <div class="dropdown">

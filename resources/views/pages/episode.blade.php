@@ -17,88 +17,105 @@
             <div class="col-12">
                 <div class="video col-12">
                     <div class="row">
-                        <div class="c-widget-wrap">
-                            <div class="c-blog__heading style-2 episode">
-                                <h4><b><a href="{{ route('anime.default', ['anime_slug' => $episode->season->anime->slug_name]) }}">{{ $episode->season->anime->name }}</a></b> - {{ $episode->title }}</h4>
-                            </div>
-                        </div>
 
-                        <div class="col-12 c_player">
 
-                            <div class="c-widget-wrap">
-                                <div class="player embed-responsive embed-responsive-21by9">
-                                    <div class="embed-responsive-item" id="player" style="position: absolute;width: 100%;height: 100%;">
-                                        <video id="video-player" height="100%" class="video-js vjs-default-skin"  poster="{{ ZAnimesControl::url('animes/' . $episode->image) }}" style="width: 100%; height: 100%"></video>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="container">
+    <div class="container ">
         <div class="col-12">
-            <div class="popular-slider style-4 episodes" data-style="style-4" data-count="5" data-initial="{{ $initial[1] }}">
-                <div class="list_5 slider__container" role="toolbar">
-                    @foreach ($episodes as $_episode)
-                        <div class="slider__item">
-                            <div class="anime @if($loop->iteration == $initial[0]) active @endif ">
-                                <div class="episode">
-                                    <div class="data">
-                                        <div class="thumb c-image-hover">
-                                            <a href="{{ route('anime.episode', ['anime_slug' => $_episode->season->anime->slug_name, 'episode' => $_episode->episode, 'episode_slug' => $_episode->slug, 'season' => $_episode->season_id]) }}">
-                                                <img data-src="{{ ZAnimesControl::url('animes/' . $_episode->image) }}" data-srcset="{{ ZAnimesControl::url('animes/' . $_episode->image) }}"  class="img-responsive lazyload effect-fade" src="{{ asset('images/video_empty.png') }}"  alt="{{ $_episode->name }}"/>
-                                                <div class="duration">{{ str_replace('00:', '', gmdate("H:i:s", $_episode->duration)) }}</div>
-                                            </a>
-                                        </div>
-                                        @auth
-                                            <div class="episode_progress">
-                                                <div class="ep_progress" style="width:{{ ZAnimesControl::porcentage($_episode->current) }}%;"></div>
-                                            </div>
-                                        @endauth
-                                        <h3>
-                                            <a href="{{ route('anime.episode', ['anime_slug' => $_episode->season->anime->slug_name, 'episode' => $_episode->episode, 'episode_slug' => $_episode->slug, 'season' => $_episode->season_id]) }}">T:{{ $_episode->season->season }} @lang('pages.episode'): {{ $_episode->episode }}</a>
-                                        </h3>
-                                    </div>
-                                    <div class="extra">
-                                        <div class="name">{{ $_episode->title }}</div>
-                                    </div>
-                                </div>
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="c-widget-wrap">
+                        <div class="c-blog__heading style-2 episode">
+                            <h4><b><a href="{{ route('anime.default', ['anime_slug' => $episode->season->anime->slug_name]) }}">{{ $episode->season->anime->name }}</a></b> - {{ $episode->title }}</h4>
+                        </div>
+                    </div>
+                    <div class="c-widget-wrap">
+                        <div class="player embed-responsive embed-responsive-16by9">
+                            <div class="embed-responsive-item" id="player" style="position: absolute;width: 100%;height: 100%;">
+                                <video id="video-player" height="100%" class="video-js vjs-default-skin"  poster="{{ ZAnimesControl::url('animes/' . $episode->image) }}" style="width: 100%; height: 100%"></video>
                             </div>
                         </div>
-                    @endforeach
+                        <div class="player-menu">
+                            <div class="item alert">
+                                <a data-toggle="modal" data-target="#alert-problem" href="#">
+                                    <i class="ion ion-ios-warning"></i> <span>@lang('watch.report_problem')</span>
+                                </a>
+                            </div>
+                            <div class="item right">
+                                <span>{{ $episode->views_count }} Visualizações</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="c-widget-wrap">
+                        <div class="alert alert-info" role="info">
+                            <h4>@lang('watch.episode', ['episode' => $episode->episode])</h4>
+                            {{ $episode->prev }}
+                        </div>
+                    </div>
+                    <div class="popular-slider style-4 episodes" data-style="style-4" data-items="{{ $episodes->count() }}" data-count="5" data-initial="{{ $initial }}">
+                        <div class="list_5 slider__container" role="toolbar">
+                            @foreach ($episodes as $_episode)
+                                <div class="slider__item">
+                                    <div class="anime @if($loop->iteration == $initial) active @endif ">
+                                        <div class="episode">
+                                            <div class="data">
+                                                <div class="thumb c-image-hover">
+                                                    <a href="{{ route('anime.episode', ['anime_slug' => $_episode->season->anime->slug_name, 'episode' => $_episode->episode, 'episode_slug' => $_episode->slug, 'season' => $_episode->season_id]) }}">
+                                                        <img data-src="{{ ZAnimesControl::url('animes/' . $_episode->image) }}" data-srcset="{{ ZAnimesControl::url('animes/' . $_episode->image) }}"  class="img-responsive lazyload effect-fade" src="{{ asset('images/video_empty.png') }}"  alt="{{ $_episode->name }}"/>
+                                                        <div class="duration">{{ str_replace('00:', '', gmdate("H:i:s", $_episode->duration)) }}</div>
+                                                    </a>
+                                                </div>
+                                                @auth
+                                                    <div class="episode_progress">
+                                                        <div class="ep_progress @if(optional($episode->current)->completed) completed @endif " style="width:{{ ZAnimesControl::porcentage($_episode->current) }}%;"></div>
+                                                    </div>
+                                                @endauth
+                                                <h3>
+                                                    <a href="{{ route('anime.episode', ['anime_slug' => $_episode->season->anime->slug_name, 'episode' => $_episode->episode, 'episode_slug' => $_episode->slug, 'season' => $_episode->season_id]) }}">T:{{ $_episode->season->season }} @lang('pages.episode'): {{ $_episode->episode }}</a>
+                                                </h3>
+                                            </div>
+                                            <div class="extra">
+                                                <div class="name">{{ $_episode->title }}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+
+                </div>
+                <div class="widget col-lg-4 default no-icon heading-style-1 c-popular">
+                    @include('inc.similar_animes')
                 </div>
             </div>
         </div>
-        <div class="col-12">
-
-            <div class="c-widget-wrap">
-                <div class="popular-slider style-1" data-style="style-1" data-count="7">
-                    <div class="c-blog__heading style-1 font-heading">
-                        <h4>@lang('anime.also_liked')</h4>
-                    </div>
-                    <div class="slider__container" role="toolbar">
-                        @foreach ($similar as $anim)
-                            <div class="slider__item">
-                                <div class="anime">
-                                    <a title="{{ $anim->title }}" href="{{ route('anime.default', ['anime_slug' => $anim->slug_name]) }}">
-                                        <div class="poster">
-                                            <img data-src="{{ ZAnimesControl::url('animes/' . $anim->slug_name . '/' . $anim->image) }}" data-srcset="{{ ZAnimesControl::url('animes/' . $anim->slug_name . '/' . $anim->image) }}" data-sizes="(max-width: 125px) 100vw, 125px" class="img-responsive lazyload" src="{{ asset('images/video_empty.png') }}" style="padding-top:180px; " alt="{{ $anim->name }}"/>
-                                        </div>
-                                        <div class="info">
-                                            <div class="title">{{ $anim->name }}</div>
-                                            <div class="eps">@lang('home.episodes', ['count' => $anim->episodes->count()])</div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
+    </div>
+    <div class="modal fade" id="alert-problem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">@lang('watch.report_problem')</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-            </div>
 
+                <form action="" method="post" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        @csrf
+                        EM CONSTRUÇÃO
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">@lang('profile.avatar.save')</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 @stop
