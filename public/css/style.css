@@ -2097,127 +2097,128 @@ body.search.search-results .search-wrap .tab-content-wrap .c-tabs-item .c-tabs-i
 /**
  * :: Plugins
  * -------------------------------------------------- */
-.manga-slider {
-  /* layout slider */
+
+.popular-slider.eps {
+    min-height: 215px;
 }
-.manga-slider .slider__container.slick-dotted {
-  margin-bottom: 0px;
+.popular-slider.anims {
+    min-height: 345px;
 }
-.manga-slider .slider__container .slick-dots {
-  bottom: -35px;
+@media only screen and (max-width: 1024px) {
+    .popular-slider.eps {
+        min-height: 226px;
+    }
+    .popular-slider.anims {
+        min-height: 375px;
+    }
 }
-.manga-slider .slider__container .slick-dots li {
-  margin: 0;
+@media only screen and (max-width: 823px) {
+    .popular-slider.eps {
+        min-height: 240px;
+    }
+    .popular-slider.anims {
+        min-height: 411px;
+    }
 }
-.manga-slider .slider__container .slick-dots li button:before {
-  font-size: 10px;
+@media only screen and (max-width: 768px) {
+    .popular-slider.eps {
+        min-height: 240px;
+    }
+    .popular-slider.anims {
+        min-height: 411px;
+    }
 }
-.manga-slider .slider__container .slick-dots li button:hover:before {
-  color: #000;
+@media only screen and (max-width: 736px) {
+    .popular-slider.eps {
+        min-height: 206px;
+    }
+    .popular-slider.anims {
+        min-height: 321px;
+    }
 }
-.manga-slider .slider__container .slick-dots li.slick-active button:before {
-  color: #000;
+@media only screen and (max-width: 731px) {
+    .popular-slider.eps {
+        min-height: 206px;
+    }
+    .popular-slider.anims {
+        min-height: 321px;
+    }
 }
-.manga-slider .slider__container .slick-list {
-  padding-left: 0px !important;
-  /*use style center mode*/
-  padding-right: 0px !important;
-  /*use style center mode*/
+@media only screen and (max-width: 667px) {
+    .popular-slider.eps {
+        min-height: 206px;
+    }
+    .popular-slider.anims {
+        min-height: 321px;
+    }
 }
-.manga-slider .slider__container .slick-list .slick-track .slider__item {
-  position: relative;
+@media only screen and (max-width: 640px) {
+    .popular-slider.eps {
+        min-height: 206px;
+    }
+    .popular-slider.anims {
+        min-height: 321px;
+    }
 }
-.manga-slider .slider__container .slick-list .slick-track .slider__item .slider__thumb .slider__thumb_item {
-  position: relative;
+@media only screen and (max-width: 568px) {
+    .popular-slider.eps {
+        min-height: 405px;
+    }
+    .popular-slider.anims {
+        min-height: 852px;
+    }
 }
-.manga-slider .slider__container .slick-list .slick-track .slider__item .slider__thumb .slider__thumb_item .slider-overlay {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: #eff1f4;
-  /* For browsers that do not support gradients */
-  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.9));
-  /*Safari 5.1-6*/
-  background: -o-linear-gradient(bottom, rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.9));
-  /*Opera 11.1-12*/
-  background: -moz-linear-gradient(bottom, rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.9));
-  /*Fx 3.6-15*/
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.9));
-  /*Standard*/
-  opacity: 1;
-  transition: all 0.3s;
+@media only screen and (max-width: 500px) {
+    .popular-slider.eps {
+        min-height: 367px;
+    }
+    .popular-slider.anims {
+        min-height: 750px;
+    }
 }
-.manga-slider .slider__container .slick-list .slick-track .slider__item .slider__thumb .slider__thumb_item img {
-  width: 100%;
-  height: auto;
+@media only screen and (max-width: 414px) {
+    .popular-slider.eps {
+        min-height: 318px;
+    }
+    .popular-slider.anims {
+        min-height: 621px;
+    }
 }
-.manga-slider .slider__container .slick-list .slick-track .slider__item .slider__thumb a:focus {
-  outline: none;
+@media only screen and (max-width: 375px) {
+    .popular-slider.eps {
+        min-height: 296px;
+    }
+    .popular-slider.anims {
+        min-height: 562px;
+    }
 }
-.manga-slider .slider__container .slick-list .slick-track .slider__item .slider__content {
-  position: absolute;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
-  padding: 0px 20px;
-  color: #fff;
-  -webkit-transition: all 0.3s;
-  -moz-transition: all 0.3s;
-  -o-transition: all 0.3s;
-  transition: all 0.3s;
+@media only screen and (max-width: 360px) {
+    .popular-slider.eps {
+        min-height: 288px;
+    }
+    .popular-slider.anims {
+        min-height: 540px;
+    }
 }
-.manga-slider .slider__container .slick-list .slick-track .slider__item .slider__content .slider__content_item {
-  -webkit-transition: -webkit-transform 0.35s;
-  transition: transform 0.35s;
-  webkit-transform: translate3d(0, 40px, 0);
-  transform: translate3d(0, 40px, 0);
-  padding-bottom: 32px;
+@media only screen and (max-width: 320px) {
+    .popular-slider.eps {
+        min-height: 265px;
+    }
+    .popular-slider.anims {
+        min-height: 480px;
+    }
 }
-.manga-slider .slider__container .slick-list .slick-track .slider__item .slider__content .slider__content_item .post-title h4 {
-  margin-bottom: 28px;
-  line-height: 28px;
+.popular-slider.episodes .list_5.slick-slider {
+    margin: 0;
+    overflow: visible;
 }
-.manga-slider .slider__container .slick-list .slick-track .slider__item .slider__content .slider__content_item .post-title h4 a {
-  color: #fff;
+.popular-slider.episodes .list_5 .slick-next {
+    background: #fff;
+    box-shadow: 0 1px 1px rgba(0,0,0,.5);
 }
-.manga-slider .slider__container .slick-list .slick-track .slider__item.no-thumb .slider__content {
-  position: static;
-  opacity: 1;
-  visibility: visible;
-}
-.manga-slider .slider__container .slick-list .slick-track .slider__item.no-thumb .slider__content .slider__content_item .post-title h4 a {
-  color: #000;
-}
-.manga-slider .slider__container .slick-list .slick-track .slider__item:hover .slider__content .slider__content_item {
-  webkit-transform: translate3d(0, 30px, 0);
-  transform: translate3d(0, 30px, 0);
-}
-.manga-slider.style-1.no-padding {
-  padding: 0;
-}
-.manga-slider.style-1.no-padding .slider__container {
-  margin-bottom: 15px;
-}
-.manga-slider.style-1.no-padding .slider__item .slider__content {
-  opacity: 0;
-  visibility: hidden;
-  text-align: center;
-}
-.manga-slider.style-1.no-padding .slider__item.slick-center .slider__content {
-  opacity: 1;
-  visibility: visible;
-}
-.manga-slider.style-1.no-padding .slider__item.slick-center .slider__thumb .slider__thumb_item .slider-overlay {
-  opacity: 0.5;
-}
-.manga-slider.style-1.no-padding .slider__item:hover .slider__content {
-  opacity: 1;
-  visibility: visible;
-}
-.manga-slider.style-1.no-padding .slider__item:hover .slider__thumb .slider__thumb_item .slider-overlay {
-  opacity: 0.5;
+.popular-slider.episodes .list_5 .slick-prev {
+    background: #fff;
+    box-shadow: 0 1px 1px rgba(0,0,0,.5);
 }
 .popular-slider .slider__container {
   overflow: hidden;
@@ -2333,7 +2334,7 @@ body.search.search-results .search-wrap .tab-content-wrap .c-tabs-item .c-tabs-i
   color: #a1a1a1;
 }
 .popular-slider.style-1 {
-  position: relative;
+    position: relative;
 }
 .popular-slider.style-1 .c-blog__heading,
 .popular-slider.style-1 .widget-heading {
@@ -2370,16 +2371,6 @@ body.search.search-results .search-wrap .tab-content-wrap .c-tabs-item .c-tabs-i
 .popular-slider.style-1 .slider__container .slick-prev {
     right: 40px;
     left: auto;
-}
-.popular-slider.style-4 .slider__container .slick-prev {
-    left: 0;
-    top: auto;
-    bottom: -15px;
-}
-.popular-slider.style-4 .slider__container .slick-next {
-    right: 0;
-    top: auto;
-    bottom: -15px;
 }
 .popular-slider.style-2 .slider__container {
   overflow: inherit;
@@ -2665,7 +2656,174 @@ body.search.search-results .search-wrap .tab-content-wrap .c-tabs-item .c-tabs-i
 }
 .anime .episode .thumb img {
     width: 100%;
-    min-height: 65px;
+    min-height: 83px;
+    border: 0;
+    background: #f2f2f2;
+}
+.popular-slider.episodes {
+    background: #3a444a;
+    border-radius: 3px;
+    border: 1px solid #000;
+    position: unset;
+    margin-bottom: 10px;
+    min-height: 153px;
+}
+.episodes .anime .episode .thumb img {
+    min-height: 59px;
+}
+@media only screen and (max-width: 1024px) {
+    .anime .episode .thumb img {
+        min-height: 94px;
+    }
+    .episodes .anime .episode .thumb img {
+        min-height: 88px;
+    }
+    .popular-slider.episodes {
+        min-height: 182px;
+    }
+}
+@media only screen and (max-width: 823px) {
+    .anime .episode .thumb img {
+        min-height: 108px;
+    }
+    .episodes .anime .episode .thumb img {
+        min-height: 101px;
+    }
+    .popular-slider.episodes {
+        min-height: 195px;
+    }
+}
+@media only screen and (max-width: 812px) {
+    .anime .episode .thumb img {
+        min-height: 108px;
+    }
+    .episodes .anime .episode .thumb img {
+        min-height: 101px;
+    }
+    .popular-slider.episodes {
+        min-height: 195px;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .anime .episode .thumb img {
+        min-height: 108px;
+    }
+    .episodes .anime .episode .thumb img {
+        min-height: 101px;
+    }
+    .popular-slider.episodes {
+        min-height: 195px;
+    }
+}
+@media only screen and (max-width: 736px) {
+    .anime .episode .thumb img {
+        min-height: 74px;
+    }
+    .episodes .anime .episode .thumb img {
+        min-height: 68px;
+    }
+    .popular-slider.episodes {
+        min-height: 162px;
+    }
+}
+@media only screen and (max-width: 731px) {
+    .anime .episode .thumb img {
+        min-height: 74px;
+    }
+    .episodes .anime .episode .thumb img {
+        min-height: 68px;
+    }
+    .popular-slider.episodes {
+        min-height: 162px;
+    }
+}
+@media only screen and (max-width: 667px) {
+    .anime .episode .thumb img {
+        min-height: 74px;
+    }
+    .episodes .anime .episode .thumb img {
+        min-height: 110px;
+    }
+    .popular-slider.episodes {
+        min-height: 204px;
+    }
+}
+@media only screen and (max-width: 640px) {
+    .anime .episode .thumb img {
+        min-height: 74px;
+    }
+    .episodes .anime .episode .thumb img {
+        min-height: 110px;
+    }
+    .popular-slider.episodes {
+        min-height: 204px;
+    }
+}
+@media only screen and (max-width: 568px) {
+    .anime .episode .thumb img {
+        min-height: 273px;
+    }
+    .episodes .anime .episode .thumb img {
+        min-height: 118px;
+    }
+    .popular-slider.episodes {
+        min-height: 212px;
+    }
+}
+@media only screen and (max-width: 500px) {
+    .anime .episode .thumb img {
+        min-height: 164px;
+    }
+    .episodes .anime .episode .thumb img {
+        min-height: 99px;
+    }
+    .popular-slider.episodes {
+        min-height: 193px;
+    }
+}
+@media only screen and (max-width: 414px) {
+    .anime .episode .thumb img {
+        min-height: 186px;
+    }
+    .episodes .anime .episode .thumb img {
+        min-height: 75px;
+    }
+    .popular-slider.episodes {
+        min-height: 169px;
+    }
+}
+@media only screen and (max-width: 375px) {
+    .anime .episode .thumb img {
+        min-height: 164px;
+    }
+    .episodes .anime .episode .thumb img {
+        min-height: 64px;
+    }
+    .popular-slider.episodes {
+        min-height: 158px;
+    }
+}
+@media only screen and (max-width: 360px) {
+    .anime .episode .thumb img {
+        min-height: 156px;
+    }
+    .episodes .anime .episode .thumb img {
+        min-height: 60px;
+    }
+    .popular-slider.episodes {
+        min-height: 154px;
+    }
+}
+@media only screen and (max-width: 320px) {
+    .anime .episode .thumb img {
+        min-height: 133px;
+    }
+    .episodes .anime .episode .thumb img {
+        min-height: 48px;
+    }
+    .popular-slider.episodes {
+        min-height: 142px;
+    }
 }
 .anime .episode .thumb .duration {
     position: absolute;
@@ -2681,81 +2839,73 @@ body.search.search-results .search-wrap .tab-content-wrap .c-tabs-item .c-tabs-i
 }
 .anime .poster img {
     width: 100%;
-    height: 100%;
+    min-height: 221px;
+    background: #f2f2f2;
     border: 1px solid #eaeaea;
 }
-.list_5.slick-slider {
-    margin: 0;
-}
-@media only screen and (max-width: 700px) {
-    .list_5 .anime {
-        padding: 5px;
-    }
-    .list_5 .anime .episode .thumb img {
-        min-height: 45px;
-    }
-    .list_5 .anime .episode .thumb .duration {
-        padding: 2px 3px;
-        border-radius: 2px;
-        font-size: 6px;
-    }
-    .list_5 .anime .episode .data h3 {
-        font-size: 9px;
-        line-height: 10px;
-    }
-    .list_5 .anime .episode .extra .name {
-        font-size: 8px;
+@media only screen and (max-width: 1024px) {
+    .anime .poster img {
+        min-height: 251px;
     }
 }
-@media only screen and (max-width: 600px) {
-    .list_5 .anime {
-        padding: 5px;
+@media only screen and (max-width: 823px) {
+    .anime .poster img {
+        min-height: 287px;
     }
-    .list_5 .anime .episode .thumb img {
-        min-height: 36px;
+}
+@media only screen and (max-width: 768px) {
+    .anime .poster img {
+        min-height: 287px;
     }
-    .list_5 .anime .episode .thumb .duration {
-        padding: 2px 3px;
-        border-radius: 2px;
-        font-size: 6px;
-        bottom: 3px;
-        right: 3px;
+}
+@media only screen and (max-width: 736px) {
+    .anime .poster img {
+        min-height: 197px;
     }
-    .list_5 .anime .episode .data h3 {
-        font-size: 8px;
-        line-height: 9px;
+}
+@media only screen and (max-width: 731px) {
+    .anime .poster img {
+        min-height: 197px;
     }
-    .list_5 .anime .episode .extra .name {
-        font-size: 7px;
+}
+@media only screen and (max-width: 667px) {
+    .anime .poster img {
+        min-height: 197px;
+    }
+}
+@media only screen and (max-width: 640px) {
+    .anime .poster img {
+        min-height: 197px;
+    }
+}
+@media only screen and (max-width: 568px) {
+    .anime .poster img {
+        min-height: 728px;
     }
 }
 @media only screen and (max-width: 500px) {
-    .video .c_player .player {
-
+    .anime .poster img {
+        min-height: 626px;
     }
-    .list_5 .anime {
-        padding: 4px;
+}
+@media only screen and (max-width: 414px) {
+    .anime .poster img {
+        min-height: 497px;
     }
-    .list_5 .anime .episode .thumb img {
-        min-height: 25px;
+}
+@media only screen and (max-width: 375px) {
+    .anime .poster img {
+        min-height: 438px;
     }
-    .list_5 .anime .episode .thumb .duration {
-        padding: 2px 3px;
-        border-radius: 2px;
-        font-size: 8px;
-        bottom: 4px;
-        right: 4px;
+}
+@media only screen and (max-width: 360px) {
+    .anime .poster img {
+        min-height: 416px;
     }
-    .list_5 .anime .episode .data .episode_progress {
-        height: 7px;
-    }
-    .list_5 .anime .episode .data h3 {
-        font-size: 10px;
-        line-height: 12px;
-    }
-    .list_5 .anime .episode .extra .name {
-        font-size: 8px;
-        line-height: 12px;
+}
+@media only screen and (max-width: 320px) {
+    .anime .poster img {
+        min-height: 356px;
     }
 }
 .calendar .days {
@@ -2842,27 +2992,150 @@ body.search.search-results .search-wrap .tab-content-wrap .c-tabs-item .c-tabs-i
     margin-top: 5px;
     width: 100%;
 }
-@media only screen and (max-width: 600px) {
-    .day .head h2 {
-        font-size: 12px;
-    }
-    .day .head h4 {
-        font-size: 8px;
-    }
-    .day .animes li .time {
-        font-size: 6px;
-    }
-    .day .animes li .name {
-        font-size: 7px;
-    }
-    .day .animes li a .latest {
-        font-size: 7px;
-    }
-}
 .releases {
     background: #1b1d1f;
     padding-top: 10px;
     padding-bottom: 10px;
+    min-height: 386px;
+}
+@media only screen and (max-width: 1024px) {
+    .releases {
+        min-height: 569px;
+    }
+}
+@media only screen and (max-width: 823px) {
+    .releases {
+        min-height: 449px;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .releases {
+        min-height: 449px;
+    }
+}
+@media only screen and (max-width: 736px) {
+    .releases {
+        min-height: 449px;
+    }
+}
+@media only screen and (max-width: 731px) {
+    .releases {
+        min-height: 359px;
+    }
+}
+@media only screen and (max-width: 667px) {
+    .releases {
+        min-height: 359px;
+    }
+}
+@media only screen and (max-width: 640px) {
+    .releases {
+        min-height: 359px;
+    }
+}
+@media only screen and (max-width: 568px) {
+    .releases {
+        min-height: 890px;
+    }
+}
+@media only screen and (max-width: 500px) {
+    .releases {
+        min-height: 788px;
+    }
+}
+@media only screen and (max-width: 414px) {
+    .releases {
+        min-height: 659px;
+    }
+}
+@media only screen and (max-width: 375px) {
+    .releases {
+        min-height: 600px;
+    }
+}
+@media only screen and (max-width: 360px) {
+    .releases {
+        min-height: 587px;
+    }
+}
+@media only screen and (max-width: 320px) {
+    .releases {
+        min-height: 518px;
+    }
+}
+.releases .c-widget-wrap {
+    margin: 0;
+}
+.releases .anime .poster img {
+    width: 100%;
+    min-height: 255px;
+    background: #000;
+    border: 0;
+}
+@media only screen and (max-width: 1024px) {
+    .releases .anime .poster img {
+        min-height: 438px;
+    }
+}
+@media only screen and (max-width: 823px) {
+    .releases .anime .poster img {
+        min-height: 318px;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .releases .anime .poster img {
+        min-height: 318px;
+    }
+}
+@media only screen and (max-width: 736px) {
+    .releases .anime .poster img {
+        min-height: 228px;
+    }
+}
+@media only screen and (max-width: 731px) {
+    .releases .anime .poster img {
+        min-height: 228px;
+    }
+}
+@media only screen and (max-width: 667px) {
+    .releases .anime .poster img {
+        min-height: 228px;
+    }
+}
+@media only screen and (max-width: 640px) {
+    .releases .anime .poster img {
+        min-height: 228px;
+    }
+}
+@media only screen and (max-width: 568px) {
+    .releases .anime .poster img {
+        min-height: 759px;
+    }
+}
+@media only screen and (max-width: 500px) {
+    .releases .anime .poster img {
+        min-height: 657px;
+    }
+}
+@media only screen and (max-width: 414px) {
+    .releases .anime .poster img {
+        min-height: 528px;
+    }
+}
+@media only screen and (max-width: 375px) {
+    .releases .anime .poster img {
+        min-height: 469px;
+    }
+}
+@media only screen and (max-width: 360px) {
+    .releases .anime .poster img {
+        min-height: 447px;
+    }
+}
+@media only screen and (max-width: 320px) {
+    .releases .anime .poster img {
+        min-height: 387px;
+    }
 }
 .c-breadcrumb-wrapper h4 {
     color: #f2f2f2;
@@ -2965,7 +3238,7 @@ body.search.search-results .search-wrap .tab-content-wrap .c-tabs-item .c-tabs-i
     background-image: var(--image);
 }
 .weekly .carousel-item .image .background {
-    background-image: radial-gradient(circle at 20% 50%, rgba(17, 17, 19, 0.98) 0%, rgba(14.12%, 14.51%, 16.86%, 0.88) 100%);
+    background-image: -webkit-linear-gradient(left, rgba(0,0,0,0.89) 0%,rgba(0,0,0,0.89) 21%,rgba(0,0,0,0.75) 70%,rgba(0,0,0,0.50) 100%);
     position: relative;
     display: grid;
 }
@@ -2984,22 +3257,23 @@ body.search.search-results .search-wrap .tab-content-wrap .c-tabs-item .c-tabs-i
     display: block;
     box-shadow: 0 0 4px rgba(0,0,0,0.2);
     border-radius: 4px;
+    width: 100%;
+    min-height: 165px;
+    background: #000;
+    border: 0;
 }
 .weekly .carousel-item .image .background .content h4 {
     color: #fff;
     font-weight: 800;
 }
 .weekly .carousel-item .image .background .content span {
-    color: rgba(255, 255, 255, 0.75);
+    color: rgba(255, 255, 255, 0.85);
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 4;
+    -webkit-line-clamp: 5;
     line-height: 18px;
-}
-.weekly .carousel-item .image .background .content .views {
-    color: #565a5f;
 }
 .pagination {
     display: contents;
@@ -3131,125 +3405,69 @@ body.search.search-results .search-wrap .tab-content-wrap .c-tabs-item .c-tabs-i
   padding:0
 }
 
-.top5__list {
-    background: #fff;
-}
-.top5__item{
-    position:relative
-}
-.top5__item:first-child {
-    width: 100%;
-    height: 100px;
-}
-
-.top5__item{
-  list-style: none;
-}
-.top5__link {
-    display: block;
-    position: relative;
-    padding: 17px 70px 17px 60px;
-    overflow: hidden;
-    border-bottom: 1px solid #dddfe2;
-}
-
-.top5__item:first-child .top5__link{
-    position:absolute;
-    width:100%;
-    height:100%;
-    padding:0;
-    border:0
-}
-.top5__item:first-child .top5__link:after {
-    content: '';
-    position: absolute;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to right, rgba(0,0,0,0.89) 0%,rgba(0,0,0,0.89) 21%,rgba(0,0,0,0.23) 99%,rgba(0,0,0,0.23) 100%);
-    border-bottom: 1px solid #000;
-}
-.top5__item .top5__title {
-    position: relative;
+ul.top5 {
+    list-style-type: none;
+    padding: 0;
     margin: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    line-height: 1;
-    padding: 2px 0 2px 0;
-    font-size: 14px;
-    font-weight: 500;
-    color: #666;
-    margin-left: 10px;
-}
-.top5__ranking {
-    position: absolute;
-    top: 19px;
-    right: 0;
-    width: 50px;
-    letter-spacing: -.05em;
-    font-size: 22px;
-    font-weight: 100;
-    color: #000;
-    text-align: center;
-}
-
-.top5__item:first-child .top5__ranking {
-    z-index: 2;
-    top: auto;
-    bottom: 12px;
     color: #FFF;
-    font-weight: 600;
+    border: 1px solid rgba(0, 0, 0, 0.65);
+    border-radius: 3px;
 }
-
-.top5__item img {
-    position: absolute;
-    top: 0;
+ul.top5 li {
+    height: 100px;
     background-size: cover;
     background-position: center;
-    left: 0;
-    width: 60px;
-    height: 70px;
-    border-right: 1px solid #c5cbd3;
+    background-repeat: no-repeat;
+    background-color: #000;
+    border-bottom: 1px solid #000;
 }
-
-.top5__item:first-child img {
-    z-index: 1;
-    width: 100%;
-    height: auto;
-    border: 0;
-}
-
-.top5__item:first-child .top5__title {
-    color: #ffffff;
-    padding-bottom: 3px;
-    position: absolute;
-    z-index: 2;
-    font-size: 16px;
-    bottom: 27px;
-    width: 100%;
-    font-weight: 600;
-}
-.top5__item:first-child .top5__title a {
-  color: #FFF;
-}
-.top5__item .top5__author {
-    margin-left: 10px;
+ul.top5 li .overlay {
     display: block;
-    font-size: 11px;
-    bottom: 3px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    color: #000;
+    height: 100%;
+    position: relative;
+    padding: 0 20px;
+    background: -moz-linear-gradient(left, rgba(0,0,0,0.89) 0%, rgba(0,0,0,0.89) 21%, rgba(0,0,0,0.23) 99%, rgba(0,0,0,0.23) 100%);
+    background: -webkit-linear-gradient(left, rgba(0,0,0,0.89) 0%,rgba(0,0,0,0.89) 21%,rgba(0,0,0,0.23) 99%,rgba(0,0,0,0.23) 100%);
+    background: linear-gradient(to right, rgba(0,0,0,0.89) 0%,rgba(0,0,0,0.89) 21%,rgba(0,0,0,0.23) 99%,rgba(0,0,0,0.23) 100%);
+    -webkit-transition: 0.25s;
+    transition: 0.25s;
 }
-.top5__item:first-child .top5__author {
-    position: absolute;
-    z-index: 2;
-    bottom: 13px;
-    font-size: 13px;
-    line-height: 1.2;
+ul.top5 li .overlay:hover {
+    background: -moz-linear-gradient(left, rgba(0,0,0,0.49) 0%, rgba(0,0,0,0.49) 21%, rgba(0,0,0,0.23) 99%, rgba(0,0,0,0.23) 100%);
+    background: -webkit-linear-gradient(left, rgba(0,0,0,0.49) 0%,rgba(0,0,0,0.49) 21%,rgba(0,0,0,0.23) 99%,rgba(0,0,0,0.23) 100%);
+    background: linear-gradient(to right, rgba(0,0,0,0.49) 0%,rgba(0,0,0,0.49) 21%,rgba(0,0,0,0.23) 99%,rgba(0,0,0,0.23) 100%);
+    -webkit-transition: 0.25s;
+    transition: 0.25s;
+}
+ul.top5 li .iteration {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 90px;
+    font-size: 30px;
+    font-weight: bold;
+    float: left;
+    color: rgba(255,255,255, 0.6);
+    margin-right: 25px;
+}
+ul.top5 li .meta {
+    width: 80%;
+    float: left;
+    padding-top: 25px;
+    vertical-align: middle;
+    display: inline-block;
+}
+ul.top5 li .title {
     color: #FFF;
+    font-weight: 700 !important;
+    display: block;
+    margin: 0;
+    line-height: 18px;
+}
+ul.top5 li .meta span {
+    margin-top: 5px;
+    font-size: 11px;
+    display: inline-block;
+    color: rgba(255,255,255, 0.6);
 }
 .pagination>li>a, .pagination>li>span {
   padding: 0 15px 5px 15px;
@@ -3290,7 +3508,6 @@ body.search.search-results .search-wrap .tab-content-wrap .c-tabs-item .c-tabs-i
  * -------------------------------------------------- */
 
 .item-thumb {
-    min-height: 485px;
     padding: 10px;
     background: #fff;
     box-shadow: 0 1px 1px rgba(0,0,0,.15);

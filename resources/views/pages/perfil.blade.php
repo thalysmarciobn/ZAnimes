@@ -88,7 +88,7 @@
                             <div class="anime">
                                 <a title="{{ $latest->title }}" href="{{ route('anime.default', ['anime_slug' => $latest->slug_name]) }}">
                                     <div class="poster">
-                                        <img data-src="{{ ZAnimesControl::url('animes/' . $latest->slug_name . '/' . $latest->image) }}" data-srcset="{{ ZAnimesControl::url('animes/' . $latest->slug_name . '/' . $latest->image) }}" data-sizes="(max-width: 125px) 100vw, 125px" class="img-responsive lazyload" src="{{ asset('images/video_empty.png') }}" style="padding-top:180px; " alt="{{ $latest->name }}"/>
+                                        <img data-src="{{ ZAnimesControl::url('animes/' . $latest->slug_name . '/' . $latest->image) }}" data-srcset="{{ ZAnimesControl::url('animes/' . $latest->slug_name . '/' . $latest->image) }}" data-sizes="(max-width: 125px) 100vw, 125px" class="img-responsive lazyload" alt="{{ $latest->name }}"/>
                                     </div>
                                     <div class="info">
                                         <div class="title">{{ $latest->name }}</div>

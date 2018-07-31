@@ -14,7 +14,7 @@
             <div class="c-breadcrumb-wrapper">
                 <div class="col-md-12">
                     <div class="c-widget-wrap">
-                        <div class="popular-slider style-1 releases" data-style="style-1" data-count="6">
+                        <div class="popular-slider style-1" data-style="style-1" data-count="6">
                             <div class="c-blog__heading style-2 font-heading">
                                 <h4>@lang('home.releases')</h4>
                             </div>
@@ -24,7 +24,7 @@
                                         <div class="anime">
                                             <a title="{{ $release->title }}" href="{{ route('anime.default', ['anime_slug' => $release->slug_name]) }}">
                                                 <div class="poster">
-                                                    <img height="225px" data-src="{{ ZAnimesControl::url('animes/' . $release->slug_name . '/' . $release->image) }}" data-srcset="{{ ZAnimesControl::url('animes/' . $release->slug_name . '/' . $release->image) }}" data-sizes="(max-width: 125px) 100vw, 125px" class="img-fluid lazyload" src="{{ asset('images/video_empty.png') }}" style="padding-top:180px; " alt="{{ $release->name }}"/>
+                                                    <img data-src="{{ ZAnimesControl::url('animes/' . $release->slug_name . '/' . $release->image) }}" data-srcset="{{ ZAnimesControl::url('animes/' . $release->slug_name . '/' . $release->image) }}" data-sizes="(max-width: 125px) 100vw, 125px" class="img-fluid lazyload" alt="{{ $release->name }}"/>
                                                 </div>
                                                 <div class="info">
                                                     <div class="title">{{ $release->name }}</div>
@@ -50,7 +50,7 @@
     <div class="widget col-12">
         <div class="row">
             <div class="widget col-lg-8">
-                <div class="popular-slider style-1" data-style="style-2" data-count="4">
+                <div class="popular-slider style-1 eps" data-style="style-1" data-count="4">
                     <div class="c-blog__heading style-2 font-heading">
                         <h4>@lang('home.latest-releases')</h4>
                     </div>
@@ -62,7 +62,7 @@
                                         <div class="data">
                                             <div class="thumb c-image-hover">
                                                 <a href="{{ route('anime.episode', ['anime_slug' => $release_episode->season->anime->slug_name, 'episode' => $release_episode->episode, 'episode_slug' => $release_episode->slug, 'season' => $release_episode->season_id]) }}">
-                                                    <img data-src="{{ ZAnimesControl::url('animes/' . $release_episode->image) }}" data-srcset="{{ ZAnimesControl::url('animes/' . $release_episode->image) }}"  class="img-fluid lazyload effect-fade" src="{{ asset('images/video_empty.png') }}"  alt="{{ $release_episode->name }}"/>
+                                                    <img data-src="{{ ZAnimesControl::url('animes/' . $release_episode->image) }}" data-srcset="{{ ZAnimesControl::url('animes/' . $release_episode->image) }}"  class="img-fluid lazyload effect-fade" alt="{{ $release_episode->name }}"/>
                                                     <div class="duration">{{ str_replace('00:', '', gmdate("H:i:s", $release_episode->duration)) }}</div>
                                                 </a>
                                             </div>
@@ -85,7 +85,7 @@
                     </div>
                 </div>
 
-                <div class="popular-slider style-1" data-style="style-2" data-count="4">
+                <div class="popular-slider style-1 anims" data-style="style-1" data-count="4">
                     <div class="c-blog__heading style-2 font-heading">
                         <h4>@lang('home.weekly_recommendation')</h4>
                     </div>
@@ -95,7 +95,7 @@
                                 <div class="anime">
                                     <a title="{{ $weekly->title }}" href="{{ route('anime.default', ['anime_slug' => $weekly->slug_name]) }}">
                                         <div class="poster">
-                                            <img data-src="{{ ZAnimesControl::url('animes/' . $weekly->slug_name . '/' . $weekly->image) }}" data-srcset="{{ ZAnimesControl::url('animes/' . $weekly->slug_name . '/' . $weekly->image) }}" data-sizes="(max-width: 125px) 100vw, 125px" class="img-fluid lazyload" src="{{ asset('images/video_empty.png') }}" style="padding-top:180px; " alt="{{ $weekly->name }}"/>
+                                            <img data-src="{{ ZAnimesControl::url('animes/' . $weekly->slug_name . '/' . $weekly->image) }}" data-srcset="{{ ZAnimesControl::url('animes/' . $weekly->slug_name . '/' . $weekly->image) }}" data-sizes="(max-width: 125px) 100vw, 125px" class="img-fluid lazyload" alt="{{ $weekly->name }}"/>
                                         </div>
                                         <div class="info">
                                             <div class="title">{{ $weekly->name }}</div>
@@ -111,16 +111,16 @@
                     <div class="c-blog__heading style-2 font-heading">
                         <h4>Animes Em Alta</h4>
                     </div>
-                    <div id="carouselExampleIndicators" class="slide carousel slide" data-ride="carousel">
+                    <div id="trend" class="slide carousel slide" data-ride="carousel">
                         <ol class="carousel-indicators">
                             @foreach ($slides as $slide)
-                                <li data-target="#carouselExampleIndicators" data-slide-to="{{ $loop->iteration - 1 }}" class=" @if ($loop->first) active @endif "></li>
+                                <li data-target="#trend" data-slide-to="{{ $loop->iteration - 1 }}" class=" @if ($loop->first) active @endif "></li>
                             @endforeach
                         </ol>
                         <div class="carousel-inner">
                             @foreach ($slides as $slide)
                                 <div class="carousel-item @if ($loop->first) active @endif">
-                                    <div class="image" style="--image: url({{ \App\ZAnimesControl::url($slide->image) }})" alt="First slide">
+                                    <div class="image" style="--image: url({{ \App\ZAnimesControl::url($slide->image) }})">
                                         <div class="background">
                                             <div class="content">
                                                 <div class="container">
@@ -129,7 +129,7 @@
                                                             <div class="col-lg-3 col-md-4 col-sm-12">
                                                                 <a title="{{ $slide->anime->title }}" href="{{ route('anime.default', ['anime_slug' => $slide->anime->slug_name]) }}">
                                                                     <div class="poster img-fluid">
-                                                                        <img data-src="{{ ZAnimesControl::url('animes/' . $slide->anime->slug_name . '/' . $slide->anime->image) }}" data-srcset="{{ ZAnimesControl::url('animes/' . $slide->anime->slug_name . '/' . $slide->anime->image) }}" data-sizes="(max-width: 125px) 100vw, 125px" class="img-fluid lazyload" src="{{ asset('images/video_empty.png') }}" style="padding-top:180px; " alt="{{ $slide->anime->name }}"/>
+                                                                        <img data-src="{{ ZAnimesControl::url('animes/' . $slide->anime->slug_name . '/' . $slide->anime->image) }}" data-srcset="{{ ZAnimesControl::url('animes/' . $slide->anime->slug_name . '/' . $slide->anime->image) }}" data-sizes="(max-width: 125px) 100vw, 125px" class="lazyload"/>
                                                                     </div>
                                                                 </a>
                                                             </div>
@@ -140,7 +140,6 @@
                                                                 <span>
                                                                     {{ $slide->anime->sinopse }}
                                                                 </span>
-                                                                <div class="views">Visualizações Nessa Semana: {{ $slide->anime->weekly_views_count }}</div>
                                                             </div>
                                                         </div>
 
@@ -156,18 +155,18 @@
                                 </div>
                             @endforeach
                         </div>
-                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <a class="carousel-control-prev" href="#trend" role="button" data-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="sr-only">Previous</span>
                         </a>
-                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <a class="carousel-control-next" href="#trend" role="button" data-slide="next">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="sr-only">Next</span>
                         </a>
                     </div>
                 </div>
 
-                <div class="popular-slider style-1" data-style="style-2" data-count="4">
+                <div class="popular-slider style-1 anims" data-style="style-1" data-count="4">
                     <div class="c-blog__heading style-2 font-heading">
                         <h4>@lang('home.latest-animes')</h4>
                     </div>
@@ -177,7 +176,7 @@
                                 <div class="anime">
                                     <a title="{{ $latest->title }}" href="{{ route('anime.default', ['anime_slug' => $latest->slug_name]) }}">
                                         <div class="poster">
-                                            <img data-src="{{ ZAnimesControl::url('animes/' . $latest->slug_name . '/' . $latest->image) }}" data-srcset="{{ ZAnimesControl::url('animes/' . $latest->slug_name . '/' . $latest->image) }}" data-sizes="(max-width: 125px) 100vw, 125px" class="img-fluid lazyload" src="{{ asset('images/video_empty.png') }}" style="padding-top:180px; " alt="{{ $latest->name }}"/>
+                                            <img data-src="{{ ZAnimesControl::url('animes/' . $latest->slug_name . '/' . $latest->image) }}" data-srcset="{{ ZAnimesControl::url('animes/' . $latest->slug_name . '/' . $latest->image) }}" data-sizes="(max-width: 125px) 100vw, 125px" class="img-fluid lazyload" alt="{{ $latest->name }}"/>
                                         </div>
                                         <div class="info">
                                             <div class="title">{{ $latest->name }}</div>
@@ -189,7 +188,7 @@
                         @endforeach
                     </div>
                 </div>
-                <div class="popular-slider style-1" data-style="style-2" data-count="4">
+                <div class="popular-slider style-1 eps" data-style="style-1" data-count="4">
                     <div class="c-blog__heading style-2 font-heading">
                         <h4>@lang('home.being-watched-at-this-moment')</h4>
                     </div>
@@ -201,7 +200,7 @@
                                         <div class="data">
                                             <div class="thumb c-image-hover">
                                                 <a href="{{ route('anime.episode', ['anime_slug' => $episode_view->season->anime->slug_name, 'episode' => $episode_view->episode, 'episode_slug' => $episode_view->slug, 'season' => $episode_view->season_id]) }}">
-                                                    <img data-src="{{ ZAnimesControl::url('animes/' . $episode_view->image) }}" data-srcset="{{ ZAnimesControl::url('animes/' . $episode_view->image) }}"  class="img-fluid lazyload effect-fade" src="{{ asset('images/video_empty.png') }}"  alt="{{ $episode_view->name }}"/>
+                                                    <img data-src="{{ ZAnimesControl::url('animes/' . $episode_view->image) }}" data-srcset="{{ ZAnimesControl::url('animes/' . $episode_view->image) }}"  class="img-fluid lazyload effect-fade" alt="{{ $episode_view->name }}"/>
                                                     <div class="duration">{{ str_replace('00:', '', gmdate("H:i:s", $episode_view->duration)) }}</div>
                                                 </a>
                                             </div>

@@ -55,7 +55,7 @@
                                         <div class="name">{{ $anime->name }}</div>
                                         <a title="{{ $anime->title }}" href="{{ route('anime.default', ['anime_slug' => $anime->slug_name]) }}">
                                             <div class="poster">
-                                                <img data-src="{{ ZAnimesControl::url('animes/' . $anime->slug_name . '/' . $anime->image) }}" data-srcset="{{ ZAnimesControl::url('animes/' . $anime->slug_name . '/' . $anime->image) }}" data-sizes="(max-width: 125px) 100vw, 125px" class="img-responsive lazyload" src="{{ asset('images/video_empty.png') }}" style="padding-top:180px; " alt="{{ $anime->name }}"/>
+                                                <img data-src="{{ ZAnimesControl::url('animes/' . $anime->slug_name . '/' . $anime->image) }}" data-srcset="{{ ZAnimesControl::url('animes/' . $anime->slug_name . '/' . $anime->image) }}" data-sizes="(max-width: 125px) 100vw, 125px" class="img-responsive lazyload" alt="{{ $anime->name }}"/>
                                             </div>
                                         </a>
                                         @if ($anime->episodes->count() > 0)

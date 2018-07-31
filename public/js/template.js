@@ -185,6 +185,7 @@
             var manga_slidesToShow = parseInt($(this).parents(".popular-slider").attr('data-count'));
             var check_rtl = (jQuery("body").css('direction') === "rtl");
             var initial = parseInt($(this).parents(".popular-slider").attr('data-initial'));
+            var items = parseInt($(this).parents(".popular-slider").attr('data-items'));
             var popular_style_2 = {
                 lazyLoad: 'ondemand',
                 dots: false,
@@ -238,15 +239,15 @@
                     {
                         breakpoint: 1700,
                         settings: {
-                            slidesToShow: 6,
-                            slidesToScroll: 6,
+                            slidesToShow: manga_slidesToShow,
+                            slidesToScroll: manga_slidesToShow,
                         }
                     },
                     {
                         breakpoint: 1200,
                         settings: {
-                            slidesToShow: 5,
-                            slidesToScroll: 5,
+                            slidesToShow: 3,
+                            slidesToScroll: 3,
                         }
                     },
                     {
@@ -271,38 +272,37 @@
                 infinite: false,
                 speed: 500,
                 slidesToShow: manga_slidesToShow,
-                arrows: false,
+                arrows: true,
                 rtl: check_rtl,
                 slidesToScroll: 1,
-                initialSlide: initial > 4 ? initial - 3 : (initial > 1 ? initial - 2 : initial - 1),
+                initialSlide: (items % 5) + initial - 5 < 0 ? 0 : (items % 5) + initial - 5,
                 responsive: [
                     {
                         breakpoint: 1700,
                         settings: {
-                            slidesToShow: manga_slidesToShow,
-                            slidesToScroll: manga_slidesToShow,
+                            slidesToShow: 3,
+                            initialSlide: (items % 3) + initial - 2 < 0 ? 0 : (items % 3) + initial - 2,
                         }
                     },
                     {
                         breakpoint: 1200,
                         settings: {
                             slidesToShow: 3,
-                            slidesToScroll: 3,
-                            initialSlide: initial > 2 ? initial - 2 : (initial > 1 ? initial - 2 : initial - 1),
+                            initialSlide: (items % 3) + initial - 2 < 0 ? 0 : (items % 3) + initial - 2,
                         }
                     },
                     {
-                        breakpoint: 992,
+                        breakpoint: 700,
                         settings: {
-                            slidesToShow: 3,
-                            slidesToScroll: 3,
-                            initialSlide: initial > 2 ? initial - 2 : (initial > 1 ? initial - 2 : initial - 1),
+                            slidesToShow: 2,
+                            initialSlide: (items % 2) + initial - 1 < 0 ? 0 : (items % 2) + initial - 1,
                         }
                     },
                     {
                         breakpoint: 600,
                         settings: {
-                            initialSlide: initial > 2 ? initial - 2 : (initial > 1 ? initial - 2 : initial - 1),
+                            slidesToShow: 2,
+                            initialSlide: (items % 2) + initial - 1 < 0 ? 0 : (items % 2) + initial - 1,
                         }
                     },
                 ]

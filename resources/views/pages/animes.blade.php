@@ -169,10 +169,11 @@
                             </div>
                         </div>
                     @endforeach
-                        <div class="nav-scroller py-1 mb-2"> <nav class="nav d-flex justify-content-center">
-                    {{ $animes->appends(request()->query())->links() }}
-                            </nav>
-                        </div>
+                    <div class="nav-scroller py-1 mb-2">
+                        <nav class="nav d-flex justify-content-center">
+                            {{ $animes->appends(request()->query())->links() }}
+                        </nav>
+                    </div>
                 </div>
             </div>
         </div>

@@ -82,7 +82,7 @@ class AuthController extends Controller {
             $user = Auth::user();
             $image = "avatars/" . $user->id . "/" . str_random(20) . time() . ".jpg";
             $user->avatar_pending = ZAnimesControl::url($image);
-            ZAnimesControl::put($image, Image::make($file->getRealPath())->resize(180, 180)->encode('jpg', 80));
+            ZAnimesControl::put($image, Image::make($file->getRealPath())->resize(128, 128)->encode('jpg', 80));
             $user->update([
                 'avatar_pending' => ZAnimesControl::url($image),
                 'avatar_update' => Carbon::now()
