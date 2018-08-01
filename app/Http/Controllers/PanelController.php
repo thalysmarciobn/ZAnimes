@@ -267,6 +267,7 @@ class PanelController extends Controller {
                     }
                     if ($anime->episodes()->save($episode)) {
                         $anime->latest_episode = Carbon::now();
+                        $anime->save();
                         $anime->staffLog()->save(new LogsStaff(['user_id' => optional(Auth::user())->id, 'message' => 'Has added the episode ' . $episode->id]));
                         return redirect()->route('panel.animes.edit.season', ['slug' => $anime->slug_name, 'season' => $season->season])->with('success', 'Episode \'' . $request->title . '\' added.');
                     }

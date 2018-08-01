@@ -77,27 +77,31 @@
     @endif
     @if ($user->editor)
     <div class="widget col-md-12">
-        <div class="c-widget-wrap">
-            <div class="popular-slider style-1" data-style="style-3" data-count="7">
-                <div class="c-blog__heading style-2 font-heading">
-                    <h4>@lang('profile.animes_posted')</h4>
-                </div>
-                <div class="slider__container" role="toolbar">
-                    @foreach ($user->animes()->limit(15)->get() as $latest)
-                        <div class="slider__item">
-                            <div class="anime">
-                                <a title="{{ $latest->title }}" href="{{ route('anime.default', ['anime_slug' => $latest->slug_name]) }}">
-                                    <div class="poster">
-                                        <img data-src="{{ ZAnimesControl::url('animes/' . $latest->slug_name . '/' . $latest->image) }}" data-srcset="{{ ZAnimesControl::url('animes/' . $latest->slug_name . '/' . $latest->image) }}" data-sizes="(max-width: 125px) 100vw, 125px" class="img-responsive lazyload" alt="{{ $latest->name }}"/>
-                                    </div>
-                                    <div class="info">
-                                        <div class="title">{{ $latest->name }}</div>
-                                        <div class="eps">@lang('home.episodes', ['count' => $latest->episodes->count()])</div>
-                                    </div>
-                                </a>
-                            </div>
+        <div class="row">
+            <div class="widget col-md-8">
+                <div class="c-widget-wrap">
+                    <div class="popular-slider style-1 anims" data-style="style-3" data-count="4">
+                        <div class="c-blog__heading style-2 font-heading">
+                            <h4>@lang('profile.animes_posted')</h4>
                         </div>
-                    @endforeach
+                        <div class="slider__container" role="toolbar">
+                            @foreach ($user->animes()->limit(15)->get() as $latest)
+                                <div class="slider__item">
+                                    <div class="anime">
+                                        <a title="{{ $latest->title }}" href="{{ route('anime.default', ['anime_slug' => $latest->slug_name]) }}">
+                                            <div class="poster">
+                                                <img data-src="{{ ZAnimesControl::url('animes/' . $latest->slug_name . '/' . $latest->image) }}" data-srcset="{{ ZAnimesControl::url('animes/' . $latest->slug_name . '/' . $latest->image) }}" data-sizes="(max-width: 125px) 100vw, 125px" class="img-responsive lazyload" alt="{{ $latest->name }}"/>
+                                            </div>
+                                            <div class="info">
+                                                <div class="title">{{ $latest->name }}</div>
+                                                <div class="eps">@lang('home.episodes', ['count' => $latest->episodes->count()])</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -2,21 +2,7 @@
 
     "use strict";
 
-    jQuery(window).load(function (e) {
-        /*
-         * Pre-Loading
-         * */
-        jQuery("#pageloader").fadeOut(500);
-
-    });
-
-    jQuery("body").removeClass("preload");
-
     $(document).ready(function () {
-        $(".listing-chapters_wrap .main > .has-child").on('click', function (e) {
-            var $this = $(this);
-            $(e.target).toggleClass("active").next("div.sub-chap").slideToggle(300);
-        });
 
         // header slider
         $(".manga-slider .slider__container").each(function () {
@@ -266,6 +252,7 @@
                     },
                 ]
             }
+            console.log(initial);
             var popular_style_4 = {
                 lazyLoad: 'ondemand',
                 dots: false,
@@ -275,34 +262,34 @@
                 arrows: true,
                 rtl: check_rtl,
                 slidesToScroll: 1,
-                initialSlide: (items % 5) + initial - 5 < 0 ? 0 : (items % 5) + initial - 5,
+                initialSlide: initial + 1 == items ? initial - 4 : (initial >= items ? initial - 5 : (initial > 3 ? initial - 3 : 0)),
                 responsive: [
                     {
                         breakpoint: 1700,
                         settings: {
                             slidesToShow: 3,
-                            initialSlide: (items % 3) + initial - 2 < 0 ? 0 : (items % 3) + initial - 2,
+                            initialSlide: initial + 1 == items ? initial - 3 : (initial >= items ? initial - 3 : (initial > 2 ? initial - 2 : 0)),
                         }
                     },
                     {
                         breakpoint: 1200,
                         settings: {
                             slidesToShow: 3,
-                            initialSlide: (items % 3) + initial - 2 < 0 ? 0 : (items % 3) + initial - 2,
+                            initialSlide: initial + 1 == items ? initial - 3 : (initial >= items ? initial - 3 : (initial > 2 ? initial - 2 : 0)),
                         }
                     },
                     {
                         breakpoint: 700,
                         settings: {
                             slidesToShow: 2,
-                            initialSlide: (items % 2) + initial - 1 < 0 ? 0 : (items % 2) + initial - 1,
+                            initialSlide: initial + 1 == items ? initial - 1 : (initial >= items ? initial - 2 : (initial > 1 ? initial - 1 : 0)),
                         }
                     },
                     {
                         breakpoint: 600,
                         settings: {
                             slidesToShow: 2,
-                            initialSlide: (items % 2) + initial - 1 < 0 ? 0 : (items % 2) + initial - 1,
+                            initialSlide: initial + 1 == items ? initial - 1 : (initial >= items ? initial - 2 : (initial > 1 ? initial - 1 : 0)),
                         }
                     },
                 ]

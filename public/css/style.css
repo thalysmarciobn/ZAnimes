@@ -3186,13 +3186,22 @@ body.search.search-results .search-wrap .tab-content-wrap .c-tabs-item .c-tabs-i
     position: relative;
 }
 #seasons .episodes .menu {
-    background: #eeeeee;
-    border: 1px solid #dddfe2;
+    background: #fff;
+    box-shadow: 0 1px 1px rgba(0,0,0,.2);
     width: 100%;
     display: inline-block;
-    padding: 10px;
-    font-weight: 800;
+    padding: 13px;
+    font-weight: 400;
     margin-bottom: 10px;
+    text-align: left;
+    color: #5a5a5a;
+    border-radius: 0;
+}
+#seasons .episodes .menu:hover, #seasons .episodes .menu:focus {
+    text-decoration: none;
+}
+#seasons .episodes .menu:hover {
+    color: #313131;
 }
 #seasons .episodes i.icon:before {
     content: "\f462";

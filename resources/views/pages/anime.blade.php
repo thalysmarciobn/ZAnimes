@@ -156,13 +156,17 @@
                 <div id="seasons">
                     <div class="listing-chapters_wrap">
                         <div class="main version-chap loaded episodes">
-                            @foreach($anime->seasons as $season)
+                            <div id="accordion">
+                                @foreach($anime->seasons as $season)
+                                    <div @if($anime->seasons->count() == 1 && $loop->first)style="display: none" @endif id="heading{{ $season->id }}">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link menu" data-toggle="collapse" data-target="#collapse{{ $season->id }}" aria-expanded=" @if ($loop->first) true @else false @endif" aria-controls="collapse{{ $season->id }}">
+                                                {{ $season->title }}
+                                            </button>
+                                        </h5>
+                                    </div>
 
-                                <div class="parent has-child">
-                                    @if($anime->seasons->count() > 1)
-                                        <a href="javascript:void(0)" class="has-child menu active">{{ $season->title }}</a>
-                                    @endif
-                                    <div class="sub-chap list-chap" @if (!$loop->first) style="display: none;"@endif>
+                                    <div id="collapse{{ $season->id }}" class="collapse @if ($loop->first) show @endif " aria-labelledby="heading{{ $season->id }}" data-parent="#accordion">
                                         <div class="col-md-12">
                                             <div class="row">
                                                 @foreach($season->episodes as $episode)
@@ -196,8 +200,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            @endforeach
+                                @endforeach
+                            </div>
                         </div>
                     </div>
                 </div>
